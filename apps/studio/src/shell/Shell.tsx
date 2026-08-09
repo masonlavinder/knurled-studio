@@ -39,6 +39,15 @@ function useDocumentTitle(title: string) {
   }, [title]);
 }
 
+/** Shown while a route chunk downloads. */
+export function Pending() {
+  return (
+    <p className={styles.pending} role="status">
+      Loading
+    </p>
+  );
+}
+
 export interface PageHeadProps {
   /** Mono label above the heading, e.g. a part number or section name. */
   eyebrow?: ReactNode;

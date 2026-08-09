@@ -7,7 +7,11 @@
     "status": "ACTIVE",
     "url": "https://knurled.studio",
     "firstCut": "2026",
-    "stack": ["React", "TypeScript", "CDK"],
+    "stack": [
+      "React",
+      "TypeScript",
+      "CDK"
+    ],
     "sourcePublic": false
   },
   {
@@ -18,7 +22,11 @@
     "status": "ACTIVE",
     "url": "https://watchthediff.knurled.studio",
     "firstCut": "2025",
-    "stack": ["FastAPI", "React"],
-    "sourcePublic": false
+    "stack": [
+      "Python",
+      "React",
+      "GitHub Actions"
+    ],
+    "sourcePublic": true
   }
 ]

@@ -74,6 +74,14 @@
     outline: none;
   }
 
+  /* Chunk-loading placeholder. Reserves height so the footer does not jump,
+     and says what it is rather than spinning. */
+  .pending {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    min-height: 60svh;
+  }
+
   .head {
     padding-bottom: var(--space-8);
   }

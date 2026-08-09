@@ -1,0 +1,64 @@
+@layer components {
+  .group {
+    padding-top: var(--space-10);
+  }
+
+  .groupLabel {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    padding-bottom: var(--space-4);
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+
+  .list > li {
+    display: flex;
+  }
+
+  .panel {
+    flex: 1;
+  }
+
+  .card {
+    composes: stack from '@knurled/kit/patterns.css';
+
+    gap: var(--space-2);
+    height: 100%;
+  }
+
+  .title {
+    composes: monoValue from '@knurled/kit/patterns.css';
+
+    font-size: var(--text-sm);
+  }
+
+  .description {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--text-muted);
+  }
+
+  .foot {
+    composes: spread from '@knurled/kit/patterns.css';
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    align-items: baseline;
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+
+  .host {
+    text-transform: none;
+    color: var(--text-accent);
+  }
+
+  .tags {
+    color: var(--rule);
+  }
+}

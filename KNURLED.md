@@ -160,17 +160,25 @@ spec page with no other file touched.
 |---|---|
 | `/` | `catalog`, ascending by part number. Shelved entries stay listed, struck through and muted. |
 | `/tools/:slug` | `bySlug`. Unknown slug renders the 404 view. |
+| `/writing` · `/writing/:slug` | `src/writing/*.md`, newest first. |
+| `/links` | `src/links/links.ts`, grouped by first category. |
 | `/about` | Hand-written. Absorbs what was at `me.knurled.studio`. |
 | `/log` | `src/log/*.md`, newest first. |
 
-### The shop log
+### Markdown content
 
-One Markdown file per entry, `src/log/YYYY-MM-DD-slug.md`, with a `date:`
-frontmatter field and a two-line body. Loaded eagerly with `import.meta.glob`
-and parsed by `src/log/entries.ts` — around forty lines, no Markdown renderer,
-because two plain lines do not need one. A missing or malformed `date:` throws
-at load. Same-day entries fall back to reverse filename order, so a trailing
-letter (`-a-`, `-b-`) sequences a single day's work.
+Two collections, both loaded eagerly through `import.meta.glob` and both
+sharing `src/lib/frontmatter.ts` — a flat `key: value` reader, not a YAML
+parser, because the frontmatter here does not need one. A missing or malformed
+field throws at load rather than rendering a blank.
+
+- **`src/log/*.md`** — the shop log. `YYYY-MM-DD-slug.md`, a `date:` field, and
+  a two-line body. No Markdown renderer: two plain lines do not need one.
+  Same-day entries fall back to reverse filename order, so a trailing letter
+  (`-a-`, `-b-`) sequences a single day's work.
+- **`src/writing/*.md`** — long form. Filename must equal the frontmatter
+  `slug`, which is enforced at load. Rendered with react-markdown + remark-gfm.
+  The body must **not** open with an `# h1`; the page heading already is one.
 
 ## Copy register
 

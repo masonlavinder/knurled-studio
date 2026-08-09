@@ -1,0 +1,97 @@
+@layer components {
+  .back {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    display: inline-block;
+    padding-bottom: var(--space-6);
+    text-decoration: none;
+  }
+
+  .back:hover {
+    color: var(--text-primary);
+  }
+
+  .byline {
+    composes: row from '@knurled/kit/patterns.css';
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    flex-wrap: wrap;
+    padding-bottom: var(--space-3);
+  }
+
+  .date {
+    composes: tabular from '@knurled/kit/patterns.css';
+  }
+
+  .tag {
+    color: var(--rule);
+  }
+
+  /* Markdown body. react-markdown emits plain elements, so this is the one
+     place descendant selectors are the right tool — there are no class names
+     to attach to. */
+  .markdown {
+    composes: prose from '@knurled/kit/patterns.css';
+
+    padding-top: var(--space-4);
+  }
+
+  .markdown > * + * {
+    margin-top: var(--space-4);
+  }
+
+  .markdown h2 {
+    padding-top: var(--space-6);
+    font-size: var(--text-lg);
+  }
+
+  .markdown h3 {
+    padding-top: var(--space-4);
+    font-size: var(--text-base);
+    color: var(--text-muted);
+  }
+
+  .markdown ul,
+  .markdown ol {
+    padding-left: var(--space-5);
+  }
+
+  .markdown li + li {
+    margin-top: var(--space-2);
+  }
+
+  .markdown code {
+    padding: 1px var(--space-1);
+    background: var(--surface-raise);
+    color: var(--text-primary);
+  }
+
+  .markdown pre {
+    overflow-x: auto;
+    padding: var(--space-4);
+    border: var(--hairline);
+    background: var(--surface-panel);
+    font-size: var(--text-sm);
+  }
+
+  .markdown pre code {
+    padding: 0;
+    background: none;
+  }
+
+  .markdown hr {
+    margin-block: var(--space-8);
+  }
+
+  .markdown blockquote {
+    padding-left: var(--space-4);
+    border-left: 1px solid var(--edge-strong);
+    color: var(--text-muted);
+  }
+
+  .markdown strong {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+}

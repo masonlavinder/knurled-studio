@@ -1,0 +1,55 @@
+@layer components {
+  .list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .item {
+    padding-block: var(--space-5);
+  }
+
+  .ruled {
+    composes: hairline from '@knurled/kit/patterns.css';
+  }
+
+  .link {
+    composes: stack from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    gap: var(--space-2);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .meta {
+    composes: row from '@knurled/kit/patterns.css';
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    flex-wrap: wrap;
+  }
+
+  .date {
+    composes: tabular from '@knurled/kit/patterns.css';
+  }
+
+  .tag {
+    color: var(--rule);
+  }
+
+  .title {
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+  }
+
+  .link:hover .title {
+    color: var(--text-accent);
+  }
+
+  .excerpt {
+    composes: prose from '@knurled/kit/patterns.css';
+
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--text-muted);
+  }
+}

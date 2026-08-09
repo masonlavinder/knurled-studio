@@ -14,7 +14,6 @@ import { Pending, Shell } from './shell/Shell.tsx';
  */
 const About = lazy(() => import('./routes/About.tsx').then((m) => ({ default: m.About })));
 const Links = lazy(() => import('./routes/Links.tsx').then((m) => ({ default: m.Links })));
-const Log = lazy(() => import('./routes/Log.tsx').then((m) => ({ default: m.Log })));
 const NotFound = lazy(() => import('./routes/NotFound.tsx').then((m) => ({ default: m.NotFound })));
 const Post = lazy(() => import('./routes/Post.tsx').then((m) => ({ default: m.Post })));
 const Tool = lazy(() => import('./routes/Tool.tsx').then((m) => ({ default: m.Tool })));
@@ -31,7 +30,6 @@ export function App() {
             <Route path="/writing" element={<Writing />} />
             <Route path="/writing/:slug" element={<Post />} />
             <Route path="/links" element={<Links />} />
-            <Route path="/log" element={<Log />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

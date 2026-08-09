@@ -1,4 +1,3 @@
-import { catalog } from '@knurled/catalog';
 import { cx, Panel, SpecTable } from '@knurled/kit';
 
 import { PageHead } from '../shell/Shell.tsx';
@@ -65,7 +64,7 @@ export function About() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Bench</h2>
+        <h2 className={styles.sectionLabel}>Tools</h2>
         <Panel>
           <SpecTable
             rows={[
@@ -74,30 +73,16 @@ export function About() {
               { label: 'Also written', value: 'Go · C++ · C · R' },
               { label: 'Editor', value: 'VS Code' },
               { label: 'Linux', value: 'Ubuntu' },
-              { label: 'Keyboard, desk', value: 'Keychron Q1 Max · Gateron Jupiter Red' },
-              { label: 'Keyboard, travel', value: 'NuPhy Air60 V2' },
-            ]}
-          />
-        </Panel>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Shop</h2>
-        <Panel>
-          <SpecTable
-            rows={[
-              { label: 'Studio', value: 'knurled.studio' },
-              { label: 'First cut', value: '2026' },
-              { label: 'Parts', value: String(catalog.length) },
-              { label: 'Distance', value: '10+ half marathons · 1 marathon' },
+              { label: 'Keyboards', value: 'Keychron Q1 Max · Gateron Jupiter Red · NuPhy Air60 V2' },
               { label: 'Outside', value: 'Cycling · hiking · trail running · fishing' },
+              { label: 'Distance', value: '10+ half marathons · 1 marathon' },
             ]}
           />
         </Panel>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>All-time</h2>
+        <h2 className={styles.sectionLabel}>All Time Greats</h2>
         <Panel>
           <SpecTable
             rows={[
@@ -117,7 +102,7 @@ export function About() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Elsewhere</h2>
+        <h2 className={styles.sectionLabel}>Where to Find Him</h2>
         <ul className={styles.links}>
           {ELSEWHERE.map((link) => (
             <li key={link.url}>

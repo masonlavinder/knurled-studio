@@ -6,7 +6,7 @@
  * page, but every real URL answers HTTP 404 — fine for a human, wrong for a
  * crawler, and wrong on the wire.
  *
- * Every route here is known at build time: four static ones, plus one per
+ * Every route here is known at build time: three static ones, plus one per
  * catalog entry and one per post. So write a real index.html at each path and
  * let them answer 200. 404.html stays, and now only catches paths that really
  * are missing.
@@ -22,7 +22,7 @@ const appRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(appRoot, 'dist');
 const shell = await readFile(resolve(dist, 'index.html'));
 
-const STATIC_ROUTES = ['about', 'links', 'log', 'writing'];
+const STATIC_ROUTES = ['about', 'links', 'writing'];
 
 const catalog = JSON.parse(
   await readFile(resolve(appRoot, '../../packages/catalog/catalog.json'), 'utf8'),

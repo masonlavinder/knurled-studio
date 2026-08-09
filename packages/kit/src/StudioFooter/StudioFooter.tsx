@@ -35,7 +35,7 @@ export function StudioFooter({ partNumber, className }: StudioFooterProps) {
 
   return (
     <footer className={cx(styles.footer, className)}>
-      <Knurl height={7} />
+      <Knurl height={14} />
       <div className={styles.bar}>
         <div className={styles.identity}>
           <Mark size={16} />

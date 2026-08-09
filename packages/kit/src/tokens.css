@@ -79,10 +79,12 @@
     --hairline:   1px solid var(--edge);
     --hairline-strong: 1px solid var(--edge-strong);
 
-    /* knurl: 2px lines on a 7px pitch, crossed at 45 degrees */
+    /* knurl: 4px lines on a 14px pitch, crossed at 45 degrees.
+       Line and pitch scale together — thickening one without the other
+       closes the diamonds up into a near-solid band. */
     --knurl-line:  var(--stock-700);
-    --knurl-width: 2px;
-    --knurl-pitch: 7px;
+    --knurl-width: 4px;
+    --knurl-pitch: 14px;
 
     /* ---- motion ----------------------------------------------------- */
     --dur-fast:   70ms;

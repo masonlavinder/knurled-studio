@@ -51,16 +51,9 @@ export interface SectionRuleProps {
   as?: 'h2' | 'h3';
 }
 
-/** A section label with the knurl running out to the edge beside it. */
+/** A section label. Shared so the three pages with sections agree on it. */
 export function SectionRule({ label, as: Heading = 'h2' }: SectionRuleProps) {
-  return (
-    <div className={styles.sectionRule}>
-      <Heading className={styles.sectionRuleLabel}>{label}</Heading>
-      <div className={styles.sectionRuleBand}>
-        <Knurl height={7} />
-      </div>
-    </div>
-  );
+  return <Heading className={styles.sectionRuleLabel}>{label}</Heading>;
 }
 
 export interface PageHeadProps {
@@ -115,7 +108,7 @@ export function Shell({ children }: { children: ReactNode }) {
         </nav>
       </header>
 
-      <Knurl height={7} />
+      <Knurl height={14} />
 
       <main id="main" className={styles.main} tabIndex={-1}>
         {children}

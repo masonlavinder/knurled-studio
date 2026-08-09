@@ -192,7 +192,13 @@ of its size and tightens the grain, because a 13px chamfer and a 7px pitch on a
 20px glyph read as neither.
 
 It sits in the header lockup beside the wordmark and at the head of the footer
-identity row. Decorative in both, since the wordmark carries the name.
+identity row. Decorative in both, since the wordmark carries the name. The mark
+sets its own pitch and line width, so it does not move when the strip tokens do.
+
+The knurl strips are the header and footer only. Line width and pitch scale
+together — `--knurl-width` is `4px` on a `--knurl-pitch` of `14px`. Thickening
+the line alone closes the diamonds into a near-solid band, which reads as a
+smear rather than a grip.
 
 `apps/studio/public/favicon.svg` redraws the same geometry in SVG, because an
 icon cannot read the token layer — the two hex values there are `--stock-950`

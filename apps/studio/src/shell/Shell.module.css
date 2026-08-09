@@ -106,24 +106,10 @@
     font-size: var(--text-sm);
   }
 
-  /* Knurl marks a boundary rather than decorating one: a short band leading
-     into each section label, the way a grip runs up to a shoulder. */
-  .sectionRule {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding-bottom: var(--space-4);
-  }
-
   .sectionRuleLabel {
     composes: monoLabel from '@knurled/kit/patterns.css';
 
-    flex: none;
-    padding: 0;
-  }
-
-  .sectionRuleBand {
-    flex: 1;
-    min-width: var(--space-8);
+    display: block;
+    padding-bottom: var(--space-4);
   }
 }

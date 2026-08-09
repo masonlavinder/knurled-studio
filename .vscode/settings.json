@@ -1,0 +1,23 @@
+{
+  // Use the workspace TypeScript (5.9.3), not the one bundled with the editor.
+  // This is also what loads typescript-plugin-css-modules: TS plugins only run
+  // under the workspace SDK, so without this, `styles.panel` is never checked
+  // against the real class names in the stylesheet.
+  //
+  // VS Code will prompt once to trust it. Accept, or run
+  // "TypeScript: Select TypeScript Version" and pick the workspace version.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // The built-in CSS language service does not know `composes`, and flags it
+  // as an unknown property on every module in the repo. Stylelint is the
+  // authority here and enforces the design rules besides.
+  "css.validate": false,
+  "stylelint.validate": ["css"],
+
+  // Resolve the nearest eslint.config.js per package rather than one at root.
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
+}

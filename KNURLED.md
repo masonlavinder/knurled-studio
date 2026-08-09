@@ -271,6 +271,13 @@ TS plugins, so the command-line build falls back to the ambient
 `Record<string, string>` declaration and a typo there is not a build failure.
 Closing that gap needs a codegen step that emits a `.d.ts` per module.
 
+The plugin only loads under the **workspace** TypeScript. `.vscode/settings.json`
+points `typescript.tsdk` at `node_modules/typescript/lib`; accept the prompt, or
+run "TypeScript: Select TypeScript Version" and choose the workspace version. On
+the editor's bundled TypeScript the plugin never runs, and editor and CLI can
+disagree — a stale server reporting exports that plainly exist is the usual
+symptom, cured by "TypeScript: Restart TS Server".
+
 Versions for Vite, React, Zod, CDK, and the typeface packages are pinned as
 those phases land, and recorded here.
 

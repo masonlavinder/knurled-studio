@@ -1,0 +1,24 @@
+[
+  {
+    "partNumber": "KS-000",
+    "slug": "studio",
+    "name": "studio",
+    "tagline": "The shop floor.",
+    "status": "ACTIVE",
+    "url": "https://knurled.studio",
+    "firstCut": "2026",
+    "stack": ["React", "TypeScript", "CDK"],
+    "sourcePublic": false
+  },
+  {
+    "partNumber": "KS-002",
+    "slug": "watchthediff",
+    "name": "watchthediff",
+    "tagline": "Watches a file. Tells you when it changes.",
+    "status": "ACTIVE",
+    "url": "https://watchthediff.knurled.studio",
+    "firstCut": "2025",
+    "stack": ["FastAPI", "React"],
+    "sourcePublic": false
+  }
+]

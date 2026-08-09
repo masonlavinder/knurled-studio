@@ -1,0 +1,11 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    // Validation only. The catalog is consumed as TypeScript source, so
+    // there is nothing to emit and nothing to cache as an artifact.
+    "build": {
+      "outputs": []
+    }
+  }
+}

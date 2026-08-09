@@ -58,6 +58,29 @@ The studio does not delete its history.
 
 ---
 
+## The catalog
+
+`packages/catalog/catalog.json` is the manifest. `@knurled/catalog` exports the
+typed array plus `byPartNumber`, `bySlug`, and `byStatus`.
+
+It is validated at module load, so a malformed manifest fails the build instead
+of rendering a broken index. `pnpm --filter @knurled/catalog build` is that check
+on its own. Beyond shape, the validator enforces: part numbers match `KS-NNN` and
+are unique, slugs are unique because they are routes, `SHELVED` entries carry
+`url: null`, and the file stays sorted ascending so diffs stay readable. Every
+fault is reported at once, not one per run.
+
+## Internal packages ship TypeScript source
+
+Workspace packages point `exports` at `./src/index.ts` rather than a built
+`dist/`. Apps bundle them through Vite, so there is no build step to sequence, no
+stale `dist/` to debug, and edits land in the dev server immediately. Relative
+imports inside these packages carry an explicit `.ts` extension — that is what
+lets `node` run them directly for build-time checks.
+
+Consequence: a package's `build` task validates rather than compiles, and
+declares `"outputs": []` in its own `turbo.json`.
+
 ## Adding a new app
 
 1. Add an entry to `packages/catalog/catalog.json`. One file — the index page and
@@ -166,6 +189,7 @@ Exact pins, no ranges. Update deliberately, one at a time.
 | eslint-plugin-react-refresh | 0.5.3 | |
 | globals | 17.9.0 | |
 | Stylelint | 17.14.1 | |
+| @types/node | 24.13.3 | |
 
 Versions for Vite, React, Zod, CDK, and the typeface packages are pinned as
 those phases land, and recorded here.

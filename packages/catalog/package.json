@@ -1,0 +1,23 @@
+{
+  "name": "@knurled/catalog",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./catalog.json": "./catalog.json"
+  },
+  "scripts": {
+    "build": "node src/validate.cli.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@knurled/eslint-config": "workspace:^",
+    "@knurled/tsconfig": "workspace:^",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  }
+}

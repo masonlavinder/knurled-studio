@@ -21,24 +21,6 @@
     composes: monoValue from '../patterns.css';
   }
 
-  .finish {
-    composes: row from '../patterns.css';
-
-    gap: var(--space-2);
-  }
-
-  .finishLabel {
-    composes: monoLabel from '../patterns.css';
-  }
-
-  .finishValue {
-    composes: monoValue from '../patterns.css';
-
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-    color: var(--text-accent);
-  }
-
   .home {
     composes: monoValue from '../patterns.css';
     composes: fade from '../patterns.css';

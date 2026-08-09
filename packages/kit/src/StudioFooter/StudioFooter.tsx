@@ -1,5 +1,6 @@
 import { byPartNumber } from '@knurled/catalog';
 
+import { ColorBar } from '../ColorBar/ColorBar.tsx';
 import { Knurl } from '../Knurl/Knurl.tsx';
 import { PartNumber } from '../PartNumber/PartNumber.tsx';
 import { StatusChip } from '../StatusChip/StatusChip.tsx';
@@ -41,10 +42,7 @@ export function StudioFooter({ partNumber, className }: StudioFooterProps) {
           <StatusChip status={entry.status} />
         </div>
 
-        <p className={styles.finish}>
-          <span className={styles.finishLabel}>Finish:</span>
-          <span className={styles.finishValue}>Lavinder</span>
-        </p>
+        <ColorBar />
 
         <a className={styles.home} href={STUDIO_HOME}>
           knurled.studio

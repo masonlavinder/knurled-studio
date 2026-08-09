@@ -12,6 +12,8 @@
  * through `composes:` in a CSS Module, never referenced from JSX.
  */
 
+export { ColorBar, type ColorBarProps } from './ColorBar/ColorBar.tsx';
+export { INKS, type Ink } from './ColorBar/inks.ts';
 export { cx } from './cx.ts';
 export { Knurl, type KnurlProps } from './Knurl/Knurl.tsx';
 export { Panel, type PanelProps, type PanelTone } from './Panel/Panel.tsx';

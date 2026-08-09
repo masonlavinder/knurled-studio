@@ -1,0 +1,17 @@
+@layer components {
+  /* The separators and the surround are one thing: the strip's own background
+     showing through a 1px grid gap. No borders to double up at the joins. */
+  .strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    padding: 1px;
+    background: var(--edge-strong);
+  }
+
+  .patch {
+    width: var(--patch-size);
+    height: var(--patch-size);
+    background: var(--ink);
+  }
+}

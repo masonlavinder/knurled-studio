@@ -7,7 +7,7 @@ import '@knurled/kit/global.css';
 import '@knurled/kit/tokens.css';
 import '@knurled/kit/fonts.css';
 
-import { Scratch } from './Scratch.tsx';
+import { App } from './App.tsx';
 
 const root = document.getElementById('root');
 
@@ -17,6 +17,6 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <Scratch />
+    <App />
   </StrictMode>,
 );

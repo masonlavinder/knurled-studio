@@ -1,0 +1,19 @@
+@layer components {
+  .code {
+    composes: partNumber from '@knurled/kit/patterns.css';
+    composes: tabular from '@knurled/kit/patterns.css';
+  }
+
+  .back {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    display: inline-block;
+    padding-top: var(--space-6);
+    text-decoration: none;
+  }
+
+  .back:hover {
+    color: var(--text-primary);
+  }
+}

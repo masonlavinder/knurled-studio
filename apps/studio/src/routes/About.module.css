@@ -1,0 +1,12 @@
+@layer components {
+  .prose {
+    composes: prose from '@knurled/kit/patterns.css';
+    composes: stack from '@knurled/kit/patterns.css';
+
+    gap: var(--space-4);
+  }
+
+  .spec {
+    padding-top: var(--space-10);
+  }
+}

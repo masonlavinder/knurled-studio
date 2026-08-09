@@ -1,0 +1,48 @@
+@layer components {
+  .back {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    display: inline-block;
+    padding-bottom: var(--space-6);
+    text-decoration: none;
+  }
+
+  .back:hover {
+    color: var(--text-primary);
+  }
+
+  .badges {
+    composes: row from '@knurled/kit/patterns.css';
+
+    padding-bottom: var(--space-3);
+  }
+
+  .spec {
+    padding-top: var(--space-6);
+  }
+
+  .launch {
+    composes: spread from '@knurled/kit/patterns.css';
+
+    align-items: center;
+  }
+
+  .launchLabel {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+  }
+
+  .launchHost {
+    composes: monoValue from '@knurled/kit/patterns.css';
+
+    color: var(--text-accent);
+  }
+
+  .shelvedNote {
+    composes: prose from '@knurled/kit/patterns.css';
+    composes: dim from '@knurled/kit/patterns.css';
+
+    padding-top: var(--space-6);
+    font-size: var(--text-sm);
+  }
+}

@@ -1,0 +1,94 @@
+@layer components {
+  .shell {
+    composes: page from '@knurled/kit/patterns.css';
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  .skip {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    position: absolute;
+    left: -9999px;
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface-raise);
+    color: var(--text-primary);
+  }
+
+  .skip:focus {
+    left: var(--gutter);
+    z-index: var(--z-sticky);
+  }
+
+  .header {
+    composes: spread from '@knurled/kit/patterns.css';
+
+    align-items: center;
+    padding-block: var(--space-6) var(--space-4);
+  }
+
+  .wordmark {
+    composes: monoValue from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .wordmark:hover {
+    color: var(--text-accent);
+  }
+
+  .nav {
+    composes: row from '@knurled/kit/patterns.css';
+
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .navLink {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    text-decoration: none;
+  }
+
+  .navLink:hover {
+    color: var(--text-primary);
+  }
+
+  .navLinkActive {
+    color: var(--text-accent);
+  }
+
+  .main {
+    flex: 1;
+    padding-block: var(--space-10);
+  }
+
+  .main:focus {
+    outline: none;
+  }
+
+  .head {
+    padding-bottom: var(--space-8);
+  }
+
+  .eyebrow {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    padding-bottom: var(--space-2);
+  }
+
+  .lede {
+    composes: prose from '@knurled/kit/patterns.css';
+    composes: dim from '@knurled/kit/patterns.css';
+
+    padding-top: var(--space-3);
+    font-size: var(--text-sm);
+  }
+}

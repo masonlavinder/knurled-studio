@@ -149,6 +149,29 @@ Hard rules, enforced by `@knurled/stylelint-config` as errors:
 
 ---
 
+## Routes
+
+`apps/studio` serves four routes plus a catch-all. `/` and `/tools/:slug` are
+generated from the catalog — **adding a part is one edit to `catalog.json` and
+nothing else.** Verified: a fake KS-003 appeared on the index and got a working
+spec page with no other file touched.
+
+| Route | Source |
+|---|---|
+| `/` | `catalog`, ascending by part number. Shelved entries stay listed, struck through and muted. |
+| `/tools/:slug` | `bySlug`. Unknown slug renders the 404 view. |
+| `/about` | Hand-written. Absorbs what was at `me.knurled.studio`. |
+| `/log` | `src/log/*.md`, newest first. |
+
+### The shop log
+
+One Markdown file per entry, `src/log/YYYY-MM-DD-slug.md`, with a `date:`
+frontmatter field and a two-line body. Loaded eagerly with `import.meta.glob`
+and parsed by `src/log/entries.ts` — around forty lines, no Markdown renderer,
+because two plain lines do not need one. A missing or malformed `date:` throws
+at load. Same-day entries fall back to reverse filename order, so a trailing
+letter (`-a-`, `-b-`) sequences a single day's work.
+
 ## Copy register
 
 Spec sheet and shop drawing. Terse, declarative, nouns and numbers. Units and

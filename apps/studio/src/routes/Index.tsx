@@ -21,7 +21,7 @@ export function Index() {
       <PageHead
         eyebrow="Catalog"
         title="Index"
-        lede={`${String(entries.length)} parts. Each one runs on its own subdomain.`}
+        lede={`The Studio project listing.`}
       />
 
       <ul className={styles.list}>

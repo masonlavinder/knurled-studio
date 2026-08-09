@@ -48,7 +48,7 @@ export function About() {
           Now co-founder at Third Loop, building AI tooling for mechanical, electrical, and chemical
           engineers. LLMs, RAG, React, Python, SQLAlchemy, AWS.
         </p>
-        <p>Knurled Studio is the workshop for everything outside that. me.knurled.studio lands here.</p>
+        <p>Knurled Studio is the workshop for everything outside that. The site before it is KS-001.</p>
       </div>
 
       <section className={styles.section}>

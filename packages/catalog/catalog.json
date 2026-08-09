@@ -14,6 +14,20 @@
     "sourcePublic": false
   },
   {
+    "partNumber": "KS-001",
+    "slug": "old",
+    "name": "old",
+    "tagline": "The personal site this one replaced.",
+    "status": "MAINTAINED",
+    "url": "https://me.knurled.studio",
+    "firstCut": "2025",
+    "stack": [
+      "React",
+      "TypeScript"
+    ],
+    "sourcePublic": true
+  },
+  {
     "partNumber": "KS-002",
     "slug": "watchthediff",
     "name": "watchthediff",

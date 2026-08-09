@@ -108,7 +108,7 @@ export function Shell({ children }: { children: ReactNode }) {
         </nav>
       </header>
 
-      <Knurl height={14} />
+      <Knurl />
 
       <main id="main" className={styles.main} tabIndex={-1}>
         {children}

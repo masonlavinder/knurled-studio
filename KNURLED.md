@@ -195,10 +195,18 @@ It sits in the header lockup beside the wordmark and at the head of the footer
 identity row. Decorative in both, since the wordmark carries the name. The mark
 sets its own pitch and line width, so it does not move when the strip tokens do.
 
-The knurl strips are the header and footer only. Line width and pitch scale
-together — `--knurl-width` is `4px` on a `--knurl-pitch` of `14px`. Thickening
-the line alone closes the diamonds into a near-solid band, which reads as a
-smear rather than a grip.
+The knurl strips are the header and footer only, and they are **two rows of
+diamonds deep** rather than one.
+
+Depth is the dial, not scale. Two families of lines a `--knurl-pitch` apart
+crossing at a right angle make a square lattice standing on its corner, so one
+row of diamonds is `pitch × √2` tall — `--knurl-row`. Strips are sized in whole
+rows; any other height cuts the bottom row through the middle. `<Knurl />` with
+no props is two rows, which is what both call sites use.
+
+Enlarging the pattern instead — a thicker line on a wider pitch — was tried and
+looks wrong: it reads as one coarse zigzag rather than a knurl. Thickening the
+line alone is worse, closing the diamonds into a near-solid band.
 
 `apps/studio/public/favicon.svg` redraws the same geometry in SVG, because an
 icon cannot read the token layer — the two hex values there are `--stock-950`

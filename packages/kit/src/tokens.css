@@ -79,12 +79,15 @@
     --hairline:   1px solid var(--edge);
     --hairline-strong: 1px solid var(--edge-strong);
 
-    /* knurl: 4px lines on a 14px pitch, crossed at 45 degrees.
-       Line and pitch scale together — thickening one without the other
-       closes the diamonds up into a near-solid band. */
+    /* knurl: 2px lines on a 7px pitch, crossed at 45 degrees.
+       Two families of lines spaced --knurl-pitch apart and crossing at a
+       right angle make a square lattice standing on its corner, so one row
+       of diamonds is pitch x sqrt(2) tall. Strips are sized in whole rows;
+       anything else clips the bottom row. */
     --knurl-line:  var(--stock-700);
-    --knurl-width: 4px;
-    --knurl-pitch: 14px;
+    --knurl-width: 2px;
+    --knurl-pitch: 7px;
+    --knurl-row:   calc(var(--knurl-pitch) * 1.41421356);
 
     /* ---- motion ----------------------------------------------------- */
     --dur-fast:   70ms;

@@ -3,6 +3,9 @@
     composes: knurl from '../patterns.css';
 
     width: 100%;
-    height: var(--knurl-height);
+
+    /* Two rows of diamonds by default. Sizing in whole --knurl-row units is
+       what keeps the bottom row from being cut through the middle. */
+    height: var(--knurl-height, calc(var(--knurl-row) * 2));
   }
 }

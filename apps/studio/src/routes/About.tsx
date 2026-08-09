@@ -73,7 +73,7 @@ export function About() {
               { label: 'Editor', value: 'VS Code' },
               { label: 'Linux', value: 'Ubuntu' },
               { label: 'Keyboards', value: 'Keychron Q1 Max · Gateron Jupiter Red · NuPhy Air60 V2' },
-              { label: 'Outside', value: 'Running, Cycling · Hiking · Fishing' },
+              { label: 'Outside', value: 'Running · Cycling · Hiking · Fishing' },
               { label: 'Distance', value: '10+ half marathons · 1 marathon' },
             ]}
           />

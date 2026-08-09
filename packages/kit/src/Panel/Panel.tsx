@@ -36,7 +36,7 @@ export type PanelProps<T extends ElementType = 'div'> = PanelOwnProps<T> &
  * The chamfered surface. Corners are cut top-left and bottom-right at 45°.
  *
  * Two nested layers, because clip-path clips a border away: the shell paints
- * the edge colour, the face is inset 1px and paints the surface. The same
+ * the edge color, the face is inset 1px and paints the surface. The same
  * clipping is why an interactive panel's focus ring is an inset box-shadow on
  * the face rather than an outline on the shell.
  */

@@ -12,7 +12,7 @@
  *   · a 1ms duration is legal — the reduced-motion block needs it
  */
 
-/** Chamfers, not rounded corners. Rounded reads as injection-moulded plastic. */
+/** Chamfers, not rounded corners. Rounded reads as injection-molded plastic. */
 const NO_RADIUS = '/^border(-[a-z]+)*-radius$/';
 
 /** Never fake light: no glows, bevels, blurs, or soft edges. */

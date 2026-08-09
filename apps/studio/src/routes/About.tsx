@@ -1,45 +1,137 @@
 import { catalog } from '@knurled/catalog';
-import { Panel, SpecTable } from '@knurled/kit';
+import { cx, Panel, SpecTable } from '@knurled/kit';
 
 import { PageHead } from '../shell/Shell.tsx';
 import styles from './About.module.css';
+
+/** Working rules, in the operator's own words, tightened. */
+const PRINCIPLES = [
+  'Simple is better. You cannot put lipstick on a pig.',
+  'Start in black and white. Color goes in last, because shape and form read first and color hides both.',
+  'Design the schema early, around the access patterns you actually expect.',
+  'Never over-normalize. Never over-optimize at the start.',
+  'Work with SQL, not around it. Designing around a tool means it is the wrong tool.',
+  'Use the bare minimum. Most bloat is a framework standing in for CSS, or Python standing in for a sort the database would have done.',
+  'Research what you adopt. You have to live with it.',
+];
+
+const ELSEWHERE = [
+  { name: 'Third Loop', url: 'https://3rd-loop.com' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/mason-lavinder/' },
+  { name: 'GitHub', url: 'https://github.com/masonlavinder' },
+  { name: 'Letterboxd', url: 'https://letterboxd.com/masonlav' },
+];
+
+function hostOf(url: string): string {
+  return new URL(url).hostname.replace(/^www\./, '');
+}
 
 export function About() {
   return (
     <>
       <PageHead
         eyebrow="Operator"
-        title="About"
-        lede="One person. Several small tools, each on its own subdomain."
+        title="Mason Lavinder"
+        lede="Founder and full-stack developer. AI applications."
       />
 
       <div className={styles.prose}>
         <p>
-          Knurled Studio is a one-person software studio. Every part in the index was designed,
-          built, and is kept running by the same person.
+          Aerospace engineering at Virginia Tech, then data science by way of internships and a first
+          job. That turned into a Master&rsquo;s in Data Analytics Engineering from George Mason,
+          earned at night.
         </p>
         <p>
-          Knurling is the diamond-cut texture on a thumbscrew or a camera dial — grip where a hand
-          needs it, and nowhere else. The work here is meant the same way: tools sized to one task,
-          finished properly, and no larger than the task requires.
+          At MPR: medical devices through nuclear reactor design, mostly software and data
+          engineering. Grew into tech lead and project manager, and the person the room asked about
+          software, ML, and data.
         </p>
-        <p>me.knurled.studio redirects to this page.</p>
+        <p>
+          Now co-founder at Third Loop, building AI tooling for mechanical, electrical, and chemical
+          engineers. LLMs, RAG, React, Python, SQLAlchemy, AWS.
+        </p>
+        <p>Knurled Studio is the workshop for everything outside that. me.knurled.studio lands here.</p>
       </div>
 
-      <div className={styles.spec}>
+      <section className={styles.section}>
+        <h2 className={styles.sectionLabel}>Principles</h2>
+        <ol className={styles.principles}>
+          {PRINCIPLES.map((principle, index) => (
+            <li key={principle} className={styles.principle}>
+              <span className={styles.principleIndex}>{String(index + 1).padStart(2, '0')}</span>
+              <span>{principle}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionLabel}>Bench</h2>
         <Panel>
           <SpecTable
-            caption="Shop"
             rows={[
-              { label: 'Operator', value: 'Mason Lavinder' },
-              { label: 'Studio', value: 'knurled.studio' },
-              { label: 'First cut', value: '2026' },
-              { label: 'Parts', value: String(catalog.length) },
-              { label: 'Stack', value: 'TypeScript · React · FastAPI · AWS' },
+              { label: 'Front end', value: 'React · TypeScript' },
+              { label: 'Back end', value: 'Python · PostgreSQL' },
+              { label: 'Also written', value: 'Go · C++ · C · R' },
+              { label: 'Editor', value: 'VS Code' },
+              { label: 'Linux', value: 'Ubuntu' },
+              { label: 'Keyboard, desk', value: 'Keychron Q1 Max · Gateron Jupiter Red' },
+              { label: 'Keyboard, travel', value: 'NuPhy Air60 V2' },
             ]}
           />
         </Panel>
-      </div>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionLabel}>Shop</h2>
+        <Panel>
+          <SpecTable
+            rows={[
+              { label: 'Studio', value: 'knurled.studio' },
+              { label: 'First cut', value: '2026' },
+              { label: 'Parts', value: String(catalog.length) },
+              { label: 'Distance', value: '10+ half marathons · 1 marathon' },
+              { label: 'Outside', value: 'Cycling · hiking · trail running · fishing' },
+            ]}
+          />
+        </Panel>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionLabel}>All-time</h2>
+        <Panel>
+          <SpecTable
+            rows={[
+              { label: 'Fiction', value: 'Dune · East of Eden · The Hobbit · The Alchemist' },
+              {
+                label: 'Nonfiction',
+                value: 'Kitchen Confidential · The Psychology of Money · Washington: A Life',
+              },
+              {
+                label: 'Film',
+                value:
+                  "Ferris Bueller's Day Off · Interstellar · LOTR · Inglourious Basterds · Empire Strikes Back",
+              },
+            ]}
+          />
+        </Panel>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionLabel}>Elsewhere</h2>
+        <ul className={styles.links}>
+          {ELSEWHERE.map((link) => (
+            <li key={link.url}>
+              <Panel interactive as="a" href={link.url} className={cx(styles.linkPanel)}>
+                <div className={styles.linkRow}>
+                  <span className={styles.linkName}>{link.name}</span>
+                  <span className={styles.linkHost}>{hostOf(link.url)}</span>
+                </div>
+              </Panel>
+            </li>
+          ))}
+        </ul>
+      </section>
     </>
   );
 }

@@ -63,4 +63,61 @@
     text-decoration: line-through;
     text-decoration-color: var(--stock-600);
   }
+
+  /* Writing and Links are not parts, so they sit below the catalog rather
+     than in it — and out of the nav, which is for the studio's own pages. */
+  .also {
+    padding-top: var(--space-12);
+  }
+
+  .alsoLabel {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    padding-bottom: var(--space-4);
+  }
+
+  .alsoList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+
+  .alsoList > li {
+    display: flex;
+  }
+
+  .alsoPanel {
+    flex: 1;
+  }
+
+  .alsoCard {
+    composes: stack from '@knurled/kit/patterns.css';
+
+    gap: var(--space-2);
+    height: 100%;
+  }
+
+  .alsoTop {
+    composes: spread from '@knurled/kit/patterns.css';
+
+    align-items: baseline;
+  }
+
+  .alsoName {
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+  }
+
+  .alsoCount {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: tabular from '@knurled/kit/patterns.css';
+  }
+
+  .alsoNote {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--text-muted);
+  }
 }

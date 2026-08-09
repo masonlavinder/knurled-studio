@@ -3,14 +3,13 @@
     "partNumber": "KS-000",
     "slug": "studio",
     "name": "studio",
-    "tagline": "The shop floor.",
+    "tagline": "The studio.",
     "status": "ACTIVE",
     "url": "https://knurled.studio",
     "firstCut": "2026",
     "stack": [
       "React",
-      "TypeScript",
-      "CDK"
+      "TypeScript"
     ],
     "sourcePublic": false
   },
@@ -18,12 +17,11 @@
     "partNumber": "KS-002",
     "slug": "watchthediff",
     "name": "watchthediff",
-    "tagline": "Watches a file. Tells you when it changes.",
+    "tagline": "Watches the watchers. Tracks those who track you.",
     "status": "ACTIVE",
     "url": "https://watchthediff.knurled.studio",
     "firstCut": "2025",
     "stack": [
-      "Python",
       "React",
       "GitHub Actions"
     ],

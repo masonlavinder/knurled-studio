@@ -9,8 +9,6 @@ export const STUDIO_PART_NUMBER = 'KS-000';
 
 const NAV = [
   { to: '/', label: 'Index', end: true },
-  { to: '/writing', label: 'Writing', end: false },
-  { to: '/links', label: 'Links', end: false },
   { to: '/about', label: 'About', end: false },
 ];
 

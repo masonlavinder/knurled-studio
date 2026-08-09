@@ -161,9 +161,15 @@ spec page with no other file touched.
 |---|---|
 | `/` | `catalog`, ascending by part number. Shelved entries stay listed, struck through and muted. |
 | `/tools/:slug` | `bySlug`. Unknown slug renders the 404 view. |
-| `/writing` · `/writing/:slug` | `src/writing/*.md`, newest first. |
-| `/links` | `src/links/links.ts`, grouped by first category. |
+| `/writing` · `/writing/:slug` | `src/writing/*.md`, newest first. Reached from the index. |
+| `/links` | `src/links/links.ts`, grouped by first category. Reached from the index. |
 | `/about` | Hand-written. Absorbs what was at `me.knurled.studio`. |
+
+The nav carries **Index** and **About** only. Writing and Links sit in an "Also
+on file" section under the catalog — they are not parts, so they are not in the
+index grid, and they are not the studio's own pages, so they are not tabs.
+Their counts come from the data: the post count reads a **non-eager**
+`import.meta.glob`, which resolves to a map of paths and never loads a post.
 
 ### Markdown content
 

@@ -3,11 +3,6 @@
     padding-top: var(--space-10);
   }
 
-  .groupLabel {
-    composes: monoLabel from '@knurled/kit/patterns.css';
-
-    padding-bottom: var(--space-4);
-  }
 
   .list {
     display: grid;

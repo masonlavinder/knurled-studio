@@ -29,17 +29,23 @@
     padding-block: var(--space-6) var(--space-4);
   }
 
+  .lockup {
+    composes: row from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    gap: var(--space-3);
+    text-decoration: none;
+  }
+
   .wordmark {
     composes: monoValue from '@knurled/kit/patterns.css';
-    composes: fade from '@knurled/kit/patterns.css';
 
     letter-spacing: var(--track-label);
     text-transform: uppercase;
     color: var(--text-primary);
-    text-decoration: none;
   }
 
-  .wordmark:hover {
+  .lockup:hover .wordmark {
     color: var(--text-accent);
   }
 
@@ -98,5 +104,26 @@
 
     padding-top: var(--space-3);
     font-size: var(--text-sm);
+  }
+
+  /* Knurl marks a boundary rather than decorating one: a short band leading
+     into each section label, the way a grip runs up to a shoulder. */
+  .sectionRule {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-bottom: var(--space-4);
+  }
+
+  .sectionRuleLabel {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    flex: none;
+    padding: 0;
+  }
+
+  .sectionRuleBand {
+    flex: 1;
+    min-width: var(--space-8);
   }
 }

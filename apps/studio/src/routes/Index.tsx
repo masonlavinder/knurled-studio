@@ -3,7 +3,7 @@ import { cx, Panel, PartNumber, StatusChip } from '@knurled/kit';
 import { Link } from 'react-router';
 
 import { LINK_COUNT, POST_COUNT } from '../lib/counts.ts';
-import { PageHead } from '../shell/Shell.tsx';
+import { PageHead, SectionRule } from '../shell/Shell.tsx';
 import styles from './Index.module.css';
 
 /** Not parts, so they sit below the catalog rather than in it. */
@@ -54,7 +54,7 @@ export function Index() {
       </ul>
 
       <section className={styles.also}>
-        <h2 className={styles.alsoLabel}>Also on file</h2>
+        <SectionRule label="Also on file" />
         <ul className={styles.alsoList}>
           {ALSO.map((item) => (
             <li key={item.to}>

@@ -10,11 +10,6 @@
     padding-top: var(--space-12);
   }
 
-  .sectionLabel {
-    composes: monoLabel from '@knurled/kit/patterns.css';
-
-    padding-bottom: var(--space-4);
-  }
 
   .principles {
     composes: prose from '@knurled/kit/patterns.css';

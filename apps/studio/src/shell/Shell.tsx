@@ -1,4 +1,4 @@
-import { cx, Knurl, StudioFooter } from '@knurled/kit';
+import { cx, Knurl, Mark, StudioFooter } from '@knurled/kit';
 import { type ReactNode, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
 
@@ -45,6 +45,24 @@ export function Pending() {
   );
 }
 
+export interface SectionRuleProps {
+  label: string;
+  /** Heading level. Sections under a page h1 are h2 unless nested deeper. */
+  as?: 'h2' | 'h3';
+}
+
+/** A section label with the knurl running out to the edge beside it. */
+export function SectionRule({ label, as: Heading = 'h2' }: SectionRuleProps) {
+  return (
+    <div className={styles.sectionRule}>
+      <Heading className={styles.sectionRuleLabel}>{label}</Heading>
+      <div className={styles.sectionRuleBand}>
+        <Knurl height={7} />
+      </div>
+    </div>
+  );
+}
+
 export interface PageHeadProps {
   /** Mono label above the heading, e.g. a part number or section name. */
   eyebrow?: ReactNode;
@@ -79,8 +97,9 @@ export function Shell({ children }: { children: ReactNode }) {
       </a>
 
       <header className={styles.header}>
-        <NavLink to="/" className={cx(styles.wordmark)}>
-          Knurled Studio
+        <NavLink to="/" className={cx(styles.lockup)}>
+          <Mark size={22} />
+          <span className={styles.wordmark}>Knurled Studio</span>
         </NavLink>
         <nav className={styles.nav} aria-label="Primary">
           {NAV.map((item) => (

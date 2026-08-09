@@ -182,6 +182,27 @@ The filename must equal the frontmatter `slug`, which is enforced at load.
 Rendered with react-markdown + remark-gfm. The body must **not** open with an
 `# h1`; the page heading already is one.
 
+## The mark
+
+`<Mark>` is a chamfered square with the knurl cut into it — both signature
+elements in one glyph. It is built from the same `chamferShell`, `chamferFace`
+and `knurl` patterns as everything else rather than drawn separately, so it
+cannot drift from the components beside it. It scales the chamfer to a quarter
+of its size and tightens the grain, because a 13px chamfer and a 7px pitch on a
+20px glyph read as neither.
+
+It sits in the header lockup beside the wordmark and at the head of the footer
+identity row. Decorative in both, since the wordmark carries the name.
+
+`apps/studio/public/favicon.svg` redraws the same geometry in SVG, because an
+icon cannot read the token layer — the two hex values there are `--stock-950`
+and `--lavinder-400`, and they have to be kept in step by hand.
+
+**An XML comment cannot contain a double hyphen.** Writing `--stock-950` inside
+one makes the file malformed; browsers serve it 200 and then refuse to render
+it, so it fails as a silently broken image. Name tokens without their leading
+dashes in SVG comments.
+
 ## Copy register
 
 Spec sheet and shop drawing. Terse, declarative, nouns and numbers. Units and

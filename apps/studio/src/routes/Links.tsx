@@ -1,7 +1,7 @@
 import { cx, Panel } from '@knurled/kit';
 
 import { linkGroups, links } from '../links/links.ts';
-import { PageHead } from '../shell/Shell.tsx';
+import { PageHead, SectionRule } from '../shell/Shell.tsx';
 import styles from './Links.module.css';
 
 function hostOf(url: string): string {
@@ -19,7 +19,7 @@ export function Links() {
 
       {linkGroups.map((group) => (
         <section key={group.category} className={styles.group}>
-          <h2 className={styles.groupLabel}>{group.category}</h2>
+          <SectionRule label={group.category} />
           <ul className={styles.list}>
             {group.entries.map((link) => (
               <li key={link.url}>

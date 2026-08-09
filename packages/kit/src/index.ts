@@ -16,6 +16,7 @@ export { ColorBar, type ColorBarProps } from './ColorBar/ColorBar.tsx';
 export { INKS, type Ink } from './ColorBar/inks.ts';
 export { cx } from './cx.ts';
 export { Knurl, type KnurlProps } from './Knurl/Knurl.tsx';
+export { Mark, type MarkProps } from './Mark/Mark.tsx';
 export { Panel, type PanelProps, type PanelTone } from './Panel/Panel.tsx';
 export { PartNumber, type PartNumberProps } from './PartNumber/PartNumber.tsx';
 export { RegistrationMarks } from './RegistrationMarks/RegistrationMarks.tsx';

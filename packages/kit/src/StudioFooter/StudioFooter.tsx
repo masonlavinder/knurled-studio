@@ -2,6 +2,7 @@ import { byPartNumber } from '@knurled/catalog';
 
 import { ColorBar } from '../ColorBar/ColorBar.tsx';
 import { Knurl } from '../Knurl/Knurl.tsx';
+import { Mark } from '../Mark/Mark.tsx';
 import { PartNumber } from '../PartNumber/PartNumber.tsx';
 import { StatusChip } from '../StatusChip/StatusChip.tsx';
 import { cx } from '../cx.ts';
@@ -37,6 +38,7 @@ export function StudioFooter({ partNumber, className }: StudioFooterProps) {
       <Knurl height={7} />
       <div className={styles.bar}>
         <div className={styles.identity}>
+          <Mark size={16} />
           <PartNumber id={entry.partNumber} />
           <span className={styles.name}>{entry.name}</span>
           <StatusChip status={entry.status} />

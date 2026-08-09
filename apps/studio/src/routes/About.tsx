@@ -1,6 +1,6 @@
 import { cx, Panel, SpecTable } from '@knurled/kit';
 
-import { PageHead } from '../shell/Shell.tsx';
+import { PageHead, SectionRule } from '../shell/Shell.tsx';
 import styles from './About.module.css';
 
 /** Working rules, in the operator's own words, tightened. */
@@ -47,11 +47,11 @@ export function About() {
           Now co-founder at Third Loop, building AI tooling for mechanical, electrical, and chemical
           engineers. LLMs, RAG, React, Python, SQLAlchemy, AWS.
         </p>
-        <p>Knurled Studio is the workshop for everything outside that. The site before it is KS-001.</p>
+        <p>Knurled Studio is the workshop for all of the side projects.</p>
       </div>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Principles</h2>
+        <SectionRule label="Principles" />
         <ol className={styles.principles}>
           {PRINCIPLES.map((principle, index) => (
             <li key={principle} className={styles.principle}>
@@ -63,7 +63,7 @@ export function About() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Tools</h2>
+        <SectionRule label="Tools" />
         <Panel>
           <SpecTable
             rows={[
@@ -81,7 +81,7 @@ export function About() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>All Time Greats</h2>
+        <SectionRule label="All Time Greats" />
         <Panel>
           <SpecTable
             rows={[
@@ -101,7 +101,7 @@ export function About() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Where to Find Him</h2>
+        <SectionRule label="Where to Find Him" />
         <ul className={styles.links}>
           {ELSEWHERE.map((link) => (
             <li key={link.url}>

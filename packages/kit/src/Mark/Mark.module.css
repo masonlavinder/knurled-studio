@@ -1,0 +1,33 @@
+@layer components {
+  /* The mark is the studio's two rules in one glyph: a chamfered square with
+     the knurl cut into it. Same two-layer construction as Panel, because
+     clip-path clips a border the same way here. */
+  .shell {
+    composes: chamferShell from '../patterns.css';
+
+    display: flex;
+    flex: none;
+    width: var(--mark-size);
+    height: var(--mark-size);
+
+    /* Scaled down from the panel chamfer — 13px on a 24px glyph would cut
+       the corners off entirely. */
+    --chamfer: calc(var(--mark-size) / 4);
+
+    background: var(--lavinder-400);
+  }
+
+  .face {
+    composes: chamferFace from '../patterns.css';
+    composes: knurl from '../patterns.css';
+
+    flex: 1;
+    background-color: var(--surface-page);
+
+    /* Tighter grain than the strips: at this size the 7px pitch reads as
+       two diamonds and loses the texture. */
+    --knurl-pitch: calc(var(--mark-size) / 5);
+    --knurl-width: 1px;
+    --knurl-line: var(--lavinder-400);
+  }
+}

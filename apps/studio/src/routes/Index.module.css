@@ -70,11 +70,6 @@
     padding-top: var(--space-12);
   }
 
-  .alsoLabel {
-    composes: monoLabel from '@knurled/kit/patterns.css';
-
-    padding-bottom: var(--space-4);
-  }
 
   .alsoList {
     display: grid;

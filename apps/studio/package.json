@@ -1,0 +1,33 @@
+{
+  "name": "studio",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "dev": "vite",
+    "lint": "eslint . && stylelint \"src/**/*.css\"",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@knurled/catalog": "workspace:^",
+    "@knurled/kit": "workspace:^",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@knurled/eslint-config": "workspace:^",
+    "@knurled/stylelint-config": "workspace:^",
+    "@knurled/tsconfig": "workspace:^",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "eslint": "catalog:",
+    "stylelint": "catalog:",
+    "typescript": "catalog:",
+    "typescript-plugin-css-modules": "catalog:",
+    "vite": "catalog:"
+  }
+}

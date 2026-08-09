@@ -1,0 +1,38 @@
+{
+  "name": "@knurled/kit",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css",
+    "./global.css": "./src/global.css",
+    "./patterns.css": "./src/patterns.css",
+    "./fonts.css": "./src/fonts.css"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "eslint . && stylelint \"src/**/*.css\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/geist": "catalog:",
+    "@fontsource/geist-mono": "catalog:",
+    "@knurled/catalog": "workspace:^"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@knurled/eslint-config": "workspace:^",
+    "@knurled/stylelint-config": "workspace:^",
+    "@knurled/tsconfig": "workspace:^",
+    "@types/react": "catalog:",
+    "eslint": "catalog:",
+    "react": "catalog:",
+    "stylelint": "catalog:",
+    "typescript": "catalog:",
+    "typescript-plugin-css-modules": "catalog:"
+  }
+}

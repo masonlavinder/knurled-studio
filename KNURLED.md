@@ -89,8 +89,9 @@ declares `"outputs": []` in its own `turbo.json`.
 2. `mkdir apps/<slug>` with a Vite + React + TS setup. Extend
    `@knurled/tsconfig/react-library.json`, use `@knurled/eslint-config/react`
    and `@knurled/stylelint-config`.
-3. Depend on `@knurled/kit` and `@knurled/catalog`. Import `tokens.css` and
-   `global.css` exactly once, at the app root.
+3. Depend on `@knurled/kit` and `@knurled/catalog`. Import the three global
+   stylesheets exactly once, at the app root, in the order given under
+   [Styling](#styling) — `global.css` first.
 4. Mount `<StudioFooter partNumber="KS-NNN" />`. Every app mounts it — it is what
    makes the subdomains read as one studio.
 5. Add a `KnurledSite` instance to `infra/stacks/studio-stack.ts`.
@@ -102,21 +103,38 @@ declares `"outputs": []` in its own `turbo.json`.
 A global design system in plain CSS, composed into CSS Modules. No Tailwind, no
 CSS-in-JS, no utility classes in JSX.
 
-- `@knurled/kit/tokens.css` — custom properties only, imported once per app.
-- `@knurled/kit/global.css` — layers, reset, base elements, type scale, focus,
-  reduced motion. Imported once per app.
-- `@knurled/kit/patterns.css` — reusable fragments, reached **only** via
-  `composes`. Never write a pattern class name in JSX.
+Three global files, imported once per app, **in this order**:
 
-Layer order, declared once in `global.css`:
+```ts
+import '@knurled/kit/global.css';   // first — declares the cascade order
+import '@knurled/kit/tokens.css';
+import '@knurled/kit/fonts.css';
+```
+
+- `global.css` — layer declaration, reset, base elements, type scale, focus,
+  reduced motion.
+- `tokens.css` — custom properties only.
+- `fonts.css` — self-hosted Geist and Geist Mono, latin subset, weights 400/500.
+- `patterns.css` — reusable fragments, reached **only** via `composes`. Never
+  imported globally, never written into JSX.
+
+Layer order, declared once at the top of `global.css`:
 
 ```css
 @layer reset, tokens, base, patterns, components;
 ```
 
-Every rule in the kit and in every app belongs to a layer. Without this, cascade
-resolution depends on CSS Module import order, which differs between the dev
-server and the production build.
+**global.css must be imported first.** A layer takes its position from wherever
+its name first appears, so any `@layer` block emitted ahead of that statement is
+pinned where it lands and the declared order silently stops applying. Importing
+tokens.css first put `@layer tokens` ahead of the declaration and did exactly
+that. It was harmless there — tokens holds only custom properties — but it is
+the failure mode the layer discipline exists to prevent, and it is invisible
+until two rules collide.
+
+CSS Module lookups are typed `string | undefined`, so join class names with
+`cx` from the kit rather than template literals, which would emit the string
+"undefined" into a class attribute.
 
 Hard rules, enforced by `@knurled/stylelint-config` as errors:
 
@@ -190,6 +208,22 @@ Exact pins, no ranges. Update deliberately, one at a time.
 | globals | 17.9.0 | |
 | Stylelint | 17.14.1 | |
 | @types/node | 24.13.3 | |
+| React | 19.2.8 | + react-dom |
+| Vite | 8.2.1 | + @vitejs/plugin-react 6.0.5 |
+| @types/react | 19.2.18 | + @types/react-dom 19.2.4 |
+| typescript-plugin-css-modules | 5.2.0 | editor-only, see below |
+| @fontsource/geist | 5.3.0 | + geist-mono, self-hosted |
+
+Exact versions live in the `catalog:` block of `pnpm-workspace.yaml`; packages
+reference them as `"react": "catalog:"`. This table mirrors that block.
+
+### CSS Module typing
+
+`typescript-plugin-css-modules` is a **tsserver** plugin: the editor gets the
+real per-class shape and flags `styles.panle` as you type. `tsc` does not load
+TS plugins, so the command-line build falls back to the ambient
+`Record<string, string>` declaration and a typo there is not a build failure.
+Closing that gap needs a codegen step that emits a `.d.ts` per module.
 
 Versions for Vite, React, Zod, CDK, and the typeface packages are pinned as
 those phases land, and recorded here.

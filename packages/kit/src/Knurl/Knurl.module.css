@@ -1,0 +1,8 @@
+@layer components {
+  .knurl {
+    composes: knurl from '../patterns.css';
+
+    width: 100%;
+    height: var(--knurl-height);
+  }
+}

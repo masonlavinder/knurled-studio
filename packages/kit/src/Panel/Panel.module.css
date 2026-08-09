@@ -1,0 +1,48 @@
+@layer components {
+  .shell {
+    composes: chamferShell from '../patterns.css';
+
+    display: flex;
+  }
+
+  .face {
+    composes: chamferFace from '../patterns.css';
+
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-5);
+  }
+
+  /* The focus ring lives here, on the face, because clip-path on the shell
+     would clip an outline away entirely. */
+  .interactiveFace {
+    composes: face;
+    composes: focusInset from '../patterns.css';
+    composes: fade from '../patterns.css';
+
+    display: block;
+    width: 100%;
+    text-align: inherit;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .interactiveFace:hover {
+    background: var(--surface-raise);
+  }
+
+  /* Tone paints the shell, which is the visible 1px edge around the face.
+     These sit in the components layer, so they win over chamferShell's
+     default edge without needing a more specific selector. */
+  .toneDefault {
+    background: var(--edge);
+  }
+
+  .toneAccent {
+    background: var(--lavinder-600);
+  }
+
+  .toneWarn {
+    background: var(--straw-400);
+  }
+}

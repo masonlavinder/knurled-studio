@@ -1,0 +1,44 @@
+@layer components {
+  .marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .tick {
+    position: absolute;
+    width: var(--space-2);
+    height: var(--space-2);
+    border-color: var(--rule);
+    border-style: solid;
+    border-width: 0;
+  }
+
+  .topLeft {
+    top: 0;
+    left: 0;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+
+  .topRight {
+    top: 0;
+    right: 0;
+    border-top-width: 1px;
+    border-right-width: 1px;
+  }
+
+  .bottomLeft {
+    bottom: 0;
+    left: 0;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+  }
+
+  .bottomRight {
+    right: 0;
+    bottom: 0;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+  }
+}

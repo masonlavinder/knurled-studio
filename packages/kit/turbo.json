@@ -1,0 +1,10 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    // Type-checked and linted, not compiled — apps bundle the source.
+    "build": {
+      "outputs": []
+    }
+  }
+}

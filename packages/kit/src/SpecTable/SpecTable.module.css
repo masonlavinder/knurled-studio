@@ -1,0 +1,35 @@
+@layer components {
+  .table {
+    width: 100%;
+    table-layout: auto;
+  }
+
+  .caption {
+    composes: monoLabel from '../patterns.css';
+
+    padding-bottom: var(--space-2);
+    text-align: left;
+  }
+
+  .label {
+    composes: monoLabel from '../patterns.css';
+
+    padding: var(--space-2) var(--space-4) var(--space-2) 0;
+    text-align: left;
+    vertical-align: baseline;
+    font-weight: 400;
+  }
+
+  .value {
+    composes: monoValue from '../patterns.css';
+
+    padding: var(--space-2) 0;
+    text-align: right;
+    vertical-align: baseline;
+  }
+
+  /* Rules go between rows, so the first row does not carry one. */
+  .ruled {
+    composes: hairline from '../patterns.css';
+  }
+}

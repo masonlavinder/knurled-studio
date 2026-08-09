@@ -8,7 +8,9 @@ import base from './index.js';
 /** Flat config for packages that ship React components. */
 export default tseslint.config(
   ...base,
-  reactHooks.configs['recommended-latest'],
+  // v7 keeps the legacy eslintrc shapes at configs[...]; the flat-config
+  // variants live under configs.flat.
+  reactHooks.configs.flat['recommended-latest'],
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {

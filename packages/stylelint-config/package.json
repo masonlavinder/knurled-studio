@@ -1,0 +1,16 @@
+{
+  "name": "@knurled/stylelint-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "stylelint": "^17.14.1"
+  }
+}

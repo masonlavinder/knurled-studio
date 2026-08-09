@@ -1,0 +1,25 @@
+{
+  "name": "knurled",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "@knurled/eslint-config": "workspace:^",
+    "@knurled/stylelint-config": "workspace:^",
+    "eslint": "catalog:",
+    "stylelint": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
+  }
+}

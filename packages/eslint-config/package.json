@@ -1,0 +1,26 @@
+{
+  "name": "@knurled/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./react": "./react.js"
+  },
+  "files": [
+    "index.js",
+    "react.js"
+  ],
+  "dependencies": {
+    "@eslint/js": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "globals": "catalog:",
+    "typescript-eslint": "catalog:"
+  },
+  "peerDependencies": {
+    "eslint": "^10.8.1",
+    "typescript": "^5.9.3"
+  }
+}

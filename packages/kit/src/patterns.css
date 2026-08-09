@@ -89,14 +89,20 @@
   .knurl {
     background-image:
       repeating-linear-gradient(
-        45deg, var(--knurl-line) 0 1px, transparent 1px var(--knurl-pitch)),
+        45deg,
+        var(--knurl-line) 0 var(--knurl-width),
+        transparent var(--knurl-width) var(--knurl-pitch)),
       repeating-linear-gradient(
-        -45deg, var(--knurl-line) 0 1px, transparent 1px var(--knurl-pitch));
+        -45deg,
+        var(--knurl-line) 0 var(--knurl-width),
+        transparent var(--knurl-width) var(--knurl-pitch));
   }
 
   .hatch {
     background-image: repeating-linear-gradient(
-      45deg, var(--knurl-line) 0 1px, transparent 1px var(--knurl-pitch));
+      45deg,
+      var(--knurl-line) 0 var(--knurl-width),
+      transparent var(--knurl-width) var(--knurl-pitch));
   }
 
   /* ---- motion ------------------------------------------------------ */

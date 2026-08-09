@@ -83,8 +83,9 @@
     --hairline:   1px solid var(--edge);
     --hairline-strong: 1px solid var(--edge-strong);
 
-    /* knurl: 1px lines on a 7px pitch, crossed at 45 degrees */
+    /* knurl: 2px lines on a 7px pitch, crossed at 45 degrees */
     --knurl-line:  var(--stock-700);
+    --knurl-width: 2px;
     --knurl-pitch: 7px;
 
     /* ---- motion ----------------------------------------------------- */

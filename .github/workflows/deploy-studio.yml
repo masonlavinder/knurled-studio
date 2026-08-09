@@ -1,0 +1,69 @@
+name: deploy studio
+
+# KS-000 · knurled.studio
+#
+# Pages is configured with build_type "workflow", so nothing publishes until
+# this uploads an artifact. The path filter keeps unrelated commits — another
+# app, the infra package, docs — from redeploying the site.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/studio/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'turbo.json'
+      - '.github/workflows/deploy-studio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race for the Pages environment, but let a queued one
+# finish rather than cancelling a half-published site.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      # Version comes from the packageManager field, so it cannot drift.
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # A broken commit should fail here, not deploy. Stylelint enforces the
+      # design rules, so this gate is what keeps them real.
+      - run: pnpm turbo run typecheck lint
+
+      - run: pnpm turbo run build --filter studio
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: apps/studio/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

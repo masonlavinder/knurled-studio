@@ -207,17 +207,30 @@ cached; `dev` is persistent and uncached.
 
 ### Deploy
 
-Infrastructure lands in Phase 4. Once `infra/` exists:
+`knurled.studio` is on GitHub Pages, published by
+`.github/workflows/deploy-studio.yml` on pushes to `main` that touch the app or
+its dependencies. Pages is configured with `build_type: workflow`, so the
+workflow artifact *is* the deploy — there is no branch to push to.
 
-```sh
-pnpm build                                    # dist/ must exist before synth
-pnpm --filter infra exec cdk synth
-pnpm --filter infra exec cdk diff  StudioStack
-pnpm --filter infra exec cdk deploy StudioStack
-```
+The workflow runs `typecheck` and `lint` before it builds. A commit that breaks
+a design rule fails there and never reaches the site.
 
-Certificates are issued in `us-east-1` regardless of the stack region —
-CloudFront requires it.
+**Static hosting has no SPA fallback.** `apps/studio/scripts/spa-fallback.mjs`
+handles it, and does more than the usual trick:
+
+- Every route is known at build time — four static, one per catalog entry, one
+  per post — so it writes a real `index.html` at each path. Those answer **200**.
+  Serving only a `404.html` shell would render the right page while telling every
+  crawler the URL does not exist.
+- `404.html` remains, for paths that genuinely are missing.
+- `.nojekyll` stops Pages dropping paths that begin with an underscore.
+- `public/CNAME` holds the custom domain.
+
+The route list is derived from `catalog.json` and `src/writing/*.md`, so adding
+a part is still one edit — the prerendered path follows on its own.
+
+Infrastructure for the tool subdomains (Phase 4, AWS CDK) is not built. Nothing
+needs it while everything is on Pages.
 
 ---
 

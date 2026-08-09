@@ -9,7 +9,6 @@ const PRINCIPLES = [
   'Start in black and white. Shapes and outlines. Never do details before you know where you are heading.',
   'Never over-optimize something that shouldn\'t exist.',
   'Work with your tools, not around it. Designing around a tool means it is the wrong tool or you don\'t understand it.',
-  'Use the bare minimum. There are plenty of tools and frameworks whose only use it to bloat a package.',
   'Research what you adopt. You have to live with it.',
 ];
 
@@ -74,7 +73,7 @@ export function About() {
               { label: 'Editor', value: 'VS Code' },
               { label: 'Linux', value: 'Ubuntu' },
               { label: 'Keyboards', value: 'Keychron Q1 Max · Gateron Jupiter Red · NuPhy Air60 V2' },
-              { label: 'Outside', value: 'Cycling · hiking · trail running · fishing' },
+              { label: 'Outside', value: 'Running, Cycling · Hiking · Fishing' },
               { label: 'Distance', value: '10+ half marathons · 1 marathon' },
             ]}
           />

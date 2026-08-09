@@ -7,11 +7,10 @@ import styles from './About.module.css';
 /** Working rules, in the operator's own words, tightened. */
 const PRINCIPLES = [
   'Simple is better. You cannot put lipstick on a pig.',
-  'Start in black and white. Color goes in last, because shape and form read first and color hides both.',
-  'Design the schema early, around the access patterns you actually expect.',
-  'Never over-normalize. Never over-optimize at the start.',
-  'Work with SQL, not around it. Designing around a tool means it is the wrong tool.',
-  'Use the bare minimum. Most bloat is a framework standing in for CSS, or Python standing in for a sort the database would have done.',
+  'Start in black and white. Shapes and outlines. Never do details before you know where you are heading.',
+  'Never over-optimize something that shouldn\'t exist.',
+  'Work with your tools, not around it. Designing around a tool means it is the wrong tool or you don\'t understand it.',
+  'Use the bare minimum. There are plenty of tools and frameworks whose only use it to bloat a package.',
   'Research what you adopt. You have to live with it.',
 ];
 

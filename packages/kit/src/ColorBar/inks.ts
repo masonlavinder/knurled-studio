@@ -18,10 +18,8 @@ export const INKS = [
   '--lavinder-600',
   '--lavinder-400',
   '--lavinder-300',
-  '--straw-900',
-  '--straw-400',
-  '--oxide-900',
-  '--oxide-400',
+  '--verdigris-900',
+  '--verdigris-400',
 ] as const;
 
 export type Ink = (typeof INKS)[number];

@@ -20,13 +20,9 @@
     --lavinder-600: #5E3F7A;  /* edges, selection */
     --lavinder-900: #241A2E;  /* tint fill */
 
-    /* ---- straw: warnings ------------------------------------------ */
-    --straw-400: #D9A93D;
-    --straw-900: #2E2412;
-
-    /* ---- oxide: destructive --------------------------------------- */
-    --oxide-400: #C4553E;   /* 4.37:1 — fills and 18px+ only, fails AA below */
-    --oxide-900: #33150F;
+    /* ---- verdigris: the second hue --------------------------------- */
+    --verdigris-400: #55BDAF;  /* 8.60:1 — text, edges, fills */
+    --verdigris-900: #102A26;  /* tint fill */
 
     /* ---- semantic aliases ----------------------------------------- */
     --surface-page:  var(--stock-950);

@@ -147,7 +147,7 @@ Hard rules, enforced by `@knurled/stylelint-config` as errors:
   marks the studio's own things — part numbers, active status, internal links.
   Verdigris is `--text-external` and marks anything that leaves the studio: the
   hostname on a tool's launch panel, on a link card, on an "Elsewhere" row. A
-  reader should be able to tell from colour alone whether a click stays home.
+  reader should be able to tell from color alone whether a click stays home.
 - Durations reference `--dur-*`.
 - One grain direction: 45°, everywhere, never rotated.
 - Dark only. No `prefers-color-scheme` handling.

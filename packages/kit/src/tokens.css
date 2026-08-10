@@ -33,6 +33,7 @@
     --text-primary:  var(--bone);
     --text-muted:    var(--stock-200);
     --text-accent:   var(--lavinder-300);
+    --text-external: var(--verdigris-400);  /* anything that leaves the studio */
     --rule:          var(--stock-400);
 
     /* ---- type ------------------------------------------------------ */

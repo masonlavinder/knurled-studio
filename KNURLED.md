@@ -143,6 +143,11 @@ Hard rules, enforced by `@knurled/stylelint-config` as errors:
   from hairline borders and flat surface steps. `repeating-linear-gradient` is
   permitted — the knurl needs it.
 - Color comes from a custom property. Raw hex outside `tokens.css` is an error.
+- Two hues, and they mean different things. Lavinder is the house finish and
+  marks the studio's own things — part numbers, active status, internal links.
+  Verdigris is `--text-external` and marks anything that leaves the studio: the
+  hostname on a tool's launch panel, on a link card, on an "Elsewhere" row. A
+  reader should be able to tell from colour alone whether a click stays home.
 - Durations reference `--dur-*`.
 - One grain direction: 45°, everywhere, never rotated.
 - Dark only. No `prefers-color-scheme` handling.

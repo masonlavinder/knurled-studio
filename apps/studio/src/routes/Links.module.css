@@ -50,7 +50,7 @@
 
   .host {
     text-transform: none;
-    color: var(--text-accent);
+    color: var(--text-external);
   }
 
   .tags {

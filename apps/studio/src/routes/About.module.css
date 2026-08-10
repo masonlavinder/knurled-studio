@@ -70,7 +70,7 @@
     composes: monoLabel from '@knurled/kit/patterns.css';
 
     text-transform: none;
-    color: var(--text-accent);
+    color: var(--text-external);
   }
 
   @media (width <= 40rem) {

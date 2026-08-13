@@ -32,7 +32,8 @@ function checkEntry(raw: unknown, at: string, faults: string[]): void {
     return;
   }
 
-  const { partNumber, slug, name, tagline, status, url, firstCut, stack, sourcePublic } = raw;
+  const { partNumber, slug, name, tagline, description, status, url, firstCut, stack, sourcePublic } =
+    raw;
 
   if (typeof partNumber !== 'string' || !PART_NUMBER_PATTERN.test(partNumber)) {
     faults.push(`${at}: partNumber must match KS-NNN, got ${JSON.stringify(partNumber)}`);
@@ -47,6 +48,17 @@ function checkEntry(raw: unknown, at: string, faults: string[]): void {
     faults.push(`${at}: tagline must be a non-empty string`);
   } else if (tagline.includes('\n')) {
     faults.push(`${at}: tagline must be one line`);
+  }
+  // Optional, but an empty or blank-padded one is an authoring slip, not a
+  // deliberate absence. Omit the key instead.
+  if (description !== undefined) {
+    if (
+      !Array.isArray(description) ||
+      description.length === 0 ||
+      description.some((p) => typeof p !== 'string' || p.trim() === '')
+    ) {
+      faults.push(`${at}: description must be omitted or a non-empty array of non-empty strings`);
+    }
   }
   if (!isStatus(status)) {
     faults.push(`${at}: status must be one of ${STATUSES.join(' | ')}, got ${JSON.stringify(status)}`);

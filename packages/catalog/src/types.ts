@@ -5,6 +5,14 @@ export interface CatalogEntry {
   slug: string; // "watchthediff"
   name: string; // "watchthediff"
   tagline: string; // one sentence, spec-sheet register
+  /**
+   * Optional prose for the spec page, one string per paragraph.
+   *
+   * The tagline is the label; this is the note beneath it. Absent is a valid
+   * state — some parts need nothing more than their one line, and requiring
+   * this would make adding a part two decisions instead of one.
+   */
+  description?: string[];
   status: Status;
   url: string | null; // null when shelved
   firstCut: string; // "2025"

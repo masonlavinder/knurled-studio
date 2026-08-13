@@ -4,6 +4,10 @@
     "slug": "studio",
     "name": "studio",
     "tagline": "The studio.",
+    "description": [
+      "The index, the spec pages, the writing, and the links, served as static files from GitHub Pages. Every route is written out at build time, so a crawler gets a real document rather than an empty shell.",
+      "The catalog is one JSON file. Adding a part writes its index card, its spec page, its prerendered path, and its metadata — no second edit. The design rules live in a shared stylelint config, so a banned border-radius fails the build rather than shipping."
+    ],
     "status": "ACTIVE",
     "url": "https://knurled.studio",
     "firstCut": "2026",
@@ -32,6 +36,9 @@
     "slug": "watchthediff",
     "name": "watchthediff",
     "tagline": "Watches the watchers. Tracks those who track you.",
+    "description": [
+      "Daily, automated diffs of privacy policies and terms from the largest AI companies. Every material change is detected, classified, scored, and dated — so you can see exactly how AI data-use language shifts over time."
+    ],
     "status": "ACTIVE",
     "url": "https://watchthediff.knurled.studio",
     "firstCut": "2025",

@@ -1,0 +1,230 @@
+<!doctype html>
+<!--
+  Source for public/og.png, the 1200x630 card every page points at.
+
+  Rendered by hand, not at build time. From this directory:
+
+    google-chrome --headless --disable-gpu --hide-scrollbars \
+      --window-size=1200,800 --screenshot=/tmp/og-full.png og-card.html
+    convert /tmp/og-full.png -crop 1200x630+0+0 +repage ../public/og.png
+
+  Two steps because headless Chrome treats window-size as the outer window,
+  not the viewport, and clips roughly 75px off the bottom. That deficit is a
+  property of the local build, so compensating for it in the flag would be a
+  magic number that breaks on the next machine. Render tall, cut to size.
+
+  A social card cannot be an SVG, and turning one into a PNG needs a renderer.
+  Chrome is already on the machine and reads the real woff2 files, so the
+  wordmark is set in Geist rather than a substitute. The alternative was a
+  build dependency for one image that changes about never.
+
+  Same trade as favicon.svg: an image cannot read the token layer, so the hex
+  is inlined and kept in step by hand. The values below are stock 950, stock
+  700, stock 400, bone, stock 200 and lavinder 400. The mark repeats the
+  Mark component's construction exactly, including its rule that the chamfer
+  is a quarter of the glyph and the grain a fifth.
+  Note: an XML comment cannot contain a double hyphen, so custom properties
+  are named here without their leading dashes.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: 'Geist';
+        font-weight: 500;
+        src: url('../../../packages/kit/node_modules/@fontsource/geist/files/geist-latin-500-normal.woff2')
+          format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Geist Mono';
+        font-weight: 400;
+        src: url('../../../packages/kit/node_modules/@fontsource/geist-mono/files/geist-mono-latin-400-normal.woff2')
+          format('woff2');
+      }
+
+      :root {
+        --knurl-line: #262624;
+        --knurl-width: 2px;
+        --knurl-pitch: 7px;
+        --knurl-row: calc(var(--knurl-pitch) * 1.41421356);
+        --mark-size: 104px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #0d0d0c;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        font-family: 'Geist', sans-serif;
+      }
+
+      /* Two rows of diamonds, exactly as the header and footer strips.
+         Sizing in whole rows is what keeps the bottom row from being cut
+         through the middle. */
+      .knurl {
+        flex: none;
+        height: calc(var(--knurl-row) * 2);
+        background-image:
+          repeating-linear-gradient(
+            45deg,
+            var(--knurl-line) 0 var(--knurl-width),
+            transparent var(--knurl-width) var(--knurl-pitch)
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            var(--knurl-line) 0 var(--knurl-width),
+            transparent var(--knurl-width) var(--knurl-pitch)
+          );
+      }
+
+      .body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 72px 96px 56px;
+        position: relative;
+      }
+
+      /* Corner ticks marking the trim, the way a drawing marks its own. */
+      .tick {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 0 solid #6e6e68;
+      }
+
+      .tl { top: 28px; left: 40px; border-top-width: 1px; border-left-width: 1px; }
+      .tr { top: 28px; right: 40px; border-top-width: 1px; border-right-width: 1px; }
+      .bl { bottom: 28px; left: 40px; border-bottom-width: 1px; border-left-width: 1px; }
+      .br { bottom: 28px; right: 40px; border-bottom-width: 1px; border-right-width: 1px; }
+
+      /* The lockup sits optically centred in what is left after the title
+         block, which is pinned to the bottom edge like a drawing's. */
+      .center {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .lockup {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      /* The mark: chamfered square, knurled. Two layers, because clip-path
+         clips a border — shell paints the edge, face is inset 1px and paints
+         the surface. */
+      .mark {
+        --chamfer: calc(var(--mark-size) / 4);
+
+        display: flex;
+        flex: none;
+        width: var(--mark-size);
+        height: var(--mark-size);
+        background: #a87bd4;
+        clip-path: polygon(
+          var(--chamfer) 0,
+          100% 0,
+          100% calc(100% - var(--chamfer)),
+          calc(100% - var(--chamfer)) 100%,
+          0 100%,
+          0 var(--chamfer)
+        );
+      }
+
+      .face {
+        --knurl-line: #a87bd4;
+        --knurl-width: 1px;
+        --knurl-pitch: calc(var(--mark-size) / 5);
+
+        flex: 1;
+        margin: 1px;
+        background-color: #0d0d0c;
+        background-image:
+          repeating-linear-gradient(
+            45deg,
+            var(--knurl-line) 0 var(--knurl-width),
+            transparent var(--knurl-width) var(--knurl-pitch)
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            var(--knurl-line) 0 var(--knurl-width),
+            transparent var(--knurl-width) var(--knurl-pitch)
+          );
+        clip-path: polygon(
+          calc(var(--chamfer) - 1px) 0,
+          100% 0,
+          100% calc(100% - var(--chamfer) + 1px),
+          calc(100% - var(--chamfer) + 1px) 100%,
+          0 100%,
+          0 calc(var(--chamfer) - 1px)
+        );
+      }
+
+      .wordmark {
+        font-size: 84px;
+        font-weight: 500;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        color: #edebe4;
+      }
+
+      /* The title block: a rule, then the part number against the host. */
+      .rule {
+        border-top: 1px solid #262624;
+      }
+
+      .titleblock {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-top: 24px;
+        font-family: 'Geist Mono', monospace;
+        font-size: 22px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .part { color: #a87bd4; }
+      .host { color: #8a8a82; }
+    </style>
+  </head>
+  <body>
+    <div class="knurl"></div>
+
+    <div class="body">
+      <span class="tick tl"></span>
+      <span class="tick tr"></span>
+      <span class="tick bl"></span>
+      <span class="tick br"></span>
+
+      <div class="center">
+        <div class="lockup">
+          <span class="mark"><span class="face"></span></span>
+          <span class="wordmark">Knurled Studio</span>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+      <div class="titleblock">
+        <span class="part">KS-000</span>
+        <span class="host">knurled.studio</span>
+      </div>
+    </div>
+
+    <div class="knurl"></div>
+  </body>
+</html>

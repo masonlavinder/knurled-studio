@@ -32,6 +32,14 @@ export function Tool() {
 
       <PageHead title={entry.name} lede={entry.tagline} />
 
+      {entry.description && (
+        <div className={styles.prose}>
+          {entry.description.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+      )}
+
       <div className={styles.spec}>
         <Panel>
           <SpecTable

@@ -18,6 +18,16 @@
     padding-bottom: var(--space-3);
   }
 
+  /* The note under the tagline. Same measure and rhythm as the About prose,
+     so a spec page reads as the same document as the rest of the studio. */
+  .prose {
+    composes: prose from '@knurled/kit/patterns.css';
+    composes: stack from '@knurled/kit/patterns.css';
+
+    gap: var(--space-4);
+    padding-top: var(--space-2);
+  }
+
   .spec {
     padding-top: var(--space-6);
   }

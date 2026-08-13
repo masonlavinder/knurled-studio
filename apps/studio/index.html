@@ -6,7 +6,16 @@
     <meta name="color-scheme" content="dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0D0D0C" />
+    <!--
+      Everything between these markers is replaced per route by
+      scripts/spa-fallback.mjs at build time. What sits here is what the dev
+      server shows and what a route without its own entry falls back to.
+      Do not remove the markers — the build fails without them.
+    -->
+    <!-- head:meta -->
     <title>Knurled Studio</title>
+    <meta name="description" content="Project catalog for Knurled Studio. Parts, writing, and links." />
+    <!-- /head:meta -->
   </head>
   <body>
     <div id="root"></div>

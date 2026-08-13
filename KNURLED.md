@@ -63,11 +63,19 @@ The studio does not delete its history.
 `packages/catalog/catalog.json` is the manifest. `@knurled/catalog` exports the
 typed array plus `byPartNumber`, `bySlug`, and `byStatus`.
 
+Every field but one is required. `description` is an optional array of strings,
+one per paragraph, rendered on the spec page under the tagline and used as that
+page's meta description. The tagline is the label; the description is the note
+beneath it. Absent is a valid state — requiring it would make adding a part two
+decisions instead of one — and when it is absent the tagline stands in as the
+meta description.
+
 It is validated at module load, so a malformed manifest fails the build instead
 of rendering a broken index. `pnpm --filter @knurled/catalog build` is that check
 on its own. Beyond shape, the validator enforces: part numbers match `KS-NNN` and
 are unique, slugs are unique because they are routes, `SHELVED` entries carry
-`url: null`, and the file stays sorted ascending so diffs stay readable. Every
+`url: null`, a `description` is either absent or a non-empty array of non-empty
+strings, and the file stays sorted ascending so diffs stay readable. Every
 fault is reported at once, not one per run.
 
 ## Internal packages ship TypeScript source
@@ -264,12 +272,56 @@ handles it, and does more than the usual trick:
   per post — so it writes a real `index.html` at each path. Those answer **200**.
   Serving only a `404.html` shell would render the right page while telling every
   crawler the URL does not exist.
-- `404.html` remains, for paths that genuinely are missing.
+- `404.html` remains, for paths that genuinely are missing, and is the one page
+  marked `noindex` — it answers on every missing path.
 - `.nojekyll` stops Pages dropping paths that begin with an underscore.
-- `public/CNAME` holds the custom domain.
+- `public/CNAME` holds the custom domain, and is also where the script reads the
+  origin for canonical URLs and the sitemap. One domain, declared once.
+- `sitemap.xml` and `robots.txt` come from the same route list. Posts carry a
+  `lastmod` from their `publishDate`; nothing else claims one it cannot know.
 
 The route list is derived from `catalog.json` and `src/writing/*.md`, so adding
 a part is still one edit — the prerendered path follows on its own.
+
+### Per-route metadata
+
+Because every route is known at build time, so is its metadata. A single shell
+copied to ten paths would give ten pages one title and no description, and every
+link to the site would preview as a bare URL.
+
+`index.html` carries a `<!-- head:meta --> … <!-- /head:meta -->` block. What
+sits inside it is what the dev server shows; at build time the script replaces
+it per route with a title, description, canonical URL, Open Graph and Twitter
+card tags, and `article:published_time` on posts. **The markers must stay.** A
+missing or duplicated one throws rather than publishing ten pages with one
+title — losing this silently is exactly the failure it exists to prevent.
+
+Copy comes from the data already on the page: a tool's `description[0]` falling
+back to its tagline, a post's `excerpt`. Meta descriptions are one line, so a
+longer opening paragraph is clamped at 200 characters on a word boundary. Write
+the first paragraph as a complete thought under that length and nothing is cut.
+
+The script imports `src/lib/frontmatter.ts` directly, under Node's type
+stripping. Sharing the app's own parser is the point — a post's frontmatter
+means one thing, and the build cannot drift from what the page renders.
+
+### The social card
+
+`apps/studio/public/og.png` is 1200×630 and every page points at it. Its source
+is `scripts/og-card.html`, which is **not** in `public/` — a file there would
+ship to the site — and the regeneration command is in a comment at the top.
+
+Rendered by hand rather than at build time. A social card cannot be an SVG, and
+turning one into a PNG needs a renderer; Chrome is already on the machine and
+reads the real `woff2` files, so the wordmark is set in Geist rather than a
+substitute. The alternative was a build dependency for one image that changes
+about never. Same trade as `favicon.svg`: hex is inlined and kept in step by
+hand, and the mark repeats the `<Mark>` construction including its rule that the
+chamfer is a quarter of the glyph and the grain a fifth.
+
+Headless Chrome treats `--window-size` as the outer window, not the viewport,
+and clips roughly 75px off the bottom. Render tall and crop to size; do not
+compensate with a magic number in the flag, which breaks on the next machine.
 
 Infrastructure for the tool subdomains (Phase 4, AWS CDK) is not built. Nothing
 needs it while everything is on Pages.

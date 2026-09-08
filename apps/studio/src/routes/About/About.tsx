@@ -1,6 +1,6 @@
 import { cx, Panel, SpecTable } from '@knurled/kit';
 
-import { PageHead, SectionRule } from '../shell/Shell.tsx';
+import { PageHead, SectionRule } from '../../shell/Shell.tsx';
 import styles from './About.module.css';
 
 /** Working rules, in the operator's own words, tightened. */

@@ -30,15 +30,15 @@
     --surface-raise: var(--stock-800);
     --edge:          var(--stock-700);
     --edge-strong:   var(--stock-600);
-    --text-primary:  var(--bone);
+    --text-primary:  var(--lavinder-400);
     --text-muted:    var(--stock-200);
     --text-accent:   var(--lavinder-300);
     --text-external: var(--verdigris-400);  /* anything that leaves the studio */
     --rule:          var(--stock-400);
 
     /* ---- type ------------------------------------------------------ */
-    --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
-    --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
+    --font-sans: 'Inconsolata', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Inconsolata', ui-monospace, 'SF Mono', monospace;
 
     --text-2xs:  10px;   /* status chips */
     --text-xs:   11px;   /* part numbers, mono labels */

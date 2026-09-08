@@ -17,8 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/geist": "catalog:",
-    "@fontsource/geist-mono": "catalog:",
+    "@fontsource/inconsolata": "catalog:",
     "@knurled/catalog": "workspace:^"
   },
   "peerDependencies": {

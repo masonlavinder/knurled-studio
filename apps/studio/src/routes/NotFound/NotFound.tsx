@@ -1,7 +1,7 @@
 import { cx } from '@knurled/kit';
 import { Link } from 'react-router';
 
-import { PageHead } from '../shell/Shell.tsx';
+import { PageHead } from '../../shell/Shell.tsx';
 import styles from './NotFound.module.css';
 
 export function NotFound() {

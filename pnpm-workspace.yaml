@@ -7,8 +7,7 @@ packages:
 # Mirrored in KNURLED.md; update both together.
 catalog:
   '@eslint/js': 10.0.1
-  '@fontsource/geist': 5.3.0
-  '@fontsource/geist-mono': 5.3.0
+  '@fontsource/inconsolata': 5.3.0
   '@types/node': 24.13.3
   '@types/react': 19.2.18
   '@types/react-dom': 19.2.4

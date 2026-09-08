@@ -9,10 +9,7 @@ catalogs:
     '@eslint/js':
       specifier: 10.0.1
       version: 10.0.1
-    '@fontsource/geist':
-      specifier: 5.3.0
-      version: 5.3.0
-    '@fontsource/geist-mono':
+    '@fontsource/inconsolata':
       specifier: 5.3.0
       version: 5.3.0
     '@types/node':
@@ -198,10 +195,7 @@ importers:
 
   packages/kit:
     dependencies:
-      '@fontsource/geist':
-        specifier: 'catalog:'
-        version: 5.3.0
-      '@fontsource/geist-mono':
+      '@fontsource/inconsolata':
         specifier: 'catalog:'
         version: 5.3.0
       '@knurled/catalog':
@@ -405,11 +399,8 @@ packages:
     resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@fontsource/geist-mono@5.3.0':
-    resolution: {integrity: sha512-UtJ1BBBCVpMYdIcW7nEB45UAoAw5M53ZXs2t0ciPW+IokuAAIc56M8+kW5tXbRJCTpDw4XTtU7proT6NdQAHTg==}
-
-  '@fontsource/geist@5.3.0':
-    resolution: {integrity: sha512-u03ftlfVwb05uijq2jGDJ03/HKGqMKaNFk7KOhkpBUex8+BhrAOfMs/XciJ2UUNUX9fEsZbZQld/RWMA2oFU7g==}
+  '@fontsource/inconsolata@5.3.0':
+    resolution: {integrity: sha512-12UZvQzR9rcgFv1Wb2vy9NvMqleh4fVZ9W5Ww/S3CamaRLeUfCkfXersbiqcyCkH82etGTTRyHd5cJYDJ2W27w==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -2323,9 +2314,7 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fontsource/geist-mono@5.3.0': {}
-
-  '@fontsource/geist@5.3.0': {}
+  '@fontsource/inconsolata@5.3.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:

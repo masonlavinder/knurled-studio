@@ -122,7 +122,7 @@ import '@knurled/kit/fonts.css';
 - `global.css` — layer declaration, reset, base elements, type scale, focus,
   reduced motion.
 - `tokens.css` — custom properties only.
-- `fonts.css` — self-hosted Geist and Geist Mono, latin subset, weights 400/500.
+- `fonts.css` — self-hosted Inconsolata, latin subset, weights 400/500.
 - `patterns.css` — reusable fragments, reached **only** via `composes`. Never
   imported globally, never written into JSX.
 
@@ -313,8 +313,8 @@ ship to the site — and the regeneration command is in a comment at the top.
 
 Rendered by hand rather than at build time. A social card cannot be an SVG, and
 turning one into a PNG needs a renderer; Chrome is already on the machine and
-reads the real `woff2` files, so the wordmark is set in Geist rather than a
-substitute. The alternative was a build dependency for one image that changes
+reads the real `woff2` files, so the wordmark is set in Inconsolata rather
+than a substitute. The alternative was a build dependency for one image that changes
 about never. Same trade as `favicon.svg`: hex is inlined and kept in step by
 hand, and the mark repeats the `<Mark>` construction including its rule that the
 chamfer is a quarter of the glyph and the grain a fifth.
@@ -350,7 +350,7 @@ Exact pins, no ranges. Update deliberately, one at a time.
 | Vite | 8.2.1 | + @vitejs/plugin-react 6.0.5 |
 | @types/react | 19.2.18 | + @types/react-dom 19.2.4 |
 | typescript-plugin-css-modules | 5.2.0 | editor-only, see below |
-| @fontsource/geist | 5.3.0 | + geist-mono, self-hosted |
+| @fontsource/inconsolata | 5.3.0 | self-hosted |
 
 Exact versions live in the `catalog:` block of `pnpm-workspace.yaml`; packages
 reference them as `"react": "catalog:"`. This table mirrors that block.

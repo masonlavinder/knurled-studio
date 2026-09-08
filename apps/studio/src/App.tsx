@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
-import { Index } from './routes/Index.tsx';
+import { Index } from './routes/Index/Index.tsx';
 import { Pending, Shell } from './shell/Shell.tsx';
 
 /**
@@ -12,12 +12,16 @@ import { Pending, Shell } from './shell/Shell.tsx';
  * dependency here, and one that only a post page needs — out of the initial
  * download entirely.
  */
-const About = lazy(() => import('./routes/About.tsx').then((m) => ({ default: m.About })));
-const Links = lazy(() => import('./routes/Links.tsx').then((m) => ({ default: m.Links })));
-const NotFound = lazy(() => import('./routes/NotFound.tsx').then((m) => ({ default: m.NotFound })));
-const Post = lazy(() => import('./routes/Post.tsx').then((m) => ({ default: m.Post })));
-const Tool = lazy(() => import('./routes/Tool.tsx').then((m) => ({ default: m.Tool })));
-const Writing = lazy(() => import('./routes/Writing.tsx').then((m) => ({ default: m.Writing })));
+const About = lazy(() => import('./routes/About/About.tsx').then((m) => ({ default: m.About })));
+const Links = lazy(() => import('./routes/Links/Links.tsx').then((m) => ({ default: m.Links })));
+const NotFound = lazy(() =>
+  import('./routes/NotFound/NotFound.tsx').then((m) => ({ default: m.NotFound })),
+);
+const Post = lazy(() => import('./routes/Post/Post.tsx').then((m) => ({ default: m.Post })));
+const Tool = lazy(() => import('./routes/Tool/Tool.tsx').then((m) => ({ default: m.Tool })));
+const Writing = lazy(() =>
+  import('./routes/Writing/Writing.tsx').then((m) => ({ default: m.Writing })),
+);
 
 export function App() {
   return (

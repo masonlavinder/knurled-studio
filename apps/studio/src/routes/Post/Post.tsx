@@ -3,9 +3,9 @@ import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
 import remarkGfm from 'remark-gfm';
 
-import { postBySlug } from '../writing/posts.ts';
-import { PageHead } from '../shell/Shell.tsx';
-import { NotFound } from './NotFound.tsx';
+import { postBySlug } from '../../writing/posts.ts';
+import { PageHead } from '../../shell/Shell.tsx';
+import { NotFound } from '../NotFound/NotFound.tsx';
 import styles from './Post.module.css';
 
 export function Post() {

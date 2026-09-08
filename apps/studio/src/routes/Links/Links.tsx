@@ -1,7 +1,7 @@
 import { cx, Panel } from '@knurled/kit';
 
-import { linkGroups, links } from '../links/links.ts';
-import { PageHead, SectionRule } from '../shell/Shell.tsx';
+import { linkGroups, links } from '../../links/links.ts';
+import { PageHead, SectionRule } from '../../shell/Shell.tsx';
 import styles from './Links.module.css';
 
 function hostOf(url: string): string {

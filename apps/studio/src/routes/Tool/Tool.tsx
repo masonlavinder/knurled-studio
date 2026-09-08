@@ -2,8 +2,8 @@ import { bySlug } from '@knurled/catalog';
 import { cx, Panel, PartNumber, SpecTable, StatusChip } from '@knurled/kit';
 import { Link, useParams } from 'react-router';
 
-import { PageHead } from '../shell/Shell.tsx';
-import { NotFound } from './NotFound.tsx';
+import { PageHead } from '../../shell/Shell.tsx';
+import { NotFound } from '../NotFound/NotFound.tsx';
 import styles from './Tool.module.css';
 
 /** Hostname only. The full URL is the link target, not the label. */

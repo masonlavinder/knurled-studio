@@ -1,8 +1,8 @@
 import { cx } from '@knurled/kit';
 import { Link } from 'react-router';
 
-import { posts } from '../writing/posts.ts';
-import { PageHead } from '../shell/Shell.tsx';
+import { posts } from '../../writing/posts.ts';
+import { PageHead } from '../../shell/Shell.tsx';
 import styles from './Writing.module.css';
 
 export function Writing() {

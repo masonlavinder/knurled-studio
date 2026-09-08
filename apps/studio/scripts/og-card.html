@@ -15,8 +15,8 @@
 
   A social card cannot be an SVG, and turning one into a PNG needs a renderer.
   Chrome is already on the machine and reads the real woff2 files, so the
-  wordmark is set in Geist rather than a substitute. The alternative was a
-  build dependency for one image that changes about never.
+  wordmark is set in Inconsolata rather than a substitute. The alternative was
+  a build dependency for one image that changes about never.
 
   Same trade as favicon.svg: an image cannot read the token layer, so the hex
   is inlined and kept in step by hand. The values below are stock 950, stock
@@ -31,16 +31,16 @@
     <meta charset="UTF-8" />
     <style>
       @font-face {
-        font-family: 'Geist';
+        font-family: 'Inconsolata';
         font-weight: 500;
-        src: url('../../../packages/kit/node_modules/@fontsource/geist/files/geist-latin-500-normal.woff2')
+        src: url('../../../packages/kit/node_modules/@fontsource/inconsolata/files/inconsolata-latin-500-normal.woff2')
           format('woff2');
       }
 
       @font-face {
-        font-family: 'Geist Mono';
+        font-family: 'Inconsolata';
         font-weight: 400;
-        src: url('../../../packages/kit/node_modules/@fontsource/geist-mono/files/geist-mono-latin-400-normal.woff2')
+        src: url('../../../packages/kit/node_modules/@fontsource/inconsolata/files/inconsolata-latin-400-normal.woff2')
           format('woff2');
       }
 
@@ -66,7 +66,7 @@
         flex-direction: column;
         justify-content: space-between;
         overflow: hidden;
-        font-family: 'Geist', sans-serif;
+        font-family: 'Inconsolata', sans-serif;
       }
 
       /* Two rows of diamonds, exactly as the header and footer strips.
@@ -192,7 +192,7 @@
         align-items: baseline;
         justify-content: space-between;
         padding-top: 24px;
-        font-family: 'Geist Mono', monospace;
+        font-family: 'Inconsolata', monospace;
         font-size: 22px;
         letter-spacing: 0.09em;
         text-transform: uppercase;

@@ -86,12 +86,12 @@
 
   .markdown blockquote {
     padding-left: var(--space-4);
-    border-left: 1px solid var(--edge-strong);
+    border-left: var(--hairline-strong);
     color: var(--text-muted);
   }
 
   .markdown strong {
-    font-weight: 500;
+    font-weight: 700;
     color: var(--text-primary);
   }
 }

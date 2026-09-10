@@ -4,57 +4,74 @@
 
 @layer tokens {
   :root {
-    /* ---- substrate ------------------------------------------------ */
-    --stock-950: #0D0D0C;   /* page canvas */
-    --stock-900: #141413;   /* panel face */
-    --stock-800: #1C1C1A;   /* raised, inputs */
-    --stock-700: #262624;   /* hairline */
-    --stock-600: #3A3A37;   /* strong edge */
-    --stock-400: #6E6E68;   /* DECORATIVE ONLY — 3.79:1, fails AA for text */
-    --stock-200: #8A8A82;   /* muted text — 5.59:1 */
-    --bone:      #EDEBE4;   /* primary text */
+    /* ---- substrate: paper ----------------------------------------- */
+    /* The ramp runs light to dark and the number still means darkness.
+       Ratios are against --paper, the canvas everything is read on. */
+    --paper:     #F4F2EB;   /* page canvas — warm newsprint, not white */
+    --stock-050: #FFFDF7;   /* panel face — a flat step up from the page */
+    --stock-100: #E8E5DA;   /* raised: inputs, skip link, inset wells */
+    --stock-400: #6E6E68;   /* DECORATIVE ONLY — 4.56:1, too tight for text */
+    --stock-600: #3A3A37;   /* muted text — 10.2:1 */
+    --stock-800: #1C1C1A;   /* edge */
+    --stock-950: #0D0D0C;   /* primary text, strong edge, rules — 17.4:1 */
 
     /* ---- house finish: Lavinder ----------------------------------- */
-    --lavinder-300: #C8A8E8;  /* accent text below 14px, hover */
-    --lavinder-400: #A87BD4;  /* accent fills, text 14px and up */
-    --lavinder-600: #5E3F7A;  /* edges, selection */
-    --lavinder-900: #241A2E;  /* tint fill */
+    /* One purple at full strength does both jobs: accent text on paper and
+       flood fill behind paper text. It clears 7:1 in both directions, so
+       there is no "which purple goes here" decision left to get wrong. */
+    --lavinder-050: #EFE6F7;  /* tint fill */
+    --lavinder-400: #A87BD4;  /* DECORATIVE ONLY — 2.91:1, fails AA for text */
+    --lavinder-600: #6B2FA8;  /* accent text and flood fill — 7.22:1 */
 
     /* ---- verdigris: the second hue --------------------------------- */
-    --verdigris-400: #55BDAF;  /* 8.60:1 — text, edges, fills */
-    --verdigris-900: #102A26;  /* tint fill */
+    --verdigris-050: #DFF0ED;  /* tint fill */
+    --verdigris-700: #0E6F63;  /* 5.40:1 — text, edges, fills */
 
     /* ---- semantic aliases ----------------------------------------- */
-    --surface-page:  var(--stock-950);
-    --surface-panel: var(--stock-900);
-    --surface-raise: var(--stock-800);
-    --edge:          var(--stock-700);
-    --edge-strong:   var(--stock-600);
-    --text-primary:  var(--bone);
-    --text-muted:    var(--stock-200);
-    --text-accent:   var(--lavinder-300);
-    --text-external: var(--verdigris-400);  /* anything that leaves the studio */
-    --rule:          var(--stock-400);
+    --surface-page:  var(--paper);
+    --surface-panel: var(--stock-050);
+    --surface-raise: var(--stock-100);
+    --edge:          var(--stock-800);
+    --edge-strong:   var(--stock-950);
+    --text-primary:  var(--stock-950);
+    --text-muted:    var(--stock-600);
+    --text-accent:   var(--lavinder-600);
+    --text-external: var(--verdigris-700);  /* anything that leaves the studio */
+    --rule:          var(--stock-950);
+
+    /* Accent as surface, not only as ink. --surface-tint is the soft fill
+       every foreground colour still reads on (ink 16:1, accent 6.7:1, muted
+       9.4:1), which is what makes it safe as a hover: nothing inside a panel
+       has to change colour to stay legible. */
+    --surface-accent: var(--lavinder-600);
+    --surface-tint:   var(--lavinder-050);
+    --text-on-accent: var(--paper);
 
     /* ---- type ------------------------------------------------------ */
-    --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
-    --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
+    /* One family. --font-sans is kept as an alias rather than removed so
+       the call sites naming it keep working and cannot drift back to a
+       second face. See fonts.css for what went wrong the last time these
+       named a family the app never loaded. */
+    --font-mono: 'Inconsolata', ui-monospace, 'SF Mono', monospace;
+    --font-sans: var(--font-mono);
 
-    --text-2xs:  10px;   /* status chips */
-    --text-xs:   11px;   /* part numbers, mono labels */
-    --text-sm:   13px;
-    --text-base: 15px;
-    --text-lg:   19px;
-    --text-xl:   24px;
-    --text-2xl:  32px;
+    --text-2xs:  11px;   /* status chips */
+    --text-xs:   12px;   /* part numbers, mono labels */
+    --text-sm:   14px;
+    --text-base: 16px;   /* body — mono needs a step up to hold a line */
+    --text-lg:   22px;
+    --text-xl:   34px;
+    --text-2xl:  52px;
+    --text-3xl:  76px;   /* page h1 */
 
+    --leading-display: 0.95;   /* oversized headings set tight */
     --leading-tight: 1.15;
     --leading-snug:  1.35;
-    --leading-body:  1.65;
+    --leading-body:  1.7;      /* mono prose needs the air */
 
     --track-label:   0.09em;   /* uppercase mono */
     --track-chip:    0.1em;
-    --track-display: -0.01em;
+    --track-display: -0.02em;
 
     /* ---- measure --------------------------------------------------- */
     /* 4px grid. Machined parts are dimensioned; so is this. */
@@ -70,25 +87,41 @@
     --space-16: 64px;
     --space-20: 80px;
 
-    --measure: 68ch;        /* prose max-width */
-    --gutter:  var(--space-6);
-    --page-max: 960px;
+    /* Prose stays capped so a line does not run the width of a monitor, but
+       with no auto margins the cap pins it left instead of centring it.
+       --measure-wide is the same idea for a slab of tabular data: a spec row
+       whose label and value sit 1300px apart is not a row any more. */
+    --measure: 68ch;
+    --measure-wide: 96ch;
+    --gutter:  var(--space-8);
 
     /* ---- geometry -------------------------------------------------- */
     --chamfer:    13px;
     --chamfer-sm: 8px;
-    --hairline:   1px solid var(--edge);
-    --hairline-strong: 1px solid var(--edge-strong);
+
+    /* Weight, not tint, is what separates a rule from a strong one now. On
+       paper a 1px grey hairline disappears; ink at 2px is what makes the
+       light substrate read as built rather than merely bright. --edge-weight
+       is what the chamfer face insets by, so the two cannot drift. */
+    --edge-weight: 2px;
+    --hairline:   var(--edge-weight) solid var(--edge);
+    --hairline-strong: 3px solid var(--edge-strong);
 
     /* knurl: 2px lines on a 7px pitch, crossed at 45 degrees.
        Two families of lines spaced --knurl-pitch apart and crossing at a
        right angle make a square lattice standing on its corner, so one row
        of diamonds is pitch x sqrt(2) tall. Strips are sized in whole rows;
        anything else clips the bottom row. */
-    --knurl-line:  var(--stock-700);
+    --knurl-line:  var(--lavinder-600);
     --knurl-width: 2px;
     --knurl-pitch: 7px;
     --knurl-row:   calc(var(--knurl-pitch) * 1.41421356);
+
+    /* Every strip in the studio is this tall — the header, the footer, and the
+       band a section heading is set into. One token so they cannot drift; a
+       section break that is a different depth from the header reads as a
+       different mark rather than the same one. */
+    --knurl-strip: 16px;
 
     /* ---- motion ----------------------------------------------------- */
     --dur-fast:   70ms;

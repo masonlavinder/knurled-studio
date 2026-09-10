@@ -19,8 +19,8 @@
   a build dependency for one image that changes about never.
 
   Same trade as favicon.svg: an image cannot read the token layer, so the hex
-  is inlined and kept in step by hand. The values below are stock 950, stock
-  700, stock 400, bone, stock 200 and lavinder 400. The mark repeats the
+  is inlined and kept in step by hand. The values below are paper, stock 950,
+  stock 600 and lavinder 600. The mark repeats the
   Mark component's construction exactly, including its rule that the chamfer
   is a quarter of the glyph and the grain a fifth.
   Note: an XML comment cannot contain a double hyphen, so custom properties
@@ -32,8 +32,8 @@
     <style>
       @font-face {
         font-family: 'Inconsolata';
-        font-weight: 500;
-        src: url('../../../packages/kit/node_modules/@fontsource/inconsolata/files/inconsolata-latin-500-normal.woff2')
+        font-weight: 700;
+        src: url('../../../packages/kit/node_modules/@fontsource/inconsolata/files/inconsolata-latin-700-normal.woff2')
           format('woff2');
       }
 
@@ -45,7 +45,7 @@
       }
 
       :root {
-        --knurl-line: #262624;
+        --knurl-line: #6b2fa8;
         --knurl-width: 2px;
         --knurl-pitch: 7px;
         --knurl-row: calc(var(--knurl-pitch) * 1.41421356);
@@ -61,7 +61,7 @@
       body {
         width: 1200px;
         height: 630px;
-        background: #0d0d0c;
+        background: #f4f2eb;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -101,7 +101,7 @@
         position: absolute;
         width: 16px;
         height: 16px;
-        border: 0 solid #6e6e68;
+        border: 0 solid #0d0d0c;
       }
 
       .tl { top: 28px; left: 40px; border-top-width: 1px; border-left-width: 1px; }
@@ -125,7 +125,7 @@
       }
 
       /* The mark: chamfered square, knurled. Two layers, because clip-path
-         clips a border — shell paints the edge, face is inset 1px and paints
+         clips a border — shell paints the edge, face is inset 2px and paints
          the surface. */
       .mark {
         --chamfer: calc(var(--mark-size) / 4);
@@ -134,7 +134,7 @@
         flex: none;
         width: var(--mark-size);
         height: var(--mark-size);
-        background: #a87bd4;
+        background: #6b2fa8;
         clip-path: polygon(
           var(--chamfer) 0,
           100% 0,
@@ -146,13 +146,13 @@
       }
 
       .face {
-        --knurl-line: #a87bd4;
+        --knurl-line: #6b2fa8;
         --knurl-width: 1px;
         --knurl-pitch: calc(var(--mark-size) / 5);
 
         flex: 1;
-        margin: 1px;
-        background-color: #0d0d0c;
+        margin: 2px;
+        background-color: #f4f2eb;
         background-image:
           repeating-linear-gradient(
             45deg,
@@ -165,26 +165,27 @@
             transparent var(--knurl-width) var(--knurl-pitch)
           );
         clip-path: polygon(
-          calc(var(--chamfer) - 1px) 0,
+          calc(var(--chamfer) - 2px) 0,
           100% 0,
-          100% calc(100% - var(--chamfer) + 1px),
-          calc(100% - var(--chamfer) + 1px) 100%,
+          100% calc(100% - var(--chamfer) + 2px),
+          calc(100% - var(--chamfer) + 2px) 100%,
           0 100%,
-          0 calc(var(--chamfer) - 1px)
+          0 calc(var(--chamfer) - 2px)
         );
       }
 
       .wordmark {
         font-size: 84px;
-        font-weight: 500;
-        line-height: 1.15;
-        letter-spacing: -0.01em;
-        color: #edebe4;
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: #0d0d0c;
       }
 
       /* The title block: a rule, then the part number against the host. */
       .rule {
-        border-top: 1px solid #262624;
+        border-top: 2px solid #0d0d0c;
       }
 
       .titleblock {
@@ -198,8 +199,8 @@
         text-transform: uppercase;
       }
 
-      .part { color: #a87bd4; }
-      .host { color: #8a8a82; }
+      .part { color: #6b2fa8; }
+      .host { color: #3a3a37; }
     </style>
   </head>
   <body>

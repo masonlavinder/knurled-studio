@@ -4,7 +4,11 @@
     margin-top: var(--space-16);
   }
 
+  /* The bar carries its own gutter — the shell no longer has one, so that
+     the knurl strip above it can run edge to edge. */
   .bar {
+    composes: gutter from '../patterns.css';
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;

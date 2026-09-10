@@ -38,6 +38,12 @@
     line-height: var(--leading-body);
   }
 
+  /* A block of tabular or panelled data. Wider than prose, still finite, and
+     pinned left like everything else. */
+  .slab {
+    max-width: var(--measure-wide);
+  }
+
   .dim { color: var(--text-muted); }
 
   /* ---- chamfer --------------------------------------------------- */
@@ -57,15 +63,15 @@
   }
 
   .chamferFace {
-    margin: 1px;
+    margin: var(--edge-weight);
     background: var(--surface-panel);
     clip-path: polygon(
-      calc(var(--chamfer) - 1px) 0,
+      calc(var(--chamfer) - var(--edge-weight)) 0,
       100% 0,
-      100% calc(100% - var(--chamfer) + 1px),
-      calc(100% - var(--chamfer) + 1px) 100%,
+      100% calc(100% - var(--chamfer) + var(--edge-weight)),
+      calc(100% - var(--chamfer) + var(--edge-weight)) 100%,
       0 100%,
-      0 calc(var(--chamfer) - 1px)
+      0 calc(var(--chamfer) - var(--edge-weight))
     );
   }
 
@@ -78,7 +84,7 @@
      Interactive panels compose this onto the FACE, not the shell. */
   .focusInset:focus-visible {
     outline: none;
-    box-shadow: inset 0 0 0 1px var(--lavinder-400);
+    box-shadow: inset 0 0 0 3px var(--lavinder-600);
   }
 
   /* ---- rules and marks -------------------------------------------- */
@@ -113,10 +119,20 @@
 
   /* ---- layout ------------------------------------------------------ */
 
-  .page {
-    max-width: var(--page-max);
-    margin-inline: auto;
+  /* The gutter, and nothing else. It sits on each band — header, main, the
+     footer bar — rather than on the outer shell, so that anything meant to
+     run edge to edge (the knurl strips, a flood band) can simply not
+     compose it instead of having to claw its way back out with negative
+     margins. There is no page container any more: content is pinned left
+     and the viewport is the width. */
+  .gutter {
     padding-inline: var(--gutter);
+  }
+
+  /* Cancels the band's gutter so a strip runs edge to edge while the text
+     around it stays on the page's one left margin. */
+  .bleed {
+    margin-inline: calc(var(--gutter) * -1);
   }
 
   .stack { display: flex; flex-direction: column; gap: var(--space-4); }

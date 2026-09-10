@@ -122,7 +122,11 @@ import '@knurled/kit/fonts.css';
 - `global.css` — layer declaration, reset, base elements, type scale, focus,
   reduced motion.
 - `tokens.css` — custom properties only.
-- `fonts.css` — self-hosted Inconsolata, latin subset, weights 400/500.
+- `fonts.css` — self-hosted Inconsolata, latin subset, weights 400/700. It is
+  the only family: `--font-mono` names it and `--font-sans` is an alias of
+  `--font-mono`. The scale used to name Geist and Geist Mono, neither of which
+  was ever loaded, so the site rendered in the OS default sans while these
+  files downloaded and painted nothing. One family cannot drift that way.
 - `patterns.css` — reusable fragments, reached **only** via `composes`. Never
   imported globally, never written into JSX.
 
@@ -148,8 +152,11 @@ Hard rules, enforced by `@knurled/stylelint-config` as errors:
 
 - Chamfers, not rounded corners. `border-radius` is banned outright.
 - No faked light: no gradients, shadows, glows, bevels, or noise. Depth comes
-  from hairline borders and flat surface steps. `repeating-linear-gradient` is
-  permitted — the knurl needs it.
+  from ink rules and flat surface steps. `repeating-linear-gradient` is
+  permitted — the knurl needs it. The one legal `box-shadow` is the chamfer
+  focus ring, `inset 0 0 0 3px var(--lavinder-600)`, because `clip-path` clips
+  an outline away. That also rules out a hard offset shadow: `clip-path` clips
+  those too, so a chamfered panel cannot cast one without a third layer.
 - Color comes from a custom property. Raw hex outside `tokens.css` is an error.
 - Two hues, and they mean different things. Lavinder is the house finish and
   marks the studio's own things — part numbers, active status, internal links.
@@ -158,7 +165,35 @@ Hard rules, enforced by `@knurled/stylelint-config` as errors:
   reader should be able to tell from color alone whether a click stays home.
 - Durations reference `--dur-*`.
 - One grain direction: 45°, everywhere, never rotated.
-- Dark only. No `prefers-color-scheme` handling.
+- One theme, and it is light. No `prefers-color-scheme` handling, no toggle.
+
+Direction, not lintable but not optional either:
+
+- **Paper, not screen.** `--paper` is a warm newsprint, and everything is read
+  on it. Contrast ratios are annotated against it in `tokens.css`; a token that
+  fails AA at its intended size says so on its own line.
+- **Weight, not tint, separates a rule from a strong one.** `--edge-weight` is
+  2px and `--hairline-strong` is 3px, both in ink. The chamfer face insets by
+  `--edge-weight`, so the edge and the cut cannot drift apart.
+- **Hard left, full bleed.** There is no page container and nothing is centred.
+  `--gutter` sits on each band — header, main, the footer bar — rather than on
+  the shell, so anything composing `.bleed` runs to both edges of the viewport
+  while text stays on one left margin. Blocks that read badly when stretched
+  take a measure: `--measure` (68ch) for prose, `--measure-wide` (96ch) for a
+  slab of tabular data.
+- **The knurl is the divider, and it is always the house finish.**
+  `--knurl-line` is `--lavinder-600` everywhere — header, footer and every
+  section seam — so the accent arrives as the studio's own texture rather than
+  as a flat band of colour. A section heading is that strip cut edge to edge
+  with its label stamped underneath; there is no solid accent bar.
+- **Accent is a surface too, sparingly.** `--surface-accent` is the same
+  full-strength purple as `--text-accent`, because it clears 7:1 both as text
+  on paper and as a ground under `--text-on-accent`. It is reserved for small
+  stamped blocks — the current nav item, an ACTIVE chip — not for bands.
+  `--surface-tint` is the soft fill used for hover, chosen so that everything
+  inside a panel stays legible without restyling itself.
+- **Headings are stamped.** Uppercase, 700, `--leading-display`, and large.
+  `--text-3xl` is the page h1 and it is meant to be the first thing in the room.
 
 ---
 
@@ -214,16 +249,23 @@ diamonds deep** rather than one.
 Depth is the dial, not scale. Two families of lines a `--knurl-pitch` apart
 crossing at a right angle make a square lattice standing on its corner, so one
 row of diamonds is `pitch × √2` tall — `--knurl-row`. Strips are sized in whole
-rows; any other height cuts the bottom row through the middle. `<Knurl />` with
-no props is two rows, which is what both call sites use.
+rows; any other height cuts the bottom row through the middle. `--knurl-strip`
+is the depth every strip uses — the header, the footer, and the band a section
+heading is set into — and `<Knurl />` with no props takes it, so the three
+cannot drift apart.
 
 Enlarging the pattern instead — a thicker line on a wider pitch — was tried and
 looks wrong: it reads as one coarse zigzag rather than a knurl. Thickening the
 line alone is worse, closing the diamonds into a near-solid band.
 
 `apps/studio/public/favicon.svg` redraws the same geometry in SVG, because an
-icon cannot read the token layer — the two hex values there are `--stock-950`
-and `--lavinder-400`, and they have to be kept in step by hand.
+icon cannot read the token layer — the two hex values there are `--paper`
+and `--lavinder-600`, and they have to be kept in step by hand. So do the
+`color-scheme` and `theme-color` meta tags in `apps/studio/index.html`, the
+palette inlined in `apps/studio/scripts/og-card.html`, and the `INKS` array in
+`packages/kit/src/ColorBar/inks.ts` — the footer press strip renders one patch
+per entry, so a token added or retired without touching that array shows up as
+a blank swatch.
 
 **An XML comment cannot contain a double hyphen.** Writing `--stock-950` inside
 one makes the file malformed; browsers serve it 200 and then refuse to render

@@ -4,7 +4,7 @@
     display: inline-flex;
     align-items: center;
     padding: 2px var(--space-2) 3px;
-    border: 1px solid currentcolor;
+    border: var(--edge-weight) solid currentcolor;
     font-family: var(--font-mono);
     font-size: var(--text-2xs);
     line-height: 1;
@@ -13,21 +13,23 @@
     white-space: nowrap;
   }
 
+  /* Active is the only filled chip. It is the studio's own status, so it
+     takes the house finish at full strength — paper knocked out of accent. */
   .active {
-    border-color: var(--lavinder-400);
-    background: var(--lavinder-400);
-    color: var(--stock-950);
+    border-color: var(--lavinder-600);
+    background: var(--lavinder-600);
+    color: var(--paper);
   }
 
   .maintained {
-    color: var(--bone);
+    color: var(--text-primary);
   }
 
   .prototype {
-    color: var(--verdigris-400);
+    color: var(--verdigris-700);
   }
 
   .shelved {
-    color: var(--stock-200);
+    color: var(--text-muted);
   }
 }

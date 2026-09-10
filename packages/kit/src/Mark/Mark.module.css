@@ -14,7 +14,7 @@
        the corners off entirely. */
     --chamfer: calc(var(--mark-size) / 4);
 
-    background: var(--lavinder-400);
+    background: var(--lavinder-600);
   }
 
   .face {
@@ -28,6 +28,6 @@
        two diamonds and loses the texture. */
     --knurl-pitch: calc(var(--mark-size) / 5);
     --knurl-width: 1px;
-    --knurl-line: var(--lavinder-400);
+    --knurl-line: var(--lavinder-600);
   }
 }

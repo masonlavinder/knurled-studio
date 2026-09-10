@@ -34,7 +34,7 @@ const GRADIENTS = [
 const RAW_COLOR_FUNCTIONS = ['rgb', 'rgba', 'hsl', 'hsla'];
 
 /** clip-path clips outline, so chamfered surfaces need this exact inset ring. */
-const FOCUS_RING = '/^inset 0 0 0 1px var\\(--lavinder-400\\)$/';
+const FOCUS_RING = '/^inset 0 0 0 3px var\\(--lavinder-600\\)$/';
 
 /** Detent motion. Durations are tokens; 1ms is the reduced-motion escape. */
 const DURATION = ['/var\\(--dur-/', '/^1ms$/'];
@@ -77,15 +77,15 @@ export default {
       {
         message: (property) =>
           property === 'box-shadow'
-            ? 'box-shadow is only allowed as the chamfer focus ring: inset 0 0 0 1px var(--lavinder-400).'
+            ? 'box-shadow is only allowed as the chamfer focus ring: inset 0 0 0 3px var(--lavinder-600).'
             : `"${property}" must reference a --dur-* token.`,
       },
     ],
 
-    // ---- dark only ---------------------------------------------------
+    // ---- one theme ---------------------------------------------------
     'media-feature-name-disallowed-list': [
       ['prefers-color-scheme'],
-      { message: 'Dark mode only. There is no light theme.' },
+      { message: 'One theme only. There is no theme toggle.' },
     ],
   },
 

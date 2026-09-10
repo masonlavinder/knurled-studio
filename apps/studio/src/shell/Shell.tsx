@@ -51,9 +51,17 @@ export interface SectionRuleProps {
   as?: 'h2' | 'h3';
 }
 
-/** A section label. Shared so the three pages with sections agree on it. */
+/**
+ * A section label set into a knurl band. Shared so the three pages with
+ * sections agree on it. The band is the heading's own background rather than
+ * a <Knurl> beside it, so the grain closes up on both sides of the label.
+ */
 export function SectionRule({ label, as: Heading = 'h2' }: SectionRuleProps) {
-  return <Heading className={styles.sectionRuleLabel}>{label}</Heading>;
+  return (
+    <div className={styles.sectionRule}>
+      <Heading className={styles.sectionRuleLabel}>{label}</Heading>
+    </div>
+  );
 }
 
 export interface PageHeadProps {
@@ -108,7 +116,7 @@ export function Shell({ children }: { children: ReactNode }) {
         </nav>
       </header>
 
-      <Knurl height={16} />
+      <Knurl />
 
       <main id="main" className={styles.main} tabIndex={-1}>
         {children}

@@ -27,11 +27,20 @@
     text-decoration: none;
   }
 
-  .interactiveFace:hover {
-    background: var(--surface-raise);
+  /* On hover the whole edge snaps to accent and the face takes the accent
+     tint. Not a full flood: a panel carries a part number, a status chip and
+     muted meta, and none of those survive being knocked out of solid accent.
+     Everything stays legible on the tint, so nothing inside has to restyle
+     itself to follow the hover. */
+  .shell:has(> .interactiveFace:hover) {
+    background: var(--surface-accent);
   }
 
-  /* Tone paints the shell, which is the visible 1px edge around the face.
+  .interactiveFace:hover {
+    background: var(--surface-tint);
+  }
+
+  /* Tone paints the shell, which is the visible edge around the face.
      These sit in the components layer, so they win over chamferShell's
      default edge without needing a more specific selector. */
   .toneDefault {
@@ -43,6 +52,6 @@
   }
 
   .toneWarn {
-    background: var(--verdigris-400);
+    background: var(--verdigris-700);
   }
 }

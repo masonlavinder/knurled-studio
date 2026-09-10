@@ -20,8 +20,8 @@ export function Index() {
     <>
       <PageHead
         eyebrow="Catalog"
-        title="Index"
-        lede={`The Studio project listing.`}
+        title="Knurled Studio"
+        lede={`Knurling - the art and craft of creating texture`}
       />
 
       <ul className={styles.list}>

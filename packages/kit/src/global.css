@@ -55,7 +55,7 @@
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scrollbar-color: var(--stock-600) transparent;
     scrollbar-width: thin;
   }
@@ -70,17 +70,20 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Headings are set the way a part is stamped: uppercase, heavy, tight,
+     and large enough to be the first thing in the room. */
   h1, h2, h3, h4 {
-    font-weight: 500;
-    line-height: var(--leading-tight);
+    font-weight: 700;
+    line-height: var(--leading-display);
     letter-spacing: var(--track-display);
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
-  h1 { font-size: var(--text-2xl); }
-  h2 { font-size: var(--text-xl); }
-  h3 { font-size: var(--text-lg); }
-  h4 { font-size: var(--text-base); }
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
+  h4 { font-size: var(--text-lg); }
 
   p { text-wrap: pretty; }
 
@@ -97,7 +100,7 @@
     transition: color var(--dur-detent) var(--ease-out);
   }
 
-  a:hover { color: var(--bone); }
+  a:hover { color: var(--text-primary); }
 
   hr {
     border: 0;
@@ -108,9 +111,11 @@
   small { font-size: var(--text-sm); color: var(--text-muted); }
 
   /* Focus is never removed. clip-path clips outline, so chamfered
-     surfaces re-implement this as an inset ring — see .focusInset. */
+     surfaces re-implement this as an inset ring — see .focusInset.
+     lavinder-400 is only 2.91:1 on paper and misses the 3:1 non-text
+     minimum, so the ring takes the full-strength accent. */
   :focus-visible {
-    outline: 1px solid var(--lavinder-400);
+    outline: 3px solid var(--lavinder-600);
     outline-offset: 2px;
   }
 
@@ -118,7 +123,7 @@
 
   ::selection {
     background: var(--lavinder-600);
-    color: var(--bone);
+    color: var(--paper);
   }
 
   ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -127,7 +132,7 @@
     background: var(--stock-600);
     border: 3px solid var(--surface-page);
   }
-  ::-webkit-scrollbar-thumb:hover { background: var(--stock-400); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--stock-950); }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

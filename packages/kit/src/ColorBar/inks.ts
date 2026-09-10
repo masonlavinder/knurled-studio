@@ -7,19 +7,17 @@
  */
 export const INKS = [
   '--stock-950',
-  '--stock-900',
   '--stock-800',
-  '--stock-700',
   '--stock-600',
   '--stock-400',
-  '--stock-200',
-  '--bone',
-  '--lavinder-900',
+  '--stock-100',
+  '--stock-050',
+  '--paper',
   '--lavinder-600',
   '--lavinder-400',
-  '--lavinder-300',
-  '--verdigris-900',
-  '--verdigris-400',
+  '--lavinder-050',
+  '--verdigris-700',
+  '--verdigris-050',
 ] as const;
 
 export type Ink = (typeof INKS)[number];

@@ -1,13 +1,16 @@
 @layer components {
+  /* min(280px, 100%) rather than a bare 280px: below about 375px the track
+     minimum is wider than the gutters leave, and a bare minimum cannot
+     shrink, so the grid pushes past the viewport. The clamp lets the last
+     column collapse to whatever is actually there. */
   .list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
     gap: var(--space-4);
     list-style: none;
     padding: 0;
   }
 
-  /* Cards share a row height, so the meta line rules up across the grid. */
   .list > li {
     display: flex;
   }
@@ -73,7 +76,7 @@
 
   .alsoList {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
     gap: var(--space-4);
     list-style: none;
     padding: 0;

@@ -4,9 +4,9 @@ import styles from './Knurl.module.css';
 
 export interface KnurlProps {
   /**
-   * Strip height in px. Omit for the default two stacked rows of diamonds —
-   * a row is `--knurl-pitch` × √2 tall, so whole rows are the only heights
-   * that do not clip.
+   * Strip height in px. Omit for `--knurl-strip`, the depth every strip in
+   * the studio uses. A row of diamonds is `--knurl-pitch` × √2 tall, so a
+   * height that is not a whole number of rows cuts the bottom row.
    */
   height?: number;
 }

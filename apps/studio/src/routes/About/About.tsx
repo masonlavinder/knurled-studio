@@ -51,6 +51,22 @@ export function About() {
       </div>
 
       <section className={styles.section}>
+        <SectionRule label="Where to Find Him" />
+        <ul className={styles.links}>
+          {ELSEWHERE.map((link) => (
+            <li key={link.url}>
+              <Panel interactive as="a" href={link.url} className={cx(styles.linkPanel)}>
+                <div className={styles.linkRow}>
+                  <span className={styles.linkName}>{link.name}</span>
+                  <span className={styles.linkHost}>{hostOf(link.url)}</span>
+                </div>
+              </Panel>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
         <SectionRule label="Principles" />
         <ol className={styles.principles}>
           {PRINCIPLES.map((principle, index) => (
@@ -64,7 +80,7 @@ export function About() {
 
       <section className={styles.section}>
         <SectionRule label="Tools" />
-        <Panel>
+        <Panel className={cx(styles.specPanel)}>
           <SpecTable
             rows={[
               { label: 'Front end', value: 'React · TypeScript' },
@@ -82,7 +98,7 @@ export function About() {
 
       <section className={styles.section}>
         <SectionRule label="All Time Greats" />
-        <Panel>
+        <Panel className={cx(styles.specPanel)}>
           <SpecTable
             rows={[
               { label: 'Fiction', value: 'Dune · East of Eden · The Hobbit · The Alchemist' },
@@ -98,22 +114,6 @@ export function About() {
             ]}
           />
         </Panel>
-      </section>
-
-      <section className={styles.section}>
-        <SectionRule label="Where to Find Him" />
-        <ul className={styles.links}>
-          {ELSEWHERE.map((link) => (
-            <li key={link.url}>
-              <Panel interactive as="a" href={link.url} className={cx(styles.linkPanel)}>
-                <div className={styles.linkRow}>
-                  <span className={styles.linkName}>{link.name}</span>
-                  <span className={styles.linkHost}>{hostOf(link.url)}</span>
-                </div>
-              </Panel>
-            </li>
-          ))}
-        </ul>
       </section>
     </>
   );

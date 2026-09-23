@@ -12,8 +12,13 @@ const ALSO = [
   { to: '/links', name: 'Links', note: 'Tools worth keeping.', count: `${String(LINK_COUNT)} entries` },
 ];
 
-/** Ascending by part number. The catalog is validated sorted; this is display order. */
-const entries = [...catalog].sort((a, b) => a.partNumber.localeCompare(b.partNumber));
+/**
+ * Newest first. Part numbers are assigned in the order a project is first cut,
+ * so descending by part number is chronological without needing a date — and
+ * firstCut is only a year, which cannot order two parts cut the same year.
+ * The catalog file itself stays sorted ascending; this is display order.
+ */
+const entries = [...catalog].sort((a, b) => b.partNumber.localeCompare(a.partNumber));
 
 export function Index() {
   return (
@@ -21,6 +26,7 @@ export function Index() {
       <PageHead
         eyebrow="Catalog"
         title="Knurled Studio"
+        description="A curated collection of tools and projects from Knurled Studio, a personal project studio by Mason Lavinder."
         lede={`Knurling - the art and craft of creating texture`}
       />
 

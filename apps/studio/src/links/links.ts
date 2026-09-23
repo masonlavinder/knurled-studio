@@ -14,6 +14,13 @@ export interface LinkEntry {
 
 export const links: readonly LinkEntry[] = [
   {
+    title: 'Brutalist Web Design',
+    url: 'https://brutalist-web.design/',
+    description:
+      'Seven rules for websites that are honest about being websites. The house reads it as a checklist.',
+    categories: ['design', 'learning'],
+  },
+  {
     title: 'Coolors',
     url: 'https://coolors.co/',
     description: 'Fast color palette generator for creating solid color schemes.',

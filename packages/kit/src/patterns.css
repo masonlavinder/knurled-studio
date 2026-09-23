@@ -46,6 +46,16 @@
 
   .dim { color: var(--text-muted); }
 
+  /* A hyperlink looks like one. Panel links keep text-decoration: none on the
+     face — letting the anchor's underline through would draw it under the part
+     number, the tagline and the meta line too — and compose this onto the one
+     element that names the destination instead. Matches the base `a` rule. */
+  .underlined {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+
   /* ---- chamfer --------------------------------------------------- */
   /* Two layers, because clip-path clips the border. Shell paints the
      edge; face is inset 1px and paints the surface. */
@@ -92,23 +102,16 @@
   .hairline { border-top: var(--hairline); }
   .hairlineBelow { border-bottom: var(--hairline); }
 
-  .knurl {
+  /* Solid teeth on a tile, for the mark. --knurl-tooth divides the tile
+     across and --knurl-tooth-h down, so a surface can carry teeth side by side
+     without a second row seaming across it. */
+  .teeth {
     background-image:
-      repeating-linear-gradient(
-        45deg,
-        var(--knurl-line) 0 var(--knurl-width),
-        transparent var(--knurl-width) var(--knurl-pitch)),
-      repeating-linear-gradient(
-        -45deg,
-        var(--knurl-line) 0 var(--knurl-width),
-        transparent var(--knurl-width) var(--knurl-pitch));
-  }
-
-  .hatch {
-    background-image: repeating-linear-gradient(
-      45deg,
-      var(--knurl-line) 0 var(--knurl-width),
-      transparent var(--knurl-width) var(--knurl-pitch));
+      repeating-linear-gradient(45deg,
+        var(--knurl-line) 0 50%, transparent 50% 100%),
+      repeating-linear-gradient(-45deg,
+        var(--knurl-line) 0 50%, transparent 50% 100%);
+    background-size: var(--knurl-tooth) var(--knurl-tooth-h);
   }
 
   /* ---- motion ------------------------------------------------------ */

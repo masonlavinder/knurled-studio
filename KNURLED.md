@@ -181,11 +181,12 @@ Direction, not lintable but not optional either:
   while text stays on one left margin. Blocks that read badly when stretched
   take a measure: `--measure` (68ch) for prose, `--measure-wide` (96ch) for a
   slab of tabular data.
-- **The knurl is the divider, and it is always the house finish.**
-  `--knurl-line` is `--lavinder-600` everywhere — header, footer and every
-  section seam — so the accent arrives as the studio's own texture rather than
-  as a flat band of colour. A section heading is that strip cut edge to edge
-  with its label stamped underneath; there is no solid accent bar.
+- **The banner appears once, on the footer plate.** Open triangles
+  alternating point-up and point-down, spaced apart rather than sharing
+  edges. It is a signature, not punctuation: repeating it at every section
+  turned it into a line across the page every few hundred pixels and it
+  stopped meaning anything. Section headings are a label and nothing else —
+  no band, no rule, no horizontal lines across.
 - **Accent is a surface too, sparingly.** `--surface-accent` is the same
   full-strength purple as `--text-accent`, because it clears 7:1 both as text
   on paper and as a ground under `--text-on-accent`. It is reserved for small
@@ -207,7 +208,7 @@ spec page with no other file touched.
 
 | Route | Source |
 |---|---|
-| `/` | `catalog`, ascending by part number. Shelved entries stay listed, struck through and muted. |
+| `/` | `catalog`, descending by part number — newest first. Shelved entries stay listed, struck through and muted. |
 | `/tools/:slug` | `bySlug`. Unknown slug renders the 404 view. |
 | `/writing` · `/writing/:slug` | `src/writing/*.md`, newest first. Reached from the index. |
 | `/links` | `src/links/links.ts`, grouped by first category. Reached from the index. |
@@ -236,27 +237,37 @@ Rendered with react-markdown + remark-gfm. The body must **not** open with an
 elements in one glyph. It is built from the same `chamferShell`, `chamferFace`
 and `knurl` patterns as everything else rather than drawn separately, so it
 cannot drift from the components beside it. It scales the chamfer to a quarter
-of its size and tightens the grain, because a 13px chamfer and a 7px pitch on a
-20px glyph read as neither.
+of its size and coarsens the tooth to half the glyph, because a 13px chamfer on
+a 20px glyph reads as no chamfer and the strip's 8px tile reads as muddy
+scallops rather than teeth.
 
 It sits in the header lockup beside the wordmark and at the head of the footer
 identity row. Decorative in both, since the wordmark carries the name. The mark
 sets its own pitch and line width, so it does not move when the strip tokens do.
 
-The knurl strips are the header and footer only, and they are **two rows of
-diamonds deep** rather than one.
+There is one banner, on the footer plate. The mark is the only other place
+the grain appears, and it carries a single row of solid teeth so no seam
+crosses the glyph.
 
-Depth is the dial, not scale. Two families of lines a `--knurl-pitch` apart
-crossing at a right angle make a square lattice standing on its corner, so one
-row of diamonds is `pitch × √2` tall — `--knurl-row`. Strips are sized in whole
-rows; any other height cuts the bottom row through the middle. `--knurl-strip`
-is the depth every strip uses — the header, the footer, and the band a section
-heading is set into — and `<Knurl />` with no props takes it, so the three
-cannot drift apart.
+The banner is an SVG `<pattern>` in `Knurl.tsx`, not a gradient, and its
+geometry lives there as constants — a pattern tile cannot read a custom
+property, so only `--knurl-line` crosses over, on the stroke.
 
-Enlarging the pattern instead — a thicker line on a wider pitch — was tried and
-looks wrong: it reads as one coarse zigzag rather than a knurl. Thickening the
-line alone is worse, closing the diamonds into a near-solid band.
+That is also why it is SVG at all. Crossing `repeating-linear-gradient`
+families can only draw a lattice whose triangles **share** their edges;
+standing them apart needs closed outlines, which gradients cannot make.
+
+A gradient lattice was built first and has one more trap worth recording: a
+`45deg` gradient and a `-45deg` one anchor to opposite corners of their box,
+so their relative phase moves with the element's width. The same band rendered
+as a clean truss at 900px and as a row of crossed X's at 1200px. Tiling with
+`background-size` pins the phase; the `.teeth` pattern the mark uses does
+exactly that.
+
+A tile as tall as the strip was tried and looks wrong: the band then shows
+only the bottom half of one tile, which reads as a solid bar with a toothed
+edge rather than teeth meshing. Two rows is the minimum that reads as a
+texture.
 
 `apps/studio/public/favicon.svg` redraws the same geometry in SVG, because an
 icon cannot read the token layer — the two hex values there are `--paper`

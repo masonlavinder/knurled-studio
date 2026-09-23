@@ -1,11 +1,7 @@
 @layer components {
+  /* The reset makes svg a block already; width comes from the attribute so
+     the pattern tiles in real pixels rather than being scaled by a viewBox. */
   .knurl {
-    composes: knurl from '../patterns.css';
-
-    width: 100%;
-
-    /* The house strip depth by default, so header, footer and section band
-       agree without each naming a number. Pass `height` only to deviate. */
-    height: var(--knurl-height, var(--knurl-strip));
+    display: block;
   }
 }

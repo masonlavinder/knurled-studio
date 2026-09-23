@@ -47,5 +47,23 @@
       "GitHub Actions"
     ],
     "sourcePublic": true
+  },
+  {
+    "partNumber": "KS-003",
+    "slug": "icons",
+    "name": "knurl-icons",
+    "tagline": "Draws 24×24 stroke icons that pass as Lucide.",
+    "description": [
+      "A browser editor for 24×24 stroke icons that conform to the Lucide standard. Draw on the grid, watch conformance score in real time, and export SVG a serializer will round-trip.",
+      "The serializer is gated against 1847 real upstream Lucide icons: every one is a byte-level fixed point under re-serialization, and 1839 of them rasterize pixel-identically to upstream at 24, 96 and 384px. The remaining eight are an allowlist, each with a written reason."
+    ],
+    "status": "PROTOTYPE",
+    "url": "https://icons.knurled.studio",
+    "firstCut": "2026",
+    "stack": [
+      "React",
+      "TypeScript"
+    ],
+    "sourcePublic": true
   }
 ]

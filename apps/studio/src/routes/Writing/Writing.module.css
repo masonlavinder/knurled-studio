@@ -4,7 +4,12 @@
     padding: 0;
   }
 
+  /* The rule between entries is a slab, not the viewport: a 2px ink line
+     running 1400px over 500px of text reads as a stray edge rather than a
+     separator. The overhang past the 68ch excerpt is deliberate. */
   .item {
+    composes: slab from '@knurled/kit/patterns.css';
+
     padding-block: var(--space-5);
   }
 
@@ -37,6 +42,7 @@
   }
 
   .title {
+    composes: underlined from '@knurled/kit/patterns.css';
     font-size: var(--text-lg);
     line-height: var(--leading-tight);
   }

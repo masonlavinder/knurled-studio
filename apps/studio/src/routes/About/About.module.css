@@ -10,6 +10,13 @@
     padding-top: var(--space-12);
   }
 
+  /* The cap goes on the panel, not the section — the section's SectionRule is
+     a full-bleed knurl band and must keep reaching the viewport edge. Without
+     it a spec row puts its label and value 1250px apart and stops being a row. */
+  .specPanel {
+    composes: slab from '@knurled/kit/patterns.css';
+  }
+
 
   .principles {
     composes: prose from '@knurled/kit/patterns.css';
@@ -64,6 +71,7 @@
 
   .linkName {
     composes: monoValue from '@knurled/kit/patterns.css';
+    composes: underlined from '@knurled/kit/patterns.css';
   }
 
   .linkHost {

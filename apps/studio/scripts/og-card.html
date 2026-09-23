@@ -20,9 +20,9 @@
 
   Same trade as favicon.svg: an image cannot read the token layer, so the hex
   is inlined and kept in step by hand. The values below are paper, stock 950,
-  stock 600 and lavinder 600. The mark repeats the
-  Mark component's construction exactly, including its rule that the chamfer
-  is a quarter of the glyph and the grain a fifth.
+  stock 600 and lavinder 600. The mark repeats the Mark component's
+  construction exactly, including its rule that the chamfer is a quarter of
+  the glyph and three teeth in one row.
   Note: an XML comment cannot contain a double hyphen, so custom properties
   are named here without their leading dashes.
 -->
@@ -46,9 +46,8 @@
 
       :root {
         --knurl-line: #6b2fa8;
-        --knurl-width: 2px;
-        --knurl-pitch: 7px;
-        --knurl-row: calc(var(--knurl-pitch) * 1.41421356);
+        --knurl-tooth: 8px;
+        --knurl-tooth-h: var(--knurl-tooth);
         --mark-size: 104px;
       }
 
@@ -69,23 +68,13 @@
         font-family: 'Inconsolata', sans-serif;
       }
 
-      /* Two rows of diamonds, exactly as the header and footer strips.
-         Sizing in whole rows is what keeps the bottom row from being cut
-         through the middle. */
+      /* The banner, matching the Knurl component: open triangles alternating
+         point-up and point-down, spaced apart. Drawn as an SVG pattern here
+         too, because crossing gradients can only make triangles that share
+         their edges. Bottom only, as on the site. */
       .knurl {
         flex: none;
-        height: calc(var(--knurl-row) * 2);
-        background-image:
-          repeating-linear-gradient(
-            45deg,
-            var(--knurl-line) 0 var(--knurl-width),
-            transparent var(--knurl-width) var(--knurl-pitch)
-          ),
-          repeating-linear-gradient(
-            -45deg,
-            var(--knurl-line) 0 var(--knurl-width),
-            transparent var(--knurl-width) var(--knurl-pitch)
-          );
+        display: block;
       }
 
       .body {
@@ -147,23 +136,16 @@
 
       .face {
         --knurl-line: #6b2fa8;
-        --knurl-width: 1px;
-        --knurl-pitch: calc(var(--mark-size) / 5);
+        --knurl-tooth: calc(var(--mark-size) / 3);
+        --knurl-tooth-h: var(--mark-size);
 
         flex: 1;
         margin: 2px;
         background-color: #f4f2eb;
         background-image:
-          repeating-linear-gradient(
-            45deg,
-            var(--knurl-line) 0 var(--knurl-width),
-            transparent var(--knurl-width) var(--knurl-pitch)
-          ),
-          repeating-linear-gradient(
-            -45deg,
-            var(--knurl-line) 0 var(--knurl-width),
-            transparent var(--knurl-width) var(--knurl-pitch)
-          );
+          repeating-linear-gradient(45deg, var(--knurl-line) 0 50%, transparent 50% 100%),
+          repeating-linear-gradient(-45deg, var(--knurl-line) 0 50%, transparent 50% 100%);
+        background-size: var(--knurl-tooth) var(--knurl-tooth-h);
         clip-path: polygon(
           calc(var(--chamfer) - 2px) 0,
           100% 0,
@@ -204,8 +186,6 @@
     </style>
   </head>
   <body>
-    <div class="knurl"></div>
-
     <div class="body">
       <span class="tick tl"></span>
       <span class="tick tr"></span>
@@ -226,6 +206,16 @@
       </div>
     </div>
 
-    <div class="knurl"></div>
+    <svg class="knurl" width="1200" height="30" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="teeth" width="25.613" height="30" patternUnits="userSpaceOnUse">
+          <path d="M0.750 11.250 L7.500 0.750 L14.250 11.250 Z" fill="none" stroke="#6b2fa8" stroke-width="1.5"/>
+          <path d="M13.557 0.750 L20.307 11.250 L27.057 0.750 Z" fill="none" stroke="#6b2fa8" stroke-width="1.5"/>
+          <path d="M0.750 15.750 L7.500 26.250 L14.250 15.750 Z" fill="none" stroke="#6b2fa8" stroke-width="1.5"/>
+          <path d="M13.557 26.250 L20.307 15.750 L27.057 26.250 Z" fill="none" stroke="#6b2fa8" stroke-width="1.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#teeth)"/>
+    </svg>
   </body>
 </html>

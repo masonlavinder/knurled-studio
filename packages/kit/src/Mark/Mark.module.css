@@ -19,15 +19,17 @@
 
   .face {
     composes: chamferFace from '../patterns.css';
-    composes: knurl from '../patterns.css';
+    composes: teeth from '../patterns.css';
 
     flex: 1;
     background-color: var(--surface-page);
 
-    /* Tighter grain than the strips: at this size the 7px pitch reads as
-       two diamonds and loses the texture. */
-    --knurl-pitch: calc(var(--mark-size) / 5);
-    --knurl-width: 1px;
+    /* Three teeth across, one row deep. A row boundary inside a 22px mark
+       draws a hard line straight across it and the glyph stops reading as a
+       single cut, so the row is the whole glyph and only the tooth divides.
+       Both scale with the mark, so the shape is identical at 16px and 104px. */
+    --knurl-tooth: calc(var(--mark-size) / 3);
+    --knurl-tooth-h: var(--mark-size);
     --knurl-line: var(--lavinder-600);
   }
 }

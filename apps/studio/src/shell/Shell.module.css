@@ -60,11 +60,11 @@
   .navLink {
     composes: monoLabel from '@knurled/kit/patterns.css';
     composes: fade from '@knurled/kit/patterns.css';
+    composes: underlined from '@knurled/kit/patterns.css';
 
     padding: var(--space-1) var(--space-2);
     font-size: var(--text-sm);
     font-weight: 700;
-    text-decoration: none;
   }
 
   .navLink:hover {
@@ -115,43 +115,14 @@
     font-size: var(--text-sm);
   }
 
-  /* A section heading is a seam cut across the page: the knurl runs edge to
-     edge and the label is set into it, with the page knocked out behind the
-     text so the grain never runs under a letter. Same idiom as the header and
-     footer strips, so a section break reads as the same machine mark rather
-     than a second, louder system.
-
-     Three whole rows rather than the strips' two — a band has to be taller
-     than the label it carries, and a partial row cuts the bottom diamonds
-     through the middle. */
-  .sectionRule {
-    composes: bleed from '@knurled/kit/patterns.css';
-    composes: knurl from '@knurled/kit/patterns.css';
-
-    display: flex;
-    align-items: stretch;
-    height: var(--knurl-strip);
-    margin-bottom: var(--space-5);
-  }
-
-  /* The grain runs on both sides of the label: the knockout starts a padding's
-     width short of the gutter, so there is a run of knurl before the text and
-     the text itself still lands on the same left margin as every other line on
-     the page. Margin and padding have to stay complementary — change one and
-     the section labels step off the margin. */
+  /* The label alone. No band, no rule — the page carries no horizontal lines
+     across it, and the knurl appears once, on the footer plate. */
   .sectionRuleLabel {
     composes: monoLabel from '@knurled/kit/patterns.css';
 
-    display: flex;
-    align-items: center;
-    margin-left: calc(var(--gutter) - var(--space-3));
-    padding-inline: var(--space-3);
-    background: var(--surface-page);
+    display: block;
+    margin-bottom: var(--space-5);
     font-size: var(--text-sm);
-
-    /* monoLabel's 1.4 would make the text box taller than the strip and push
-       the band past --knurl-strip. At 1 the glyphs sit inside it. */
-    line-height: 1;
     font-weight: 700;
     color: var(--text-accent);
   }

@@ -10,7 +10,6 @@
 
     display: inline-block;
     padding-top: var(--space-6);
-    text-decoration: none;
   }
 
   .back:hover {

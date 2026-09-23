@@ -30,7 +30,6 @@
     composes: fade from '../patterns.css';
 
     color: var(--text-muted);
-    text-decoration: none;
   }
 
   .home:hover {

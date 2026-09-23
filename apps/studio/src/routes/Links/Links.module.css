@@ -29,6 +29,7 @@
 
   .title {
     composes: monoValue from '@knurled/kit/patterns.css';
+    composes: underlined from '@knurled/kit/patterns.css';
 
     font-size: var(--text-sm);
   }

@@ -33,6 +33,7 @@
   }
 
   .name {
+    composes: underlined from '@knurled/kit/patterns.css';
     font-size: var(--text-lg);
     line-height: var(--leading-tight);
   }
@@ -76,7 +77,11 @@
 
   .alsoList {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    /* auto-fill and the catalog's own track size, not auto-fit at 240: with
+       only two entries auto-fit stretches them to half the viewport each and
+       puts 500px between a name and its count. Filling the same tracks as the
+       grid above lines these up with the first two catalog cards. */
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
     gap: var(--space-4);
     list-style: none;
     padding: 0;
@@ -104,6 +109,7 @@
   }
 
   .alsoName {
+    composes: underlined from '@knurled/kit/patterns.css';
     font-size: var(--text-lg);
     line-height: var(--leading-tight);
   }

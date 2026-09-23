@@ -1,4 +1,4 @@
-import { cx, Knurl, Mark, StudioFooter } from '@knurled/kit';
+import { cx, Mark, StudioFooter } from '@knurled/kit';
 import { type ReactNode, useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router';
 
@@ -52,29 +52,28 @@ export interface SectionRuleProps {
 }
 
 /**
- * A section label set into a knurl band. Shared so the three pages with
- * sections agree on it. The band is the heading's own background rather than
- * a <Knurl> beside it, so the grain closes up on both sides of the label.
+ * A section label. Shared so the three pages with sections agree on it.
+ *
+ * Just the label — no band and no rule. The knurl is the studio's signature,
+ * not its punctuation, and repeating it at every section turned it into a
+ * line across the page every few hundred pixels. It appears once now, on the
+ * footer plate.
  */
 export function SectionRule({ label, as: Heading = 'h2' }: SectionRuleProps) {
-  return (
-    <div className={styles.sectionRule}>
-      <Heading className={styles.sectionRuleLabel}>{label}</Heading>
-    </div>
-  );
+  return <Heading className={styles.sectionRuleLabel}>{label}</Heading>;
 }
 
 export interface PageHeadProps {
   /** Mono label above the heading, e.g. a part number or section name. */
   eyebrow?: ReactNode;
   title: string;
-  /** One sentence under the heading. Spec-sheet register. */
   lede?: string;
+  description?: string;
   children?: ReactNode;
 }
 
 /** Heading block. Also sets the document title from the page heading. */
-export function PageHead({ eyebrow, title, lede, children }: PageHeadProps) {
+export function PageHead({ eyebrow, title, lede, description, children }: PageHeadProps) {
   useDocumentTitle(title);
 
   return (
@@ -82,6 +81,7 @@ export function PageHead({ eyebrow, title, lede, children }: PageHeadProps) {
       {eyebrow === undefined ? null : <div className={styles.eyebrow}>{eyebrow}</div>}
       <h1>{title}</h1>
       {lede === undefined ? null : <p className={styles.lede}>{lede}</p>}
+      {description === undefined ? null : <p className={styles.description}>{description}</p>}
       {children}
     </div>
   );
@@ -115,8 +115,6 @@ export function Shell({ children }: { children: ReactNode }) {
           ))}
         </nav>
       </header>
-
-      <Knurl />
 
       <main id="main" className={styles.main} tabIndex={-1}>
         {children}

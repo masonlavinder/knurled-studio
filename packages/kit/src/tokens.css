@@ -55,14 +55,14 @@
     --font-mono: 'Inconsolata', ui-monospace, 'SF Mono', monospace;
     --font-sans: var(--font-mono);
 
-    --text-2xs:  11px;   /* status chips */
-    --text-xs:   12px;   /* part numbers, mono labels */
-    --text-sm:   14px;
-    --text-base: 16px;   /* body — mono needs a step up to hold a line */
-    --text-lg:   22px;
-    --text-xl:   34px;
-    --text-2xl:  52px;
-    --text-3xl:  76px;   /* page h1 */
+    --text-2xs:  12px;   /* status chips */
+    --text-xs:   14px;   /* part numbers, mono labels */
+    --text-sm:   16px;
+    --text-base: 18px;   /* body — mono needs a step up to hold a line */
+    --text-lg:   25px;
+    --text-xl:   38px;
+    --text-2xl:  58px;
+    --text-3xl:  86px;   /* page h1 */
 
     --leading-display: 0.95;   /* oversized headings set tight */
     --leading-tight: 1.15;

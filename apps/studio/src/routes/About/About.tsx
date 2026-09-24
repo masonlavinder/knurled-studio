@@ -85,7 +85,7 @@ export function About() {
             rows={[
               { label: 'Front end', value: 'React · TypeScript' },
               { label: 'Back end', value: 'Python · PostgreSQL' },
-              { label: 'Also written', value: 'Go · C++ · C · R' },
+              { label: 'Also written', value: 'Java · Go · C++ · C · R' },
               { label: 'Editor', value: 'VS Code' },
               { label: 'Linux', value: 'Ubuntu' },
               { label: 'Keyboards', value: 'Keychron Q1 Max · Gateron Jupiter Red · NuPhy Air60 V2' },

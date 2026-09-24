@@ -11,12 +11,19 @@
     padding: 0;
   }
 
+  /* min-width: 0 on both the grid item and the panel inside it. A flex item's
+     automatic minimum size is its min-content width, so without this the card
+     refuses to shrink below its longest unbreakable run and pushes past the
+     track — which the grid's min() clamp cannot undo. Only visible once the
+     type got big enough for min-content to exceed the track. */
   .list > li {
     display: flex;
+    min-width: 0;
   }
 
   .entryPanel {
     flex: 1;
+    min-width: 0;
   }
 
   .card {
@@ -89,10 +96,12 @@
 
   .alsoList > li {
     display: flex;
+    min-width: 0;
   }
 
   .alsoPanel {
     flex: 1;
+    min-width: 0;
   }
 
   .alsoCard {

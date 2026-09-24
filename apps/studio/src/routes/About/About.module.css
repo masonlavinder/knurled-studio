@@ -57,10 +57,12 @@
 
   .links > li {
     display: flex;
+    min-width: 0;
   }
 
   .linkPanel {
     flex: 1;
+    min-width: 0;
   }
 
   .linkRow {

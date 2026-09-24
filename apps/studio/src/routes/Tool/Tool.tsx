@@ -40,6 +40,19 @@ export function Tool() {
         </div>
       )}
 
+      {entry.url === null ? (
+        <p className={styles.shelvedNote}>Shelved. Nothing is running at this part number.</p>
+      ) : (
+        <div className={styles.spec}>
+          <Panel interactive as="a" href={entry.url} tone="accent">
+            <div className={styles.launch}>
+              <span className={styles.launchLabel}>Open</span>
+              <span className={styles.launchHost}>{hostOf(entry.url)}</span>
+            </div>
+          </Panel>
+        </div>
+      )}
+
       <div className={styles.spec}>
         <Panel>
           <SpecTable
@@ -53,19 +66,6 @@ export function Tool() {
           />
         </Panel>
       </div>
-
-      {entry.url === null ? (
-        <p className={styles.shelvedNote}>Shelved. Nothing is running at this part number.</p>
-      ) : (
-        <div className={styles.spec}>
-          <Panel interactive as="a" href={entry.url} tone="accent">
-            <div className={styles.launch}>
-              <span className={styles.launchLabel}>Open</span>
-              <span className={styles.launchHost}>{hostOf(entry.url)}</span>
-            </div>
-          </Panel>
-        </div>
-      )}
     </>
   );
 }

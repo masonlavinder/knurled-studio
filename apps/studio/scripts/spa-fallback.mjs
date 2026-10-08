@@ -106,13 +106,8 @@ const routes = [
   {
     path: '',
     title: SITE_NAME,
-    description: 'Project catalog for Knurled Studio. Parts, writing, and links.',
-  },
-  {
-    path: 'about',
-    title: 'Mason Lavinder',
     description:
-      'Founder and full-stack developer. Aerospace to data science to AI applications. The operator behind the studio.',
+      'Knurled Studio, the personal project studio of Mason Lavinder — founder and full-stack developer. Parts, writing, and links.',
   },
   {
     path: 'writing',
@@ -212,6 +207,23 @@ for (const route of routes) {
   await writeFile(file, withHead(shell, route));
 }
 
+// /about was a page and is now a section of the index. Old links still land:
+// a static redirect, with a canonical pointing home so a crawler folds it in.
+// Kept out of the route table so it is not in the sitemap.
+await mkdir(resolve(dist, 'about'), { recursive: true });
+await writeFile(
+  resolve(dist, 'about/index.html'),
+  [
+    '<!doctype html>',
+    '<meta charset="utf-8" />',
+    `<title>${SITE_NAME}</title>`,
+    `<link rel="canonical" href="${ORIGIN}/" />`,
+    '<meta http-equiv="refresh" content="0; url=/#operator" />',
+    '<a href="/#operator">Moved to the index.</a>',
+    '',
+  ].join('\n'),
+);
+
 // Anything genuinely unrouted still gets the shell, and the router shows 404.
 // Marked noindex, because this file answers on every missing path.
 await writeFile(
@@ -246,5 +258,5 @@ await writeFile(
 await writeFile(resolve(dist, '.nojekyll'), '');
 
 process.stdout.write(
-  `spa-fallback: ${String(routes.length)} routes + 404.html + sitemap.xml + robots.txt + .nojekyll\n`,
+  `spa-fallback: ${String(routes.length)} routes + /about redirect + 404.html + sitemap.xml + robots.txt + .nojekyll\n`,
 );

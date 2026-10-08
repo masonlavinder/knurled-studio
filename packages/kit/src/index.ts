@@ -23,3 +23,4 @@ export { RegistrationMarks } from './RegistrationMarks/RegistrationMarks.tsx';
 export { SpecTable, type SpecRow, type SpecTableProps } from './SpecTable/SpecTable.tsx';
 export { StatusChip, type StatusChipProps } from './StatusChip/StatusChip.tsx';
 export { StudioFooter, type StudioFooterProps } from './StudioFooter/StudioFooter.tsx';
+export { Window, type WindowProps } from './Window/Window.tsx';

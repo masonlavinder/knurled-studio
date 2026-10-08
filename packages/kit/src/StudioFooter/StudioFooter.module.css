@@ -1,11 +1,14 @@
 @layer components {
+  /* A plain ink rule across the top, edge to edge. The knurl band used to
+     sit here; it read as decoration rather than a plate, so it came off. */
   .footer {
     width: 100%;
     margin-top: var(--space-16);
+    border-top: var(--hairline-strong);
   }
 
-  /* The bar carries its own gutter — the shell no longer has one, so that
-     the knurl strip above it can run edge to edge. */
+  /* The bar carries its own gutter — the shell has none, so the rule above
+     it can run edge to edge. */
   .bar {
     composes: gutter from '../patterns.css';
 

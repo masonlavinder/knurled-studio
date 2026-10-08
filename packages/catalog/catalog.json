@@ -65,5 +65,25 @@
       "TypeScript"
     ],
     "sourcePublic": true
+  },
+  {
+    "partNumber": "KS-004",
+    "slug": "delia",
+    "name": "delia",
+    "tagline": "A 128×64 LED matrix on a Raspberry Pi, run from a phone.",
+    "description": [
+      "A 128×64 RGB HUB75 panel driven by a Pi 3 A+. A long-lived root daemon owns the panel and renders declarative scene documents; an unprivileged Flask API validates them and forwards them over a Unix socket, and the daemon validates them again — it is the trust boundary.",
+      "The phone UI is a React and TypeScript SPA, built on a laptop rather than the Pi. The engine runs in CI against a mock backend, so the renderer is tested without any hardware attached. The panel lives on the home network; the source is public."
+    ],
+    "status": "ACTIVE",
+    "url": "https://github.com/masonlavinder/delia",
+    "firstCut": "2026",
+    "stack": [
+      "Python",
+      "Flask",
+      "React",
+      "Raspberry Pi"
+    ],
+    "sourcePublic": true
   }
 ]

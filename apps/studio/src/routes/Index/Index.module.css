@@ -1,47 +1,225 @@
 @layer components {
-  /* min(280px, 100%) rather than a bare 280px: below about 375px the track
-     minimum is wider than the gutters leave, and a bare minimum cannot
-     shrink, so the grid pushes past the viewport. The clamp lets the last
-     column collapse to whatever is actually there. */
-  .list {
+  .page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- reveal ------------------------------------------------------ */
+  /* Anything carrying data-reveal slides in from the left the first time it
+     scrolls into view; useReveal sets data-shown. Staggered by --i, one
+     detent apart. Hard left, like everything else: things arrive from the
+     margin they are pinned to. */
+  .page [data-reveal] {
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      translate var(--dur-reveal) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * var(--dur-fast));
+  }
+
+  .page [data-reveal]:not([data-shown]) {
+    opacity: 0;
+    translate: calc(var(--space-6) * -1) 0;
+  }
+
+  /* ---- hero ------------------------------------------------------ */
+
+  .hero {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-    gap: var(--space-4);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: var(--space-12);
+    align-items: center;
+    padding-bottom: var(--space-20);
+  }
+
+  .heroText {
+    composes: stack from '@knurled/kit/patterns.css';
+
+    gap: var(--space-5);
+  }
+
+  .eyebrow {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    color: var(--text-accent);
+  }
+
+  .heroTitle {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--text-4xl);
+    line-height: 0.85;
+  }
+
+  .heroLine {
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* Each letter drops a fraction and lands, one beat after the last, like a
+     number stamp going down a part. Held while the boot screen is up so it
+     happens where it can be seen. */
+  .letter {
+    display: inline-block;
+    animation: stamp var(--dur-slow) var(--ease-detent) both;
+    animation-delay: calc(var(--i, 0) * var(--dur-fast) * 0.6);
+  }
+
+  :global(html[data-booting]) .letter {
+    animation-play-state: paused;
+  }
+
+  @keyframes stamp {
+    from {
+      opacity: 0;
+      translate: 0 -0.18em;
+    }
+  }
+
+  /* The second line takes the house finish: the studio, cut in. */
+  .heroLine + .heroLine {
+    color: var(--text-accent);
+  }
+
+  .lede {
+    composes: prose from '@knurled/kit/patterns.css';
+
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .description {
+    composes: prose from '@knurled/kit/patterns.css';
+    composes: dim from '@knurled/kit/patterns.css';
+
+    font-size: var(--text-sm);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-top: var(--space-2);
+  }
+
+  /* Stamped blocks, the same as the nav's active tab: square, ink-edged,
+     and they flood on hover rather than tinting. */
+  .action {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: fade from '@knurled/kit/patterns.css';
+
+    padding: var(--space-2) var(--space-4);
+    border: var(--edge-weight) solid var(--edge-strong);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .action:hover {
+    background: var(--edge-strong);
+    color: var(--paper);
+  }
+
+  .actionPrimary {
+    border-color: var(--surface-accent);
+    background: var(--surface-accent);
+    color: var(--text-on-accent);
+  }
+
+  .actionPrimary:hover {
+    border-color: var(--edge-strong);
+  }
+
+  .heroWindow {
+    min-width: 0;
+  }
+
+  .live {
+    display: inline-flex;
+    gap: var(--space-1);
+    align-items: center;
+  }
+
+  .lamp {
+    color: var(--lavinder-400);
+    animation: blink var(--dur-blink) steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* ---- sections --------------------------------------------------- */
+
+  .section {
+    padding-top: var(--space-20);
+    scroll-margin-top: var(--space-6);
+  }
+
+  .section:focus {
+    outline: none;
+  }
+
+  /* Number, title, note, on one baseline. The number is the house finish;
+     the note is a count, right-aligned in mono. */
+  .sectionHead {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    align-items: baseline;
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-8);
+    border-bottom: var(--hairline-strong);
+  }
+
+  .sectionIndex {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    line-height: var(--leading-display);
+    color: var(--text-accent);
+  }
+
+  .sectionTitle {
+    flex: 1;
+  }
+
+  .sectionNote {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+    composes: tabular from '@knurled/kit/patterns.css';
+  }
+
+  /* ---- windows ---------------------------------------------------- */
+
+  /* min(300px, 100%) rather than a bare 300px: on a narrow phone the track
+     minimum is wider than the gutters leave, and a bare minimum cannot
+     shrink, so the grid pushes past the viewport. */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-5);
     list-style: none;
     padding: 0;
   }
 
-  /* min-width: 0 on both the grid item and the panel inside it. A flex item's
-     automatic minimum size is its min-content width, so without this the card
-     refuses to shrink below its longest unbreakable run and pushes past the
-     track — which the grid's min() clamp cannot undo. Only visible once the
-     type got big enough for min-content to exceed the track. */
-  .list > li {
+  /* min-width: 0 down the chain: a flex item's automatic minimum is its
+     min-content width, and without this a long name pushes past its track. */
+  .grid > li,
+  .elsewhere > li {
     display: flex;
     min-width: 0;
   }
 
-  .entryPanel {
+  .fill {
     flex: 1;
-    min-width: 0;
-  }
-
-  .card {
-    composes: stack from '@knurled/kit/patterns.css';
-
-    gap: var(--space-3);
-    height: 100%;
-  }
-
-  .cardTop {
-    composes: spread from '@knurled/kit/patterns.css';
-
-    align-items: center;
   }
 
   .name {
     composes: underlined from '@knurled/kit/patterns.css';
-    font-size: var(--text-lg);
+
+    font-family: var(--font-display);
+    font-size: var(--text-d1);
+    font-weight: 400;
+    letter-spacing: 0;
     line-height: var(--leading-tight);
   }
 
@@ -55,16 +233,12 @@
     composes: spread from '@knurled/kit/patterns.css';
     composes: monoLabel from '@knurled/kit/patterns.css';
 
-    align-items: baseline;
+    align-items: center;
     margin-top: auto;
-    padding-top: var(--space-1);
+    padding-top: var(--space-2);
   }
 
-  .cut {
-    composes: tabular from '@knurled/kit/patterns.css';
-  }
-
-  /* Shelved work stays on the index. It just stops asking for attention. */
+  /* Shelved work stays on the page. It just stops asking for attention. */
   .shelved .name,
   .shelved .tagline {
     color: var(--text-muted);
@@ -75,62 +249,124 @@
     text-decoration-color: var(--stock-600);
   }
 
-  /* Writing and Links are not parts, so they sit below the catalog rather
-     than in it — and out of the nav, which is for the studio's own pages. */
-  .also {
-    padding-top: var(--space-12);
+  /* ---- operator ---------------------------------------------------- */
+
+  .operator {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-12);
+    align-items: start;
   }
 
+  .bio {
+    composes: prose from '@knurled/kit/patterns.css';
+    composes: stack from '@knurled/kit/patterns.css';
 
-  .alsoList {
-    display: grid;
-    /* auto-fill and the catalog's own track size, not auto-fit at 240: with
-       only two entries auto-fit stretches them to half the viewport each and
-       puts 500px between a name and its count. Filling the same tracks as the
-       grid above lines these up with the first two catalog cards. */
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
     gap: var(--space-4);
+  }
+
+  .operatorName {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .operatorRole {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    color: var(--text-accent);
+  }
+
+  .subhead {
+    composes: monoLabel from '@knurled/kit/patterns.css';
+
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-accent);
+  }
+
+  .principles {
     list-style: none;
     padding: 0;
   }
 
-  .alsoList > li {
-    display: flex;
-    min-width: 0;
-  }
+  .principle {
+    composes: hairline from '@knurled/kit/patterns.css';
 
-  .alsoPanel {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .alsoCard {
-    composes: stack from '@knurled/kit/patterns.css';
-
-    gap: var(--space-2);
-    height: 100%;
-  }
-
-  .alsoTop {
-    composes: spread from '@knurled/kit/patterns.css';
-
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: var(--space-4);
     align-items: baseline;
-  }
-
-  .alsoName {
-    composes: underlined from '@knurled/kit/patterns.css';
-    font-size: var(--text-lg);
-    line-height: var(--leading-tight);
-  }
-
-  .alsoCount {
-    composes: monoLabel from '@knurled/kit/patterns.css';
-    composes: tabular from '@knurled/kit/patterns.css';
-  }
-
-  .alsoNote {
-    font-size: var(--text-sm);
+    max-width: var(--measure-wide);
+    padding-block: var(--space-5);
+    font-size: var(--text-base);
     line-height: var(--leading-snug);
-    color: var(--text-muted);
+  }
+
+  .principle:first-child {
+    border-top: 0;
+  }
+
+  .principleIndex {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    line-height: 1;
+    color: var(--text-accent);
+  }
+
+  /* ---- elsewhere --------------------------------------------------- */
+
+  .elsewhere {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+    gap: var(--space-5);
+    list-style: none;
+    padding: 0;
+  }
+
+  .host {
+    composes: monoValue from '@knurled/kit/patterns.css';
+    composes: underlined from '@knurled/kit/patterns.css';
+
+    color: var(--text-external);
+  }
+
+  /* ---- narrow ------------------------------------------------------ */
+
+  @media (width <= 72rem) {
+    .hero,
+    .operator {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .heroTitle {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  @media (width <= 40rem) {
+    .heroTitle {
+      font-size: calc(var(--text-d1) * 3);
+    }
+
+    .principle {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+  }
+
+  /* The global block shortens durations but leaves delays, and a staggered
+     letter with fill-mode both sits invisible through its delay. */
+  @media (prefers-reduced-motion: reduce) {
+    .page [data-reveal] {
+      transition-delay: 0s;
+    }
+
+    .letter {
+      animation: none;
+    }
   }
 }

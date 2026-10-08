@@ -1,0 +1,111 @@
+@layer components {
+  /* The wrapper reserves the plate's offset, so a window never overlaps the
+     thing below or beside it — the grid gap stays the gap. */
+  .window {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    margin: 0 var(--lift) var(--lift) 0;
+  }
+
+  .plate {
+    composes: chamferShell from '../patterns.css';
+
+    position: absolute;
+    inset: 0;
+    translate: var(--lift) var(--lift);
+    background: var(--edge-strong);
+  }
+
+  .shell {
+    composes: chamferShell from '../patterns.css';
+
+    position: relative;
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    background: var(--edge-strong);
+    transition: translate var(--dur-detent) var(--ease-detent);
+  }
+
+  .face {
+    composes: chamferFace from '../patterns.css';
+
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: none;
+  }
+
+  .interactiveFace {
+    composes: focusInset from '../patterns.css';
+  }
+
+  /* Ink, with paper knocked out of it. The chamfer cuts its top-left corner,
+     which is the point: the bar is part of the plate, not a strip laid on. */
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-5);
+    background: var(--edge-strong);
+    color: var(--paper);
+    transition: background-color var(--dur-detent) var(--ease-out);
+  }
+
+  .closeBox {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border: var(--edge-weight) solid var(--paper);
+  }
+
+  .title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .meta {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--track-chip);
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+  }
+
+  /* Hover lifts the window further off its plate; the plate stays put, so
+     more ink shows. Press seats it, plate and window flush. */
+  .interactive:hover .shell,
+  .interactive:has(:focus-visible) .shell {
+    translate: calc(var(--lift) - var(--lift-hover)) calc(var(--lift) - var(--lift-hover));
+  }
+
+  .interactive:active .shell {
+    translate: var(--lift) var(--lift);
+  }
+
+  .interactive:hover .bar,
+  .interactive:has(:focus-visible) .bar {
+    background: var(--surface-accent);
+  }
+}

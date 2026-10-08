@@ -1,6 +1,6 @@
 @layer components {
   /* Full width, no gutter of its own. The gutter belongs to the bands
-     below, so the knurl strips reach both edges of the viewport. */
+     below, so the footer rule reaches both edges of the viewport. */
   .shell {
     display: flex;
     flex-direction: column;
@@ -78,6 +78,24 @@
     color: var(--text-on-accent);
   }
 
+  /* Three section names do not fit beside the lockup on a phone. Drop the
+     nav under it as its own row instead of letting it fold into a column. */
+  @media (width <= 40rem) {
+    .header {
+      flex-wrap: wrap;
+      row-gap: var(--space-3);
+    }
+
+    .nav {
+      gap: var(--space-1);
+      margin-left: calc(var(--space-2) * -1);
+    }
+  }
+
+  .wordmark {
+    white-space: nowrap;
+  }
+
   .main {
     composes: gutter from '@knurled/kit/patterns.css';
 
@@ -116,7 +134,7 @@
   }
 
   /* The label alone. No band, no rule — the page carries no horizontal lines
-     across it, and the knurl appears once, on the footer plate. */
+     across it, and the knurl lives in the mark only. */
   .sectionRuleLabel {
     composes: monoLabel from '@knurled/kit/patterns.css';
 

@@ -80,6 +80,16 @@
     text-wrap: balance;
   }
 
+  /* The display face takes the two top levels. It has one weight, and a
+     synthesised bold smears the pixels, so these step back down to 400; its
+     grid already spaces the letters, so the display tracking comes off. */
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-synthesis: none;
+    letter-spacing: 0;
+  }
+
   h1 { font-size: var(--text-3xl); }
   h2 { font-size: var(--text-2xl); }
   h3 { font-size: var(--text-xl); }

@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 
 import { Index } from './routes/Index/Index.tsx';
 import { Pending, Shell } from './shell/Shell.tsx';
@@ -12,7 +12,6 @@ import { Pending, Shell } from './shell/Shell.tsx';
  * dependency here, and one that only a post page needs — out of the initial
  * download entirely.
  */
-const About = lazy(() => import('./routes/About/About.tsx').then((m) => ({ default: m.About })));
 const Links = lazy(() => import('./routes/Links/Links.tsx').then((m) => ({ default: m.Links })));
 const NotFound = lazy(() =>
   import('./routes/NotFound/NotFound.tsx').then((m) => ({ default: m.NotFound })),
@@ -34,7 +33,8 @@ export function App() {
             <Route path="/writing" element={<Writing />} />
             <Route path="/writing/:slug" element={<Post />} />
             <Route path="/links" element={<Links />} />
-            <Route path="/about" element={<About />} />
+            {/* About is a section of the index now. The old URL still lands. */}
+            <Route path="/about" element={<Navigate to="/#operator" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

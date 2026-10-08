@@ -122,11 +122,18 @@ import '@knurled/kit/fonts.css';
 - `global.css` — layer declaration, reset, base elements, type scale, focus,
   reduced motion.
 - `tokens.css` — custom properties only.
-- `fonts.css` — self-hosted Inconsolata, latin subset, weights 400/700. It is
-  the only family: `--font-mono` names it and `--font-sans` is an alias of
-  `--font-mono`. The scale used to name Geist and Geist Mono, neither of which
-  was ever loaded, so the site rendered in the OS default sans while these
-  files downloaded and painted nothing. One family cannot drift that way.
+- `fonts.css` — two self-hosted families, nothing from a CDN.
+  - **Inconsolata** (latin subset, 400/700) is the voice: body, labels, data.
+    `--font-mono` names it and `--font-sans` is an alias of it. The scale used
+    to name Geist and Geist Mono, neither of which was ever loaded, so the
+    site rendered in the OS default sans. Every family named must be loaded.
+  - **Departure Mono** (`--font-display`) is the display face: h1, h2, window
+    titles, the instruments. Nothing longer than a line. It is not on npm, so
+    the woff2 and its OFL licence are vendored in `packages/kit/src/fonts/`
+    from the v1.500 release. It is drawn on an 11px grid, so display sizes
+    are multiples of 11 (`--text-d1` 22, `--text-2xl` 44, `--text-3xl` 88,
+    `--text-4xl` 132). Regular weight only; headings in it are set at 400
+    with `font-synthesis: none`, because a faked bold smears the pixels.
 - `patterns.css` — reusable fragments, reached **only** via `composes`. Never
   imported globally, never written into JSX.
 
@@ -181,11 +188,11 @@ Direction, not lintable but not optional either:
   while text stays on one left margin. Blocks that read badly when stretched
   take a measure: `--measure` (68ch) for prose, `--measure-wide` (96ch) for a
   slab of tabular data.
-- **The banner appears once, on the footer plate.** Open triangles
-  alternating point-up and point-down, spaced apart rather than sharing
-  edges. It is a signature, not punctuation: repeating it at every section
-  turned it into a line across the page every few hundred pixels and it
-  stopped meaning anything. Section headings are a label and nothing else —
+- **The grain lives in the mark only.** The triangle banner (`<Knurl>`) is
+  still exported from the kit but no longer placed anywhere: it sat on the
+  footer plate, read as decoration, and came off. The footer is separated by a
+  plain `--hairline-strong` rule. Repeating the grain at every section had
+  already turned it into a line across the page every few hundred pixels. Section headings are a label and nothing else —
   no band, no rule, no horizontal lines across.
 - **Accent is a surface too, sparingly.** `--surface-accent` is the same
   full-strength purple as `--text-accent`, because it clears 7:1 both as text
@@ -193,30 +200,42 @@ Direction, not lintable but not optional either:
   stamped blocks — the current nav item, an ACTIVE chip — not for bands.
   `--surface-tint` is the soft fill used for hover, chosen so that everything
   inside a panel stays legible without restyling itself.
-- **Headings are stamped.** Uppercase, 700, `--leading-display`, and large.
-  `--text-3xl` is the page h1 and it is meant to be the first thing in the room.
+- **Headings are stamped.** Uppercase, `--leading-display`, and large. h1 and
+  h2 are in the display face at 400; h3 and h4 stay Inconsolata 700.
+  `--text-3xl` is the page h1 and `--text-4xl` is the hero, used once.
+- **Windows sit off the page.** `<Window>` is a chamfered panel with an ink
+  title bar, on a solid ink plate offset by `--lift`. The plate is a layer, not
+  a shadow, so it passes the no-faked-light rule. Interactive windows lift to
+  `--lift-hover` on hover and focus and seat on the plate when pressed. `Panel`
+  remains for flat surfaces on the inner pages.
+- **Motion is mechanical and happens once.** Scroll reveals slide in from the
+  left, staggered by `--dur-fast`, the first time something enters view. The
+  boot screen shows once per session, only on a cold landing on `/`. The lathe
+  stops drawing off screen. With reduced motion turned on there is no boot,
+  no stamp, no reveal, and the lathe draws one still frame.
 
 ---
 
 ## Routes
 
-`apps/studio` serves three static routes, two generated ones, and a
-catch-all. `/` and `/tools/:slug` are
+`apps/studio` is one page plus the routes it links to: three static routes,
+two generated ones, a redirect, and a catch-all. `/` and `/tools/:slug` are
 generated from the catalog — **adding a part is one edit to `catalog.json` and
 nothing else.** Verified: a fake KS-003 appeared on the index and got a working
 spec page with no other file touched.
 
 | Route | Source |
 |---|---|
-| `/` | `catalog`, descending by part number — newest first. Shelved entries stay listed, struck through and muted. |
+| `/` | The one page. Hero with the lathe, then numbered sections: **Parts** (`catalog`, newest first; shelved entries stay listed, struck through), **Operator** (bio, rig, principles), **On file** (Writing, Links), **Elsewhere**. |
 | `/tools/:slug` | `bySlug`. Unknown slug renders the 404 view. |
 | `/writing` · `/writing/:slug` | `src/writing/*.md`, newest first. Reached from the index. |
 | `/links` | `src/links/links.ts`, grouped by first category. Reached from the index. |
-| `/about` | Hand-written. Absorbs what was at `me.knurled.studio`. |
+| `/about` | Redirects to `/#operator`. The client route is a `<Navigate>`; the build writes a static meta-refresh page with a canonical pointing at `/`, kept out of the sitemap. |
 
-The nav carries **Index** and **About** only. Writing and Links sit in an "Also
-on file" section under the catalog — they are not parts, so they are not in the
-index grid, and they are not the studio's own pages, so they are not tabs.
+The nav is three jumps into the index: **Parts**, **Operator**, **Elsewhere**,
+written as `/#id` so they work from any page. The current section is tracked
+as you scroll and gets the stamped block. Writing and Links sit in the "On
+file" section — they are not parts, so they are not in the parts grid.
 Their counts come from the data: the post count reads a **non-eager**
 `import.meta.glob`, which resolves to a map of paths and never loads a post.
 
@@ -245,8 +264,8 @@ It sits in the header lockup beside the wordmark and at the head of the footer
 identity row. Decorative in both, since the wordmark carries the name. The mark
 sets its own pitch and line width, so it does not move when the strip tokens do.
 
-There is one banner, on the footer plate. The mark is the only other place
-the grain appears, and it carries a single row of solid teeth so no seam
+The banner is not placed on any page. The mark is the only place the grain
+appears, and it carries a single row of solid teeth so no seam
 crosses the glyph.
 
 The banner is an SVG `<pattern>` in `Knurl.tsx`, not a gradient, and its

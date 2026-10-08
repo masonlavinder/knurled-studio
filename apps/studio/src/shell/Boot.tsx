@@ -58,14 +58,15 @@ function shouldBoot(): boolean {
 }
 
 /**
- * --dur-boot, read from the token so CSS and the counter cannot disagree.
- * Unit-aware: the minifier rewrites 1100ms as 1.1s in the built CSS.
+ * A duration token in ms, read from CSS so the stylesheet and the counter
+ * cannot disagree. Unit-aware: the minifier rewrites 2600ms as 2.6s in the
+ * built CSS, and a bare parseFloat would read that as 2.6ms.
  */
-function bootDuration(): number {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue('--dur-boot').trim();
+function durationToken(name: string, fallback: number): number {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   const value = Number.parseFloat(raw);
   const ms = raw.endsWith('ms') ? value : value * 1000;
-  return Number.isFinite(ms) && ms > 0 ? ms : 1100;
+  return Number.isFinite(ms) && ms > 0 ? ms : fallback;
 }
 
 type Phase = 'run' | 'exit' | 'done';
@@ -92,7 +93,9 @@ export function Boot() {
     const root = document.documentElement;
     root.dataset.booting = '';
 
-    const duration = bootDuration();
+    const duration = durationToken('--dur-boot', 2600);
+    const hold = durationToken('--dur-boot-hold', 500);
+    let holdTimer = 0;
     const start = performance.now();
     let frame = requestAnimationFrame(function step(now) {
       // A frame's timestamp is when the frame began, which can be a little
@@ -103,7 +106,9 @@ export function Boot() {
       if (next < 100) {
         frame = requestAnimationFrame(step);
       } else {
-        setPhase('exit');
+        holdTimer = window.setTimeout(() => {
+          setPhase('exit');
+        }, hold);
       }
     });
 
@@ -117,6 +122,7 @@ export function Boot() {
 
     return () => {
       cancelAnimationFrame(frame);
+      window.clearTimeout(holdTimer);
       window.removeEventListener('keydown', skip);
       window.removeEventListener('pointerdown', skip);
     };
@@ -165,6 +171,13 @@ export function Boot() {
           </span>
           <span className={styles.percent}>{String(percent).padStart(3, ' ')}%</span>
         </p>
+
+        {/* Shown during the hold at 100%, which is --dur-boot-hold: 500ms.
+            If that token changes, change the number here — it is a joke,
+            but it is not allowed to be a lie. */}
+        {percent === 100 ? (
+          <p className={styles.aside}>{'// added a sleep(500) so this gimmick would land'}</p>
+        ) : null}
 
         <p className={styles.hint}>
           PRESS ANY KEY<span className={styles.cursor}>▪</span>

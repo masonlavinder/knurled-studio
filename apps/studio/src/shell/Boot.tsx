@@ -59,7 +59,7 @@ function shouldBoot(): boolean {
 
 /**
  * A duration token in ms, read from CSS so the stylesheet and the counter
- * cannot disagree. Unit-aware: the minifier rewrites 2600ms as 2.6s in the
+ * cannot disagree. Unit-aware: the minifier rewrites 2000ms as 2s in the
  * built CSS, and a bare parseFloat would read that as 2.6ms.
  */
 function durationToken(name: string, fallback: number): number {
@@ -93,8 +93,8 @@ export function Boot() {
     const root = document.documentElement;
     root.dataset.booting = '';
 
-    const duration = durationToken('--dur-boot', 2600);
-    const hold = durationToken('--dur-boot-hold', 1500);
+    const duration = durationToken('--dur-boot', 2000);
+    const hold = durationToken('--dur-boot-hold', 3000);
     let holdTimer = 0;
     const start = performance.now();
     let frame = requestAnimationFrame(function step(now) {
@@ -172,11 +172,11 @@ export function Boot() {
           <span className={styles.percent}>{String(percent).padStart(3, ' ')}%</span>
         </p>
 
-        {/* Shown during the hold at 100%, which is --dur-boot-hold: 1500ms.
+        {/* Shown during the hold at 100%, which is --dur-boot-hold: 3000ms.
             If that token changes, change the number here — it is a joke,
             but it is not allowed to be a lie. */}
         {percent === 100 ? (
-          <p className={styles.aside}>{'// added a sleep(1500) so this gimmick would land'}</p>
+          <p className={styles.aside}>{'// added a sleep(3000) so this gimmick would land'}</p>
         ) : null}
 
         <p className={styles.hint}>

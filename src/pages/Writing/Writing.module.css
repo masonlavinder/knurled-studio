@@ -8,18 +8,18 @@
      running 1400px over 500px of text reads as a stray edge rather than a
      separator. The overhang past the 68ch excerpt is deliberate. */
   .item {
-    composes: slab from '../../kit/patterns.css';
+    composes: slab from '../../styles/patterns.css';
 
     padding-block: var(--space-5);
   }
 
   .ruled {
-    composes: hairline from '../../kit/patterns.css';
+    composes: hairline from '../../styles/patterns.css';
   }
 
   .link {
-    composes: stack from '../../kit/patterns.css';
-    composes: fade from '../../kit/patterns.css';
+    composes: stack from '../../styles/patterns.css';
+    composes: fade from '../../styles/patterns.css';
 
     gap: var(--space-2);
     text-decoration: none;
@@ -27,14 +27,14 @@
   }
 
   .meta {
-    composes: row from '../../kit/patterns.css';
-    composes: monoLabel from '../../kit/patterns.css';
+    composes: row from '../../styles/patterns.css';
+    composes: monoLabel from '../../styles/patterns.css';
 
     flex-wrap: wrap;
   }
 
   .date {
-    composes: tabular from '../../kit/patterns.css';
+    composes: tabular from '../../styles/patterns.css';
   }
 
   .tag {
@@ -42,7 +42,7 @@
   }
 
   .title {
-    composes: underlined from '../../kit/patterns.css';
+    composes: underlined from '../../styles/patterns.css';
     font-size: var(--text-lg);
     line-height: var(--leading-tight);
   }
@@ -52,7 +52,7 @@
   }
 
   .excerpt {
-    composes: prose from '../../kit/patterns.css';
+    composes: prose from '../../styles/patterns.css';
 
     font-size: var(--text-sm);
     line-height: var(--leading-snug);

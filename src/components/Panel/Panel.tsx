@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import styles from './Panel.module.css';
 
 export type PanelTone = 'default' | 'accent' | 'warn';

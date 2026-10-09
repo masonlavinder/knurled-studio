@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import { INKS } from './inks.ts';
 import styles from './ColorBar.module.css';
 

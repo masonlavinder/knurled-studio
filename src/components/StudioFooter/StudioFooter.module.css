@@ -10,7 +10,7 @@
   /* The bar carries its own gutter — the shell has none, so the rule above
      it can run edge to edge. */
   .bar {
-    composes: gutter from '../patterns.css';
+    composes: gutter from '../../styles/patterns.css';
 
     display: flex;
     flex-wrap: wrap;
@@ -21,16 +21,16 @@
   }
 
   .identity {
-    composes: row from '../patterns.css';
+    composes: row from '../../styles/patterns.css';
   }
 
   .name {
-    composes: monoValue from '../patterns.css';
+    composes: monoValue from '../../styles/patterns.css';
   }
 
   .home {
-    composes: monoValue from '../patterns.css';
-    composes: fade from '../patterns.css';
+    composes: monoValue from '../../styles/patterns.css';
+    composes: fade from '../../styles/patterns.css';
 
     color: var(--text-muted);
   }

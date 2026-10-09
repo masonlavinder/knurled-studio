@@ -1,5 +1,5 @@
 import { catalog } from "../catalog/index.ts";
-import { cx } from "../kit/index.ts";
+import { cx } from "../utils/cx.ts";
 import { useEffect, useState } from "react";
 
 import { LINK_COUNT, POST_COUNT } from "../utils/counts.ts";

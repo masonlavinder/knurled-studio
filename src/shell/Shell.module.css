@@ -8,7 +8,7 @@
   }
 
   .skip {
-    composes: monoLabel from '../kit/patterns.css';
+    composes: monoLabel from '../styles/patterns.css';
 
     position: absolute;
     left: -9999px;
@@ -23,23 +23,23 @@
   }
 
   .header {
-    composes: spread from '../kit/patterns.css';
-    composes: gutter from '../kit/patterns.css';
+    composes: spread from '../styles/patterns.css';
+    composes: gutter from '../styles/patterns.css';
 
     align-items: center;
     padding-block: var(--space-6) var(--space-4);
   }
 
   .lockup {
-    composes: row from '../kit/patterns.css';
-    composes: fade from '../kit/patterns.css';
+    composes: row from '../styles/patterns.css';
+    composes: fade from '../styles/patterns.css';
 
     gap: var(--space-3);
     text-decoration: none;
   }
 
   .wordmark {
-    composes: monoValue from '../kit/patterns.css';
+    composes: monoValue from '../styles/patterns.css';
 
     letter-spacing: var(--track-label);
     text-transform: uppercase;
@@ -51,16 +51,16 @@
   }
 
   .nav {
-    composes: row from '../kit/patterns.css';
+    composes: row from '../styles/patterns.css';
 
     flex-wrap: wrap;
     gap: var(--space-4);
   }
 
   .navLink {
-    composes: monoLabel from '../kit/patterns.css';
-    composes: fade from '../kit/patterns.css';
-    composes: underlined from '../kit/patterns.css';
+    composes: monoLabel from '../styles/patterns.css';
+    composes: fade from '../styles/patterns.css';
+    composes: underlined from '../styles/patterns.css';
 
     padding: var(--space-1) var(--space-2);
     font-size: var(--text-sm);
@@ -97,7 +97,7 @@
   }
 
   .main {
-    composes: gutter from '../kit/patterns.css';
+    composes: gutter from '../styles/patterns.css';
 
     flex: 1;
     padding-block: var(--space-10);
@@ -110,7 +110,7 @@
   /* Chunk-loading placeholder. Reserves height so the footer does not jump,
      and says what it is rather than spinning. */
   .pending {
-    composes: monoLabel from '../kit/patterns.css';
+    composes: monoLabel from '../styles/patterns.css';
 
     min-height: 60svh;
   }
@@ -120,14 +120,14 @@
   }
 
   .eyebrow {
-    composes: monoLabel from '../kit/patterns.css';
+    composes: monoLabel from '../styles/patterns.css';
 
     padding-bottom: var(--space-2);
   }
 
   .lede {
-    composes: prose from '../kit/patterns.css';
-    composes: dim from '../kit/patterns.css';
+    composes: prose from '../styles/patterns.css';
+    composes: dim from '../styles/patterns.css';
 
     padding-top: var(--space-3);
     font-size: var(--text-sm);
@@ -136,7 +136,7 @@
   /* The label alone. No band, no rule — the page carries no horizontal lines
      across it, and the knurl lives in the mark only. */
   .sectionRuleLabel {
-    composes: monoLabel from '../kit/patterns.css';
+    composes: monoLabel from '../styles/patterns.css';
 
     display: block;
     margin-bottom: var(--space-5);

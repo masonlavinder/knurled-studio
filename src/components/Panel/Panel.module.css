@@ -1,12 +1,12 @@
 @layer components {
   .shell {
-    composes: chamferShell from '../patterns.css';
+    composes: chamferShell from '../../styles/patterns.css';
 
     display: flex;
   }
 
   .face {
-    composes: chamferFace from '../patterns.css';
+    composes: chamferFace from '../../styles/patterns.css';
 
     flex: 1;
     min-width: 0;
@@ -17,8 +17,8 @@
      would clip an outline away entirely. */
   .interactiveFace {
     composes: face;
-    composes: focusInset from '../patterns.css';
-    composes: fade from '../patterns.css';
+    composes: focusInset from '../../styles/patterns.css';
+    composes: fade from '../../styles/patterns.css';
 
     display: block;
     width: 100%;

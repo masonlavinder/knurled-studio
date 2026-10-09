@@ -1,6 +1,6 @@
 import type { Status } from '../../catalog/index.ts';
 
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import styles from './StatusChip.module.css';
 
 const STATUS_CLASS: Record<Status, string | undefined> = {

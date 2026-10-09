@@ -4,7 +4,7 @@ import { ColorBar } from '../ColorBar/ColorBar.tsx';
 import { Mark } from '../Mark/Mark.tsx';
 import { PartNumber } from '../PartNumber/PartNumber.tsx';
 import { StatusChip } from '../StatusChip/StatusChip.tsx';
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import styles from './StudioFooter.module.css';
 
 /** The studio itself is KS-000, so its url is where every app points home. */

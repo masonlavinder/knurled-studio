@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import styles from './SpecTable.module.css';
 
 export interface SpecRow {

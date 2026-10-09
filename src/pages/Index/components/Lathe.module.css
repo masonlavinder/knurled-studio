@@ -13,7 +13,7 @@
   }
 
   .readout {
-    composes: hairline from '../../../kit/patterns.css';
+    composes: hairline from '../../../styles/patterns.css';
 
     padding-top: var(--space-3);
     font-family: var(--font-display);

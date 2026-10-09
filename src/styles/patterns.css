@@ -1,4 +1,4 @@
-/* kit — patterns.css
+/* patterns.css
    Composable fragments. Reached only via `composes:` from a CSS Module.
    Never reference these class names directly in JSX. */
 

@@ -1,6 +1,6 @@
 @layer components {
   .partNumber {
-    composes: partNumber from '../patterns.css';
+    composes: partNumber from '../../styles/patterns.css';
 
     display: inline-block;
     white-space: nowrap;

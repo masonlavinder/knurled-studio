@@ -1,4 +1,4 @@
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import styles from './PartNumber.module.css';
 
 export interface PartNumberProps {

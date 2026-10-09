@@ -1,20 +1,6 @@
-/**
- * kit — tokens and primitives.
- *
- * The three global stylesheets are separate entry points, imported once, from
- * main.tsx, in this order:
- *
- *   import './kit/global.css';   // must be first — declares the layers
- *   import './kit/tokens.css';
- *   import './kit/fonts.css';
- *
- * patterns.css is deliberately absent from that list. It is reached only
- * through `composes:` in a CSS Module, never referenced from JSX.
- */
-
+/** Studio primitives. Global stylesheets and patterns.css live in src/styles/. */
 export { ColorBar, type ColorBarProps } from './ColorBar/ColorBar.tsx';
 export { INKS, type Ink } from './ColorBar/inks.ts';
-export { cx } from './cx.ts';
 export { Knurl, type KnurlProps } from './Knurl/Knurl.tsx';
 export { Mark, type MarkProps } from './Mark/Mark.tsx';
 export { Panel, type PanelProps, type PanelTone } from './Panel/Panel.tsx';

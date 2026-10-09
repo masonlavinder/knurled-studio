@@ -1,4 +1,4 @@
-import { cx } from '../../kit/index.ts';
+import { cx } from '../../utils/cx.ts';
 import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
 import remarkGfm from 'remark-gfm';

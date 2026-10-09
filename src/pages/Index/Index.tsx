@@ -1,5 +1,6 @@
 import { catalog } from "../../catalog/index.ts";
-import { cx, SpecTable, StatusChip, Window } from "../../kit/index.ts";
+import { cx } from "../../utils/cx.ts";
+import { SpecTable, StatusChip, Window } from "../../components/index.ts";
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "react-router";
 

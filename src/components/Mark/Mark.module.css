@@ -3,7 +3,7 @@
      the knurl cut into it. Same two-layer construction as Panel, because
      clip-path clips a border the same way here. */
   .shell {
-    composes: chamferShell from '../patterns.css';
+    composes: chamferShell from '../../styles/patterns.css';
 
     display: flex;
     flex: none;
@@ -18,8 +18,8 @@
   }
 
   .face {
-    composes: chamferFace from '../patterns.css';
-    composes: teeth from '../patterns.css';
+    composes: chamferFace from '../../styles/patterns.css';
+    composes: teeth from '../../styles/patterns.css';
 
     flex: 1;
     background-color: var(--surface-page);

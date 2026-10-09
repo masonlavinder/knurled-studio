@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 
-import { cx } from '../cx.ts';
+import { cx } from '../../utils/cx.ts';
 import styles from './Mark.module.css';
 
 export interface MarkProps {
@@ -13,7 +13,7 @@ export interface MarkProps {
  * The studio mark: a chamfered square, knurled.
  *
  * Both signature elements in one glyph, built from the same patterns the rest
- * of the kit uses rather than drawn separately — so it cannot drift from the
+ * of the components use rather than drawn separately — so it cannot drift from the
  * components it sits next to. Decorative wherever a wordmark accompanies it.
  */
 export function Mark({ size = 20, className }: MarkProps) {

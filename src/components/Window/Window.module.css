@@ -9,7 +9,7 @@
   }
 
   .plate {
-    composes: chamferShell from '../patterns.css';
+    composes: chamferShell from '../../styles/patterns.css';
 
     position: absolute;
     inset: 0;
@@ -18,7 +18,7 @@
   }
 
   .shell {
-    composes: chamferShell from '../patterns.css';
+    composes: chamferShell from '../../styles/patterns.css';
 
     position: relative;
     display: flex;
@@ -29,7 +29,7 @@
   }
 
   .face {
-    composes: chamferFace from '../patterns.css';
+    composes: chamferFace from '../../styles/patterns.css';
 
     display: flex;
     flex: 1;
@@ -41,7 +41,7 @@
   }
 
   .interactiveFace {
-    composes: focusInset from '../patterns.css';
+    composes: focusInset from '../../styles/patterns.css';
   }
 
   /* Ink, with paper knocked out of it. The chamfer cuts its top-left corner,

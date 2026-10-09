@@ -10,7 +10,8 @@ Repo conventions for Knurled Studio. Read before adding anything.
 knurled/
 ├── src/
 │   ├── catalog/           catalog.json + types + lookup helpers
-│   ├── kit/               tokens + primitives
+│   ├── components/        primitives (ColorBar, Panel, Window, …)
+│   ├── styles/            global, tokens, fonts, patterns
 │   ├── pages/ shell/      the site
 │   └── hooks/ utils/ writing/
 ├── public/                copied verbatim into dist/
@@ -99,9 +100,9 @@ CSS-in-JS, no utility classes in JSX.
 Three global files, imported once from `src/main.tsx`, **in this order**:
 
 ```ts
-import './kit/global.css';   // first — declares the cascade order
-import './kit/tokens.css';
-import './kit/fonts.css';
+import './styles/global.css';   // first — declares the cascade order
+import './styles/tokens.css';
+import './styles/fonts.css';
 ```
 
 - `global.css` — layer declaration, reset, base elements, type scale, focus,
@@ -114,7 +115,7 @@ import './kit/fonts.css';
     site rendered in the OS default sans. Every family named must be loaded.
   - **Departure Mono** (`--font-display`) is the display face: h1, h2, window
     titles, the instruments. Nothing longer than a line. It is not on npm, so
-    the woff2 and its OFL licence are vendored in `src/kit/fonts/`
+    the woff2 and its OFL licence are vendored in `src/styles/fonts/`
     from the v1.500 release. It is drawn on an 11px grid, so display sizes
     are multiples of 11 (`--text-d1` 22, `--text-2xl` 44, `--text-3xl` 88,
     `--text-4xl` 132). Regular weight only; headings in it are set at 400
@@ -137,7 +138,7 @@ the failure mode the layer discipline exists to prevent, and it is invisible
 until two rules collide.
 
 CSS Module lookups are typed `string | undefined`, so join class names with
-`cx` from the kit rather than template literals, which would emit the string
+`cx` from `src/utils/cx.ts` rather than template literals, which would emit the string
 "undefined" into a class attribute.
 
 Hard rules, enforced by `stylelint.config.js` as errors:
@@ -174,7 +175,7 @@ Direction, not lintable but not optional either:
   take a measure: `--measure` (68ch) for prose, `--measure-wide` (96ch) for a
   slab of tabular data.
 - **The grain lives in the mark only.** The triangle banner (`<Knurl>`) is
-  still exported from the kit but no longer placed anywhere: it sat on the
+  still exported from `src/components` but no longer placed anywhere: it sat on the
   footer plate, read as decoration, and came off. The footer is separated by a
   plain `--hairline-strong` rule. Repeating the grain at every section had
   already turned it into a line across the page every few hundred pixels. Section headings are a label and nothing else —
@@ -278,7 +279,7 @@ icon cannot read the token layer — the two hex values there are `--paper`
 and `--lavinder-600`, and they have to be kept in step by hand. So do the
 `color-scheme` and `theme-color` meta tags in `index.html`, the
 palette inlined in `scripts/og-card.html`, and the `INKS` array in
-`src/kit/ColorBar/inks.ts` — the footer press strip renders one patch
+`src/components/ColorBar/inks.ts` — the footer press strip renders one patch
 per entry, so a token added or retired without touching that array shows up as
 a blank swatch.
 

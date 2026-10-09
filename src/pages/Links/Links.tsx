@@ -1,4 +1,5 @@
-import { cx, Panel } from "../../kit/index.ts";
+import { cx } from "../../utils/cx.ts";
+import { Panel } from "../../components/index.ts";
 
 import { linkGroups, links } from "./links.ts";
 import { PageHead, SectionRule } from "../../shell/Shell.tsx";

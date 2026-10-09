@@ -1,5 +1,6 @@
 import { bySlug } from '../../catalog/index.ts';
-import { cx, Panel, PartNumber, SpecTable, StatusChip } from '../../kit/index.ts';
+import { cx } from '../../utils/cx.ts';
+import { Panel, PartNumber, SpecTable, StatusChip } from '../../components/index.ts';
 import { Link, useParams } from 'react-router';
 
 import { PageHead } from '../../shell/Shell.tsx';

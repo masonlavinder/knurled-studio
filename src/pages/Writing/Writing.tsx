@@ -1,4 +1,4 @@
-import { cx } from '../../kit/index.ts';
+import { cx } from '../../utils/cx.ts';
 import { Link } from 'react-router';
 
 import { posts } from '../../writing/posts.ts';

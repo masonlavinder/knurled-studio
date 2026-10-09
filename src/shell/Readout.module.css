@@ -2,7 +2,7 @@
   /* Full bleed, ink, paper knocked out. The one dark band on the page, and
      it is the instrument rather than the content. */
   .readout {
-    composes: gutter from '../kit/patterns.css';
+    composes: gutter from '../styles/patterns.css';
 
     display: flex;
     flex-wrap: wrap;

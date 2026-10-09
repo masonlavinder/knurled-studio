@@ -1,4 +1,5 @@
-import { cx, Mark, StudioFooter } from "../kit/index.ts";
+import { cx } from "../utils/cx.ts";
+import { Mark, StudioFooter } from "../components/index.ts";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 

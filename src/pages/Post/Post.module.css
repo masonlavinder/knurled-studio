@@ -1,7 +1,7 @@
 @layer components {
   .back {
-    composes: monoLabel from '../../kit/patterns.css';
-    composes: fade from '../../kit/patterns.css';
+    composes: monoLabel from '../../styles/patterns.css';
+    composes: fade from '../../styles/patterns.css';
 
     display: inline-block;
     padding-bottom: var(--space-6);
@@ -12,15 +12,15 @@
   }
 
   .byline {
-    composes: row from '../../kit/patterns.css';
-    composes: monoLabel from '../../kit/patterns.css';
+    composes: row from '../../styles/patterns.css';
+    composes: monoLabel from '../../styles/patterns.css';
 
     flex-wrap: wrap;
     padding-bottom: var(--space-3);
   }
 
   .date {
-    composes: tabular from '../../kit/patterns.css';
+    composes: tabular from '../../styles/patterns.css';
   }
 
   .tag {
@@ -31,7 +31,7 @@
      place descendant selectors are the right tool — there are no class names
      to attach to. */
   .markdown {
-    composes: prose from '../../kit/patterns.css';
+    composes: prose from '../../styles/patterns.css';
 
     padding-top: var(--space-4);
   }

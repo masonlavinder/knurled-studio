@@ -5,14 +5,14 @@
   }
 
   .caption {
-    composes: monoLabel from '../patterns.css';
+    composes: monoLabel from '../../styles/patterns.css';
 
     padding-bottom: var(--space-2);
     text-align: left;
   }
 
   .label {
-    composes: monoLabel from '../patterns.css';
+    composes: monoLabel from '../../styles/patterns.css';
 
     padding: var(--space-2) var(--space-4) var(--space-2) 0;
     text-align: left;
@@ -21,7 +21,7 @@
   }
 
   .value {
-    composes: monoValue from '../patterns.css';
+    composes: monoValue from '../../styles/patterns.css';
 
     padding: var(--space-2) 0;
     text-align: right;
@@ -30,6 +30,6 @@
 
   /* Rules go between rows, so the first row does not carry one. */
   .ruled {
-    composes: hairline from '../patterns.css';
+    composes: hairline from '../../styles/patterns.css';
   }
 }

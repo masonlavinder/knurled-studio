@@ -1,6 +1,6 @@
 @layer components {
   .boot {
-    composes: gutter from '../kit/patterns.css';
+    composes: gutter from '../styles/patterns.css';
 
     position: fixed;
     inset: 0;

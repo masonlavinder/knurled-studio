@@ -1,21 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-import { prefersReducedMotion } from '../../lib/motion.ts';
-import styles from './Lathe.module.css';
+import styles from "./Lathe.module.css";
 
 /** One pass, start of cut to end of cut, in ms. */
-const CUT_MS = 6400;
-/** Time the finished part sits in the chuck, tool backed off, before new stock. */
-const HOLD_MS = 2200;
-
-/** Diamond pitch and the gap between teeth, in CSS px. */
-const PITCH = 12;
-const GROOVE = 2;
-/** Spindle speed, as the knurl travels past: px of rotation per ms. */
-const SURFACE_SPEED = 0.05;
-
-const CHIP_GRAVITY = 0.0012;
-const CHIP_MAX = 60;
+import {
+  CUT_MS,
+  HOLD_MS,
+  PITCH,
+  GROOVE,
+  SURFACE_SPEED,
+  CHIP_GRAVITY,
+  CHIP_MAX,
+} from "../constants";
 
 interface Chip {
   x: number;
@@ -43,18 +39,18 @@ function readPalette(): Palette {
   const css = getComputedStyle(document.documentElement);
   const token = (name: string) => css.getPropertyValue(name).trim();
   return {
-    paper: token('--paper'),
-    stock: token('--stock-100'),
-    ink: token('--stock-950'),
-    muted: token('--stock-400'),
-    accent: token('--lavinder-600'),
-    accentSoft: token('--lavinder-400'),
-    display: token('--font-display'),
+    paper: token("--paper"),
+    stock: token("--stock-100"),
+    ink: token("--stock-950"),
+    muted: token("--stock-400"),
+    accent: token("--lavinder-600"),
+    accentSoft: token("--lavinder-400"),
+    display: token("--font-display"),
   };
 }
 
 function pad(value: number, width: number): string {
-  return String(value).padStart(width, '0');
+  return String(value).padStart(width, "0");
 }
 
 /**
@@ -72,13 +68,12 @@ export function Lathe() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
+    const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) {
       return;
     }
 
     const palette = readPalette();
-    const still = prefersReducedMotion();
 
     let width = 0;
     let height = 0;
@@ -112,7 +107,16 @@ export function Lathe() {
       const tailW = Math.max(40, width * 0.08);
       const barX0 = chuckW;
       const barX1 = width - tailW;
-      return { cy, r, chuckW, tailW, barX0, barX1, cutX0: barX0 + 18, cutX1: barX1 - 24 };
+      return {
+        cy,
+        r,
+        chuckW,
+        tailW,
+        barX0,
+        barX1,
+        cutX0: barX0 + 18,
+        cutX1: barX1 - 24,
+      };
     }
 
     /** A rectangle with its top-left and bottom-right corners cut at 45°. */
@@ -252,9 +256,9 @@ export function Lathe() {
         ctx.fill();
       }
       ctx.font = `11px ${p.display}`;
-      ctx.textBaseline = 'top';
+      ctx.textBaseline = "top";
       ctx.fillStyle = p.ink;
-      const label = 'DIAMOND KNURL 30° · P 1.2';
+      const label = "DIAMOND KNURL 30° · P 1.2";
       const labelW = ctx.measureText(label).width;
       const lx = (cutX0 + cutX1) / 2 - labelW / 2;
       ctx.fillStyle = p.paper;
@@ -267,7 +271,7 @@ export function Lathe() {
       if (!readoutRef.current) {
         return;
       }
-      const rpm = progress < 1 ? 420 : 0;
+      const rpm = progress < 1 ? 360 : 0;
       readoutRef.current.textContent =
         `RPM ${pad(rpm, 4)}   FEED 0.20   PASS ${pad(pass, 3)}   ` +
         `${pad(Math.round(progress * 100), 3)}%`;
@@ -292,7 +296,9 @@ export function Lathe() {
             x: cutX0 + (cutX1 - cutX0) * progress + 14,
             y: top ? cy - r : cy + r,
             vx: 0.04 + Math.random() * 0.12,
-            vy: top ? -0.08 - Math.random() * 0.12 : 0.02 + Math.random() * 0.06,
+            vy: top
+              ? -0.08 - Math.random() * 0.12
+              : 0.02 + Math.random() * 0.06,
             life: 900 + Math.random() * 600,
           });
         }
@@ -321,22 +327,14 @@ export function Lathe() {
     }
 
     function schedule() {
-      if (frame === 0 && visible && !still) {
+      if (frame === 0 && visible) {
         frame = requestAnimationFrame(step);
       }
-    }
-
-    function drawStill() {
-      draw(1, 1);
-      writeReadout(1);
     }
 
     resize();
     const sizer = new ResizeObserver(() => {
       resize();
-      if (still) {
-        drawStill();
-      }
     });
     sizer.observe(canvas);
 
@@ -346,20 +344,7 @@ export function Lathe() {
       schedule();
     });
     watcher.observe(canvas);
-
-    // The label is set in the display face; draw again once it has loaded,
-    // or a still frame keeps the fallback face forever.
-    void document.fonts.ready.then(() => {
-      if (still) {
-        drawStill();
-      }
-    });
-
-    if (still) {
-      drawStill();
-    } else {
-      schedule();
-    }
+    schedule();
 
     return () => {
       cancelAnimationFrame(frame);
@@ -377,7 +362,7 @@ export function Lathe() {
         aria-label="A knurling tool travelling along a steel bar on a lathe, pressing a diamond pattern into it."
       />
       <p ref={readoutRef} className={styles.readout} aria-hidden="true">
-        RPM 0420 FEED 0.20 PASS 001 000%
+        RPM 0360 FEED 0.20 PASS 001 000%
       </p>
     </div>
   );

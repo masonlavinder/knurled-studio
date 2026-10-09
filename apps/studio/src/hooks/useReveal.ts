@@ -1,6 +1,4 @@
-import { useEffect, useRef } from 'react';
-
-import { prefersReducedMotion } from './motion.ts';
+import { useEffect, useRef } from "react";
 
 /**
  * Scroll-in, once. Every element under the returned ref that carries a
@@ -20,15 +18,10 @@ export function useReveal<T extends HTMLElement>() {
       return;
     }
 
-    const targets = root.querySelectorAll<HTMLElement>('[data-reveal]');
+    const targets = root.querySelectorAll<HTMLElement>("[data-reveal]");
     const show = (target: HTMLElement) => {
-      target.dataset.shown = '';
+      target.dataset.shown = "";
     };
-
-    if (prefersReducedMotion()) {
-      targets.forEach(show);
-      return;
-    }
 
     const watcher = new IntersectionObserver(
       (entries) => {
@@ -39,7 +32,7 @@ export function useReveal<T extends HTMLElement>() {
           }
         }
       },
-      { rootMargin: '0px 0px -8% 0px' },
+      { rootMargin: "0px 0px -8% 0px" },
     );
 
     targets.forEach((target) => {

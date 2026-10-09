@@ -4,7 +4,7 @@ import {
   requireDate,
   requireField,
   slugFromPath,
-} from '../lib/frontmatter.ts';
+} from "../utils/frontmatter.ts";
 
 export interface Post {
   slug: string;
@@ -16,7 +16,11 @@ export interface Post {
   body: string;
 }
 
-const sources = import.meta.glob<string>('./*.md', { query: '?raw', import: 'default', eager: true });
+const sources = import.meta.glob<string>("./*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+});
 
 /** Newest first. */
 export const posts: readonly Post[] = Object.entries(sources)
@@ -24,16 +28,18 @@ export const posts: readonly Post[] = Object.entries(sources)
     const { fields, body } = parseFrontmatter(path, source);
     const slug = slugFromPath(path);
 
-    if (fields.get('slug') !== slug) {
-      throw new Error(`${path}: frontmatter slug "${String(fields.get('slug'))}" must match the filename`);
+    if (fields.get("slug") !== slug) {
+      throw new Error(
+        `${path}: frontmatter slug "${String(fields.get("slug"))}" must match the filename`,
+      );
     }
 
     return {
       slug,
-      title: requireField(path, 'title', fields.get('title')),
-      date: requireDate(path, fields.get('publishDate')),
-      excerpt: requireField(path, 'excerpt', fields.get('excerpt')),
-      tags: parseList(fields.get('tags')),
+      title: requireField(path, "title", fields.get("title")),
+      date: requireDate(path, fields.get("publishDate")),
+      excerpt: requireField(path, "excerpt", fields.get("excerpt")),
+      tags: parseList(fields.get("tags")),
       body: body.trim(),
     };
   })

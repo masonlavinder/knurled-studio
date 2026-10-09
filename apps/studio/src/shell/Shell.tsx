@@ -1,15 +1,14 @@
-import { cx, Mark, StudioFooter } from '@knurled/kit';
-import { type ReactNode, useEffect, useRef, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router';
+import { cx, Mark, StudioFooter } from "@knurled/kit";
+import { type ReactNode, useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router";
 
-import { prefersReducedMotion } from '../lib/motion.ts';
-import { useDocumentTitle } from '../lib/useDocumentTitle.ts';
-import { Boot } from './Boot.tsx';
-import { Readout } from './Readout.tsx';
-import styles from './Shell.module.css';
+import { useDocumentTitle } from "../hooks/useDocumentTitle.ts";
+import { Boot } from "./Boot.tsx";
+import { Readout } from "./Readout.tsx";
+import styles from "./Shell.module.css";
 
 /** KS-000. The studio's own part number, and the only place it is written. */
-export const STUDIO_PART_NUMBER = 'KS-000';
+export const STUDIO_PART_NUMBER = "KS-000";
 
 /**
  * The site is one page now, so the nav is a set of jumps into it. Written as
@@ -17,9 +16,9 @@ export const STUDIO_PART_NUMBER = 'KS-000';
  * router lands on the index and useRouteReset scrolls to the section.
  */
 const NAV = [
-  { id: 'parts', label: 'Parts' },
-  { id: 'operator', label: 'Operator' },
-  { id: 'elsewhere', label: 'Elsewhere' },
+  { id: "parts", label: "Parts" },
+  { id: "operator", label: "Operator" },
+  { id: "elsewhere", label: "Elsewhere" },
 ];
 
 /**
@@ -40,10 +39,16 @@ function useRouteReset(pathname: string, hash: string, key: string) {
     const first = firstRender.current;
     firstRender.current = false;
 
-    const target = hash === '' ? null : document.getElementById(decodeURIComponent(hash.slice(1)));
+    const target =
+      hash === ""
+        ? null
+        : document.getElementById(decodeURIComponent(hash.slice(1)));
     if (target) {
-      const smooth = !first && !prefersReducedMotion();
-      target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+      const smooth = !first;
+      target.scrollIntoView({
+        behavior: smooth ? "smooth" : "auto",
+        block: "start",
+      });
       target.focus({ preventScroll: true });
       return;
     }
@@ -52,7 +57,7 @@ function useRouteReset(pathname: string, hash: string, key: string) {
       return;
     }
     window.scrollTo(0, 0);
-    document.getElementById('main')?.focus();
+    document.getElementById("main")?.focus();
   }, [pathname, hash, key]);
 }
 
@@ -88,7 +93,7 @@ function useCurrentSection(enabled: boolean): string | null {
         const last = NAV.filter((item) => inView.has(item.id)).at(-1);
         setCurrent(last?.id ?? null);
       },
-      { rootMargin: '-30% 0px -60% 0px' },
+      { rootMargin: "-30% 0px -60% 0px" },
     );
 
     sections.forEach((section) => {
@@ -116,7 +121,7 @@ export function Pending() {
 export interface SectionRuleProps {
   label: string;
   /** Heading level. Sections under a page h1 are h2 unless nested deeper. */
-  as?: 'h2' | 'h3';
+  as?: "h2" | "h3";
 }
 
 /**
@@ -126,7 +131,7 @@ export interface SectionRuleProps {
  * not its punctuation, and repeating it at every section turned it into a
  * line across the page every few hundred pixels. It lives in the mark only.
  */
-export function SectionRule({ label, as: Heading = 'h2' }: SectionRuleProps) {
+export function SectionRule({ label, as: Heading = "h2" }: SectionRuleProps) {
   return <Heading className={styles.sectionRuleLabel}>{label}</Heading>;
 }
 
@@ -140,15 +145,25 @@ export interface PageHeadProps {
 }
 
 /** Heading block. Also sets the document title from the page heading. */
-export function PageHead({ eyebrow, title, lede, description, children }: PageHeadProps) {
+export function PageHead({
+  eyebrow,
+  title,
+  lede,
+  description,
+  children,
+}: PageHeadProps) {
   useDocumentTitle(title);
 
   return (
     <div className={styles.head}>
-      {eyebrow === undefined ? null : <div className={styles.eyebrow}>{eyebrow}</div>}
+      {eyebrow === undefined ? null : (
+        <div className={styles.eyebrow}>{eyebrow}</div>
+      )}
       <h1>{title}</h1>
       {lede === undefined ? null : <p className={styles.lede}>{lede}</p>}
-      {description === undefined ? null : <p className={styles.description}>{description}</p>}
+      {description === undefined ? null : (
+        <p className={styles.description}>{description}</p>
+      )}
       {children}
     </div>
   );
@@ -157,7 +172,7 @@ export function PageHead({ eyebrow, title, lede, description, children }: PageHe
 export function Shell({ children }: { children: ReactNode }) {
   const { pathname, hash, key } = useLocation();
   useRouteReset(pathname, hash, key);
-  const current = useCurrentSection(pathname === '/');
+  const current = useCurrentSection(pathname === "/");
 
   return (
     <div className={styles.shell}>
@@ -178,8 +193,11 @@ export function Shell({ children }: { children: ReactNode }) {
             <Link
               key={item.id}
               to={`/#${item.id}`}
-              aria-current={current === item.id ? 'location' : undefined}
-              className={cx(styles.navLink, current === item.id && styles.navLinkActive)}
+              aria-current={current === item.id ? "location" : undefined}
+              className={cx(
+                styles.navLink,
+                current === item.id && styles.navLinkActive,
+              )}
             >
               {item.label}
             </Link>

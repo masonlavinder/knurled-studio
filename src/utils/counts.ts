@@ -1,4 +1,4 @@
-import { links } from "../routes/Links/links.ts";
+import { links } from "../pages/Links/links.ts";
 
 /**
  * Counts for the index, taken from the data rather than typed in.

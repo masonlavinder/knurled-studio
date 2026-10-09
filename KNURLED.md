@@ -11,7 +11,7 @@ knurled/
 ├── src/
 │   ├── catalog/           catalog.json + types + lookup helpers
 │   ├── kit/               tokens + primitives
-│   ├── routes/ shell/     the site
+│   ├── pages/ shell/      the site
 │   └── hooks/ utils/ writing/
 ├── public/                copied verbatim into dist/
 ├── scripts/               build-time scripts (catalog check, SPA fallback, og card)

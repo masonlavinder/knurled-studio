@@ -1,0 +1,48 @@
+@layer components {
+  /* Full bleed, ink, paper knocked out. The one dark band on the page, and
+     it is the instrument rather than the content. */
+  .readout {
+    composes: gutter from '../kit/patterns.css';
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-6);
+    padding-block: var(--space-2);
+    background: var(--edge-strong);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    white-space: pre;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .coords {
+    color: var(--lavinder-400);
+  }
+
+  /* Hairline dividers between readings, in paper. */
+  .cell {
+    padding-left: var(--space-6);
+    border-left: var(--edge-weight) solid var(--stock-600);
+  }
+
+  /* No pointer to track on touch, and no room for four readings on a phone. */
+  @media (pointer: coarse), (width <= 40rem) {
+    .coords {
+      display: none;
+    }
+
+    .coords + .cell {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  @media (width <= 40rem) {
+    .cell:last-child {
+      display: none;
+    }
+  }
+}

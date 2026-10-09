@@ -1,0 +1,60 @@
+@layer components {
+  .back {
+    composes: monoLabel from '../../kit/patterns.css';
+    composes: fade from '../../kit/patterns.css';
+
+    display: inline-block;
+    padding-bottom: var(--space-6);
+  }
+
+  .back:hover {
+    color: var(--text-primary);
+  }
+
+  .badges {
+    composes: row from '../../kit/patterns.css';
+
+    padding-bottom: var(--space-3);
+  }
+
+  /* The note under the tagline. Same measure and rhythm as the About prose,
+     so a spec page reads as the same document as the rest of the studio. */
+  .prose {
+    composes: prose from '../../kit/patterns.css';
+    composes: stack from '../../kit/patterns.css';
+
+    gap: var(--space-4);
+    padding-top: var(--space-2);
+  }
+
+  .spec {
+    composes: slab from '../../kit/patterns.css';
+
+    padding-top: var(--space-6);
+  }
+
+  .launch {
+    composes: spread from '../../kit/patterns.css';
+
+    align-items: center;
+  }
+
+  .launchLabel {
+    composes: monoLabel from '../../kit/patterns.css';
+    composes: underlined from '../../kit/patterns.css';
+  }
+
+  .launchHost {
+    composes: monoValue from '../../kit/patterns.css';
+
+    color: var(--text-external);
+  }
+
+  .shelvedNote {
+    composes: prose from '../../kit/patterns.css';
+    composes: dim from '../../kit/patterns.css';
+
+    padding-top: var(--space-6);
+    font-size: var(--text-sm);
+  }
+}

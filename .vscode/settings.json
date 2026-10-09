@@ -15,9 +15,6 @@
   "css.validate": false,
   "stylelint.validate": ["css"],
 
-  // Resolve the nearest eslint.config.js per package rather than one at root.
-  "eslint.workingDirectories": [{ "mode": "auto" }],
-
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true
 }

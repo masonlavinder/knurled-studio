@@ -7,9 +7,6 @@ dist/
 build/
 *.tsbuildinfo
 
-# turbo
-.turbo/
-
 # cdk
 cdk.out/
 cdk.context.json

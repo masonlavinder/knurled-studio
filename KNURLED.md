@@ -8,21 +8,22 @@ Repo conventions for Knurled Studio. Read before adding anything.
 
 ```
 knurled/
-├── apps/                  deployable front ends, one per subdomain
-├── packages/              shared libraries and configs
+├── src/
 │   ├── catalog/           catalog.json + types + lookup helpers
 │   ├── kit/               tokens + primitives
-│   ├── tsconfig/          base.json, react-library.json
-│   ├── eslint-config/     flat config, base + react
-│   └── stylelint-config/  design rules as build failures
-├── services/              FastAPI services (uv workspace)
-├── infra/                 AWS CDK v2 app
-├── archive/               shelved apps, excluded from CI
-├── turbo.json
-└── pnpm-workspace.yaml
+│   ├── routes/ shell/     the site
+│   └── hooks/ utils/ writing/
+├── public/                copied verbatim into dist/
+├── scripts/               build-time scripts (catalog check, SPA fallback, og card)
+├── index.html
+├── vite.config.ts
+├── tsconfig.json          solution: tsconfig.app.json (src) + tsconfig.node.json
+├── eslint.config.js       flat config, base + react
+└── stylelint.config.js    design rules as build failures
 ```
 
-Workspace globs: `apps/*`, `packages/*`, `infra`.
+One package, one site. Tools are separate projects that the studio links out
+to; they do not live in this repo.
 
 ---
 
@@ -37,7 +38,7 @@ first cut.
 - Gaps are honest history, not mistakes to fill. `KS-001` is absent on purpose.
 - The next number is `max(existing) + 1`. Do not pick one to look tidy.
 
-`packages/catalog/catalog.json` is the only source of part numbers. Nothing else
+`src/catalog/catalog.json` is the only source of part numbers. Nothing else
 declares one — components take a `partNumber` prop and look the rest up.
 
 ---
@@ -60,7 +61,7 @@ The studio does not delete its history.
 
 ## The catalog
 
-`packages/catalog/catalog.json` is the manifest. `@knurled/catalog` exports the
+`src/catalog/catalog.json` is the manifest. `src/catalog/index.ts` exports the
 typed array plus `byPartNumber`, `bySlug`, and `byStatus`.
 
 Every field but one is required. `description` is an optional array of strings,
@@ -71,38 +72,22 @@ decisions instead of one — and when it is absent the tagline stands in as the
 meta description.
 
 It is validated at module load, so a malformed manifest fails the build instead
-of rendering a broken index. `pnpm --filter @knurled/catalog build` is that check
+of rendering a broken index. `pnpm validate` is that check
 on its own. Beyond shape, the validator enforces: part numbers match `KS-NNN` and
 are unique, slugs are unique because they are routes, `SHELVED` entries carry
 `url: null`, a `description` is either absent or a non-empty array of non-empty
 strings, and the file stays sorted ascending so diffs stay readable. Every
 fault is reported at once, not one per run.
 
-## Internal packages ship TypeScript source
+Relative imports carry an explicit `.ts` extension — that is what lets `node`
+run `scripts/validate-catalog.ts` against the same source the site bundles.
 
-Workspace packages point `exports` at `./src/index.ts` rather than a built
-`dist/`. Apps bundle them through Vite, so there is no build step to sequence, no
-stale `dist/` to debug, and edits land in the dev server immediately. Relative
-imports inside these packages carry an explicit `.ts` extension — that is what
-lets `node` run them directly for build-time checks.
+## Adding a part
 
-Consequence: a package's `build` task validates rather than compiles, and
-declares `"outputs": []` in its own `turbo.json`.
-
-## Adding a new app
-
-1. Add an entry to `packages/catalog/catalog.json`. One file — the index page and
-   the `/tools/:slug` spec page are both generated from it. If adding an entry
-   ever takes two edits, the architecture has drifted; fix that first.
-2. `mkdir apps/<slug>` with a Vite + React + TS setup. Extend
-   `@knurled/tsconfig/react-library.json`, use `@knurled/eslint-config/react`
-   and `@knurled/stylelint-config`.
-3. Depend on `@knurled/kit` and `@knurled/catalog`. Import the three global
-   stylesheets exactly once, at the app root, in the order given under
-   [Styling](#styling) — `global.css` first.
-4. Mount `<StudioFooter partNumber="KS-NNN" />`. Every app mounts it — it is what
-   makes the subdomains read as one studio.
-5. Add a `KnurledSite` instance to `infra/stacks/studio-stack.ts`.
+Add an entry to `src/catalog/catalog.json`. One file — the index page and the
+`/tools/:slug` spec page are both generated from it, and its `url` is where the
+tool actually lives. If adding an entry ever takes two edits, the architecture
+has drifted; fix that first.
 
 ---
 
@@ -111,12 +96,12 @@ declares `"outputs": []` in its own `turbo.json`.
 A global design system in plain CSS, composed into CSS Modules. No Tailwind, no
 CSS-in-JS, no utility classes in JSX.
 
-Three global files, imported once per app, **in this order**:
+Three global files, imported once from `src/main.tsx`, **in this order**:
 
 ```ts
-import '@knurled/kit/global.css';   // first — declares the cascade order
-import '@knurled/kit/tokens.css';
-import '@knurled/kit/fonts.css';
+import './kit/global.css';   // first — declares the cascade order
+import './kit/tokens.css';
+import './kit/fonts.css';
 ```
 
 - `global.css` — layer declaration, reset, base elements, type scale, focus,
@@ -129,7 +114,7 @@ import '@knurled/kit/fonts.css';
     site rendered in the OS default sans. Every family named must be loaded.
   - **Departure Mono** (`--font-display`) is the display face: h1, h2, window
     titles, the instruments. Nothing longer than a line. It is not on npm, so
-    the woff2 and its OFL licence are vendored in `packages/kit/src/fonts/`
+    the woff2 and its OFL licence are vendored in `src/kit/fonts/`
     from the v1.500 release. It is drawn on an 11px grid, so display sizes
     are multiples of 11 (`--text-d1` 22, `--text-2xl` 44, `--text-3xl` 88,
     `--text-4xl` 132). Regular weight only; headings in it are set at 400
@@ -155,7 +140,7 @@ CSS Module lookups are typed `string | undefined`, so join class names with
 `cx` from the kit rather than template literals, which would emit the string
 "undefined" into a class attribute.
 
-Hard rules, enforced by `@knurled/stylelint-config` as errors:
+Hard rules, enforced by `stylelint.config.js` as errors:
 
 - Chamfers, not rounded corners. `border-radius` is banned outright.
 - No faked light: no gradients, shadows, glows, bevels, or noise. Depth comes
@@ -218,7 +203,7 @@ Direction, not lintable but not optional either:
 
 ## Routes
 
-`apps/studio` is one page plus the routes it links to: three static routes,
+The site is one page plus the routes it links to: three static routes,
 two generated ones, a redirect, and a catch-all. `/` and `/tools/:slug` are
 generated from the catalog — **adding a part is one edit to `catalog.json` and
 nothing else.** Verified: a fake KS-003 appeared on the index and got a working
@@ -288,12 +273,12 @@ only the bottom half of one tile, which reads as a solid bar with a toothed
 edge rather than teeth meshing. Two rows is the minimum that reads as a
 texture.
 
-`apps/studio/public/favicon.svg` redraws the same geometry in SVG, because an
+`public/favicon.svg` redraws the same geometry in SVG, because an
 icon cannot read the token layer — the two hex values there are `--paper`
 and `--lavinder-600`, and they have to be kept in step by hand. So do the
-`color-scheme` and `theme-color` meta tags in `apps/studio/index.html`, the
-palette inlined in `apps/studio/scripts/og-card.html`, and the `INKS` array in
-`packages/kit/src/ColorBar/inks.ts` — the footer press strip renders one patch
+`color-scheme` and `theme-color` meta tags in `index.html`, the
+palette inlined in `scripts/og-card.html`, and the `INKS` array in
+`src/kit/ColorBar/inks.ts` — the footer press strip renders one patch
 per entry, so a token added or retired without touching that array shows up as
 a blank swatch.
 
@@ -315,29 +300,25 @@ precision: `142 ms`, not "fast." Banned: *seamless*, *empower*, *leverage*,
 Run from the repo root.
 
 ```sh
-pnpm install                      # install the workspace
-pnpm dev                          # every app's dev server
-pnpm --filter studio dev          # one app
-pnpm build                        # build everything, respecting deps
-pnpm lint                         # eslint + stylelint across the workspace
-pnpm typecheck                    # tsc --noEmit across the workspace
-pnpm test
+pnpm install
+pnpm dev                          # vite dev server
+pnpm build                        # validate catalog, tsc, vite build, SPA fallback
+pnpm lint                         # eslint + stylelint
+pnpm typecheck                    # tsc -b
+pnpm validate                     # catalog check on its own, prints the manifest
 ```
-
-Turbo tasks are `build`, `dev`, `lint`, `typecheck`, `test`. All but `dev` are
-cached; `dev` is persistent and uncached.
 
 ### Deploy
 
 `knurled.studio` is on GitHub Pages, published by
-`.github/workflows/deploy-studio.yml` on pushes to `main` that touch the app or
-its dependencies. Pages is configured with `build_type: workflow`, so the
+`.github/workflows/deploy-studio.yml` on pushes to `main`, except those
+that touch only top-level Markdown. Pages is configured with `build_type: workflow`, so the
 workflow artifact *is* the deploy — there is no branch to push to.
 
 The workflow runs `typecheck` and `lint` before it builds. A commit that breaks
 a design rule fails there and never reaches the site.
 
-**Static hosting has no SPA fallback.** `apps/studio/scripts/spa-fallback.mjs`
+**Static hosting has no SPA fallback.** `scripts/spa-fallback.mjs`
 handles it, and does more than the usual trick:
 
 - Every route is known at build time — three static, one per catalog entry, one
@@ -379,7 +360,7 @@ means one thing, and the build cannot drift from what the page renders.
 
 ### The social card
 
-`apps/studio/public/og.png` is 1200×630 and every page points at it. Its source
+`public/og.png` is 1200×630 and every page points at it. Its source
 is `scripts/og-card.html`, which is **not** in `public/` — a file there would
 ship to the site — and the regeneration command is in a comment at the top.
 
@@ -395,9 +376,6 @@ Headless Chrome treats `--window-size` as the outer window, not the viewport,
 and clips roughly 75px off the bottom. Render tall and crop to size; do not
 compensate with a magic number in the flag, which breaks on the next machine.
 
-Infrastructure for the tool subdomains (Phase 4, AWS CDK) is not built. Nothing
-needs it while everything is on Pages.
-
 ---
 
 ## Pinned versions
@@ -408,7 +386,6 @@ Exact pins, no ranges. Update deliberately, one at a time.
 |---|---|---|
 | Node | 24.18.0 | `.nvmrc` |
 | pnpm | 9.15.4 | `packageManager` field |
-| Turborepo | 2.10.9 | |
 | TypeScript | 5.9.3 | Not 7.x — `typescript-eslint` peers cap at `<6.1.0`. |
 | ESLint | 10.8.1 | flat config only |
 | typescript-eslint | 8.66.0 | |
@@ -424,8 +401,7 @@ Exact pins, no ranges. Update deliberately, one at a time.
 | typescript-plugin-css-modules | 5.2.0 | editor-only, see below |
 | @fontsource/inconsolata | 5.3.0 | self-hosted |
 
-Exact versions live in the `catalog:` block of `pnpm-workspace.yaml`; packages
-reference them as `"react": "catalog:"`. This table mirrors that block.
+Exact versions live in `package.json`. This table mirrors it.
 
 ### CSS Module typing
 

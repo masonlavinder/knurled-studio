@@ -3,19 +3,13 @@ name: deploy studio
 # KS-000 · knurled.studio
 #
 # Pages is configured with build_type "workflow", so nothing publishes until
-# this uploads an artifact. The path filter keeps unrelated commits — another
-# app, the infra package, docs — from redeploying the site.
+# this uploads an artifact. Markdown-only commits (docs, not posts) skip it.
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'apps/studio/**'
-      - 'packages/**'
-      - 'pnpm-lock.yaml'
-      - 'pnpm-workspace.yaml'
-      - 'turbo.json'
-      - '.github/workflows/deploy-studio.yml'
+    paths-ignore:
+      - '*.md'
   workflow_dispatch:
 
 permissions:
@@ -48,15 +42,16 @@ jobs:
 
       # A broken commit should fail here, not deploy. Stylelint enforces the
       # design rules, so this gate is what keeps them real.
-      - run: pnpm turbo run typecheck lint
+      - run: pnpm typecheck
+      - run: pnpm lint
 
-      - run: pnpm turbo run build --filter studio
+      - run: pnpm build
 
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: apps/studio/dist
+          path: dist
 
   deploy:
     needs: build

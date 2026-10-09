@@ -1,0 +1,153 @@
+/* kit — tokens.css
+   Custom properties only. No selectors with declarations, ever.
+   Importing this file must never impose a style on anything. */
+
+@layer tokens {
+  :root {
+    /* ---- substrate: paper ----------------------------------------- */
+    /* The ramp runs light to dark and the number still means darkness.
+       Ratios are against --paper, the canvas everything is read on. */
+    --paper:     #F4F2EB;   /* page canvas — warm newsprint, not white */
+    --stock-050: #FFFDF7;   /* panel face — a flat step up from the page */
+    --stock-100: #E8E5DA;   /* raised: inputs, skip link, inset wells */
+    --stock-400: #6E6E68;   /* DECORATIVE ONLY — 4.56:1, too tight for text */
+    --stock-600: #3A3A37;   /* muted text — 10.2:1 */
+    --stock-800: #1C1C1A;   /* edge */
+    --stock-950: #0D0D0C;   /* primary text, strong edge, rules — 17.4:1 */
+
+    /* ---- house finish: Lavinder ----------------------------------- */
+    /* One purple at full strength does both jobs: accent text on paper and
+       flood fill behind paper text. It clears 7:1 in both directions, so
+       there is no "which purple goes here" decision left to get wrong. */
+    --lavinder-050: #EFE6F7;  /* tint fill */
+    --lavinder-400: #A87BD4;  /* DECORATIVE ONLY — 2.91:1, fails AA for text */
+    --lavinder-600: #6B2FA8;  /* accent text and flood fill — 7.22:1 */
+
+    /* ---- verdigris: the second hue --------------------------------- */
+    --verdigris-050: #DFF0ED;  /* tint fill */
+    --verdigris-700: #0E6F63;  /* 5.40:1 — text, edges, fills */
+
+    /* ---- semantic aliases ----------------------------------------- */
+    --surface-page:  var(--paper);
+    --surface-panel: var(--stock-050);
+    --surface-raise: var(--stock-100);
+    --edge:          var(--stock-800);
+    --edge-strong:   var(--stock-950);
+    --text-primary:  var(--stock-950);
+    --text-muted:    var(--stock-600);
+    --text-accent:   var(--lavinder-600);
+    --text-external: var(--verdigris-700);  /* anything that leaves the studio */
+    --rule:          var(--stock-950);
+
+    /* Accent as surface, not only as ink. --surface-tint is the soft fill
+       every foreground colour still reads on (ink 16:1, accent 6.7:1, muted
+       9.4:1), which is what makes it safe as a hover: nothing inside a panel
+       has to change colour to stay legible. */
+    --surface-accent: var(--lavinder-600);
+    --surface-tint:   var(--lavinder-050);
+    --text-on-accent: var(--paper);
+
+    /* ---- type ------------------------------------------------------ */
+    /* Two families, two jobs. Inconsolata is the voice: body, labels, data.
+       Departure Mono is the display face — h1, h2, window titles, the
+       instruments — and nothing longer than a line. --font-sans stays an
+       alias of the mono so its call sites cannot drift to a third face. */
+    --font-mono: 'Inconsolata', ui-monospace, 'SF Mono', monospace;
+    --font-sans: var(--font-mono);
+    --font-display: 'Departure Mono', var(--font-mono);
+
+    --text-2xs:  12px;   /* status chips */
+    --text-xs:   14px;   /* part numbers, mono labels */
+    --text-sm:   16px;
+    --text-base: 18px;   /* body — mono needs a step up to hold a line */
+    --text-lg:   25px;
+    --text-xl:   38px;
+
+    /* Display sizes sit on Departure Mono's 11px grid; anywhere else its
+       pixels land between device pixels and blur. */
+    --text-d1:   22px;   /* window titles, card names */
+    --text-2xl:  44px;   /* h2 */
+    --text-3xl:  88px;   /* page h1 */
+    --text-4xl:  132px;  /* the hero, and only the hero */
+
+    --leading-display: 0.95;   /* oversized headings set tight */
+    --leading-tight: 1.15;
+    --leading-snug:  1.35;
+    --leading-body:  1.7;      /* mono prose needs the air */
+
+    --track-label:   0.09em;   /* uppercase mono */
+    --track-chip:    0.1em;
+    --track-display: -0.02em;
+
+    /* ---- measure --------------------------------------------------- */
+    /* 4px grid. Machined parts are dimensioned; so is this. */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+
+    /* Prose stays capped so a line does not run the width of a monitor, but
+       with no auto margins the cap pins it left instead of centring it.
+       --measure-wide is the same idea for a slab of tabular data: a spec row
+       whose label and value sit 1300px apart is not a row any more. */
+    --measure: 68ch;
+    --measure-wide: 96ch;
+    --gutter:  var(--space-8);
+
+    /* ---- geometry -------------------------------------------------- */
+    --chamfer:    13px;
+    --chamfer-sm: 8px;
+
+    /* Weight, not tint, is what separates a rule from a strong one now. On
+       paper a 1px grey hairline disappears; ink at 2px is what makes the
+       light substrate read as built rather than merely bright. --edge-weight
+       is what the chamfer face insets by, so the two cannot drift. */
+    --edge-weight: 2px;
+    --hairline:   var(--edge-weight) solid var(--edge);
+    --hairline-strong: 3px solid var(--edge-strong);
+
+    /* The banner's geometry lives in Knurl.tsx: it is an SVG pattern, and a
+       pattern's tile size cannot read a custom property. Only the colour
+       crosses over, on the stroke. */
+    --knurl-line: var(--lavinder-600);
+
+    /* The mark's grain is solid teeth, not the banner's outlines: at 22px an
+       outline reads as noise. Its tile has two axes — --knurl-tooth across
+       and --knurl-tooth-h down — so the glyph can carry teeth side by side
+       without a second row seaming across it. */
+    --knurl-tooth:   8px;
+    --knurl-tooth-h: var(--knurl-tooth);
+
+    /* ---- motion ----------------------------------------------------- */
+    --dur-fast:   70ms;
+    --dur-detent: 110ms;
+    --dur-slow:   220ms;
+    --dur-reveal: 480ms;   /* scroll-in, once per element */
+    --dur-boot:   2000ms;  /* the boot screen's count, 0 to 100% */
+    --dur-boot-hold: 3000ms;  /* held at 100% — the boot screen says so; keep them equal */
+    --dur-blink:  1000ms;  /* cursor and LIVE lamp, stepped */
+    --ease-detent: cubic-bezier(0.2, 0.9, 0.3, 1.2);  /* slight overshoot */
+    --ease-out:    cubic-bezier(0.2, 0, 0.1, 1);
+
+    /* ---- lift ------------------------------------------------------- */
+    /* How far a window sits off its plate. Not a shadow: the plate is a
+       solid ink layer of its own, the same chamfer, offset down and right.
+       Hover lifts further, press seats the window on the plate. */
+    --lift:       6px;
+    --lift-hover: 10px;
+
+    /* ---- layering ---------------------------------------------------- */
+    --z-base:    0;
+    --z-sticky:  100;
+    --z-overlay: 200;
+    --z-toast:   300;
+    --z-boot:    400;
+  }
+}

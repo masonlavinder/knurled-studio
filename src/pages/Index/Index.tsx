@@ -1,6 +1,6 @@
 import { catalog } from "../../catalog/index.ts";
 import { cx } from "../../utils/cx.ts";
-import { SpecTable, StatusChip, Window } from "../../components/index.ts";
+import { SpecTable, StatusChip } from "../../components/index.ts";
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "react-router";
 
@@ -9,6 +9,7 @@ import { useDocumentTitle } from "../../hooks/useDocumentTitle.ts";
 import { useReveal } from "../../hooks/useReveal.ts";
 import styles from "./Index.module.css";
 import { Lathe } from "./components/Lathe.tsx";
+import { Window } from "./components/Window.tsx";
 
 /**
  * Newest first. Part numbers are assigned in the order a project is first cut,

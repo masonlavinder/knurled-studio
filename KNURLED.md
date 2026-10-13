@@ -10,9 +10,10 @@ Repo conventions for Knurled Studio. Read before adding anything.
 knurled/
 ├── src/
 │   ├── catalog/           catalog.json + types + lookup helpers
-│   ├── components/        primitives (ColorBar, Panel, Window, …)
+│   ├── components/        shared primitives (Panel, SpecTable, …)
 │   ├── styles/            global, tokens, fonts, patterns
 │   ├── pages/ shell/      the site
+│   │                      page-only components live in pages/<Page>/components/
 │   └── hooks/ utils/ writing/
 ├── public/                copied verbatim into dist/
 ├── scripts/               build-time scripts (catalog check, SPA fallback, og card)
